@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ************************************************************** Proposed 
+	schema for ACBAR orders. ************************************************************** -->
+
+<xs:schema targetNamespace="http://idfbins.com/rules/order"
+	xmlns:rf="http://idfbins.com/rules/order" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" elementFormDefault="qualified"
+	jxb:version="1.0">
+
+
+
+
+	<xs:element name="order" type="rf:order"></xs:element>
+
+	<xs:complexType name="order">
+		<xs:sequence>
+
+			<xs:element name="systemOfOrigin" minOccurs="1"
+				maxOccurs="1" type="rf:originatingSystemType">
+			</xs:element>
+			<xs:element name="reportTypes" type="rf:reportTypes"
+				minOccurs="1" maxOccurs="1">
+			</xs:element>
+			<xs:element name="customers" type="rf:customers"
+				maxOccurs="1" minOccurs="1">
+			</xs:element>
+			<xs:element name="addresses" type="rf:addresses"
+				maxOccurs="1" minOccurs="0">
+			</xs:element>
+			<xs:element name="businesses" type="rf:businesses"
+				maxOccurs="1" minOccurs="0">
+			</xs:element>
+
+			<xs:element name="vehicles" type="rf:vehicles" maxOccurs="1"
+				minOccurs="0">
+			</xs:element>
+
+			<xs:element name="policies" type="rf:policies" maxOccurs="1"
+				minOccurs="0">
+			</xs:element>
+
+			<xs:element name="mortgages" type="rf:mortgages"
+				maxOccurs="1" minOccurs="0">
+			</xs:element>
+
+
+		</xs:sequence>
+
+		<xs:attribute name="agent_id" type="xs:string"></xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="customerType">
+		<xs:sequence>
+			<xs:element name="name" type="rf:nameType" minOccurs="0"
+				maxOccurs="1">
+			</xs:element>
+			<xs:element name="dateOfBirth" type="xs:date" minOccurs="0"
+				maxOccurs="1">
+			</xs:element>
+			<xs:element name="ssn" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+			</xs:element>
+			<xs:element name="driversLicenseNumber"
+				type="rf:driversLicenseNumberType" minOccurs="0" maxOccurs="1">
+			</xs:element>
+			<xs:element name="gender" minOccurs="0" maxOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+
+						<xs:enumeration value="M"></xs:enumeration>
+						<xs:enumeration value="F"></xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="addresses" type="rf:customerAddresses"
+				maxOccurs="1" minOccurs="0">
+			</xs:element>
+
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="type">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Primary"></xs:enumeration>
+					<xs:enumeration value="Joint"></xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="addressType">
+		<xs:sequence>
+			<xs:element name="houseNumber" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+			</xs:element>
+			<xs:element name="street" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+			</xs:element>
+			<xs:element name="apartment" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+			</xs:element>
+			<xs:element name="city" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+			</xs:element>
+			<xs:element name="state" maxOccurs="1" minOccurs="1"
+				type="rf:stateType">
+
+			</xs:element>
+			<xs:element name="zipCode" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Initially I thought an integer would be a good
+						choice for zip code, however there was the
+						problem of the leading zero. It seems easier to
+						send it as a string so the leading zero would
+						always be preserved.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="extendedZipCode" type="xs:string"
+				minOccurs="0" maxOccurs="1">
+			</xs:element>
+		</xs:sequence>
+
+		<xs:attribute name="id" type="xs:string" use="required"></xs:attribute>
+    </xs:complexType>
+
+	<xs:complexType name="businessType">
+		<xs:sequence>
+			<xs:element name="names" type="rf:names"></xs:element>
+
+			<xs:element name="addresses" type="rf:businessAddresses"
+				maxOccurs="1" minOccurs="0">
+			</xs:element>
+
+			<xs:element name="fein" type="xs:string" minOccurs="1"
+				maxOccurs="1">
+			</xs:element>
+			<xs:element name="parameters" type="rf:parameters" maxOccurs="1" minOccurs="0"></xs:element>
+
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string"></xs:attribute>
+	</xs:complexType>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<xs:complexType name="nameType">
+		<xs:sequence>
+			<xs:element name="first_name" type="xs:string" minOccurs="0"
+				maxOccurs="1"></xs:element>
+			<xs:element name="last_name" type="xs:string" minOccurs="1"
+				maxOccurs="1"></xs:element>
+			<xs:element name="middle_name" type="xs:string" minOccurs="0"
+				maxOccurs="1"></xs:element>
+			<xs:element name="suffix" type="xs:string" minOccurs="0"
+				maxOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="driversLicenseNumberType">
+		<xs:sequence>
+			<xs:element name="state" maxOccurs="1" minOccurs="1"
+				type="rf:stateType">
+			</xs:element>
+			<xs:element name="number" type="xs:string" minOccurs="1"
+				maxOccurs="1">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="customerAddressType">
+		<xs:attribute name="type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="primary"></xs:enumeration>
+					<xs:enumeration value="education"></xs:enumeration>
+					<xs:enumeration value="former"></xs:enumeration>
+					<xs:enumeration value="mailing"></xs:enumeration>
+					<xs:enumeration value="residence"></xs:enumeration>
+					<xs:enumeration value="work"></xs:enumeration>
+					<xs:enumeration value="property"></xs:enumeration>
+					<xs:enumeration value="risk"></xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="id" type="xs:string" use="required"></xs:attribute>
+	</xs:complexType>
+
+
+	<xs:complexType name="businessNameType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="1"
+				maxOccurs="1"></xs:element>
+		</xs:sequence>
+		<xs:attribute name="type" type="xs:string" use="required"></xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="businessAddressType">
+		<xs:attribute name="type">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="1099"></xs:enumeration>
+					<xs:enumeration value="BILLING"></xs:enumeration>
+					<xs:enumeration value="BUSINESS"></xs:enumeration>
+					<xs:enumeration value="HOME"></xs:enumeration>
+					<xs:enumeration value="LIENHOLDER"></xs:enumeration>
+					<xs:enumeration value="MAILING"></xs:enumeration>
+					<xs:enumeration value="OTHER"></xs:enumeration>
+					<xs:enumeration value="VENDOR"></xs:enumeration>
+					<xs:enumeration value="WORK"></xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="id" type="xs:string"></xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="parameterType">
+		<xs:sequence>
+			<xs:element name="value" type="xs:string"></xs:element>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string"></xs:attribute>
+	</xs:complexType>
+
+
+	<xs:complexType name="vehicleType">
+		<xs:sequence>
+			<xs:element name="year" minOccurs="1" maxOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minExclusive value="1900"></xs:minExclusive>
+						<xs:maxExclusive value="2500"></xs:maxExclusive>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="make" type="xs:string" minOccurs="1"
+				maxOccurs="1">
+			</xs:element>
+			<xs:element name="model" type="xs:string" minOccurs="1"
+				maxOccurs="1">
+			</xs:element>
+			<xs:element name="vin" type="xs:string" minOccurs="0"
+				maxOccurs="1">
+			</xs:element>
+			<xs:element name="drivers" type="rf:drivers" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string"></xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="vehicleCustomerType">
+		<xs:attribute name="type" type="xs:string"></xs:attribute>
+		<xs:attribute name="id" type="xs:string"></xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="vehicleYearType">
+		<xs:sequence>
+			<xs:element name="year">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minExclusive value="1850"></xs:minExclusive>
+						<xs:maxExclusive value="2500"></xs:maxExclusive>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+
+	<xs:complexType name="policyType">
+		<xs:sequence>
+			<xs:element name="number" type="xs:string" minOccurs="1"
+				maxOccurs="1">
+			</xs:element>
+			<xs:element name="issuer" type="xs:string" minOccurs="1"
+				maxOccurs="1">
+			</xs:element>
+			<xs:element name="startDate" type="xs:date" minOccurs="0"
+				maxOccurs="1">
+			</xs:element>
+			<xs:element name="endDate" type="xs:date" minOccurs="0"
+				maxOccurs="1">
+			</xs:element>
+			<xs:element name="policyHolders" type="rf:policyHolders" maxOccurs="1" minOccurs="1"></xs:element>
+
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string"></xs:attribute>
+		<xs:attribute name="type">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="PERSONAL_AUTO"></xs:enumeration>
+					<xs:enumeration value="MOTORCYCLE"></xs:enumeration>
+					<xs:enumeration value="MOTORHOME"></xs:enumeration>
+					<xs:enumeration value="HOMEOWNERS"></xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="policyCustomerType">
+		<xs:attribute name="relationship" type="xs:string"></xs:attribute>
+		<xs:attribute name="customerId" type="xs:string"></xs:attribute>
+	</xs:complexType>
+
+
+	<xs:complexType name="mortgageType">
+		<xs:sequence>
+			<xs:element name="number" type="xs:string" minOccurs="1"
+				maxOccurs="1">
+			</xs:element>
+			<xs:element name="policyHolders"
+				type="rf:mortgagePolicyHolders" maxOccurs="1" minOccurs="1">
+			</xs:element>
+
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string"></xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="mortgageCustomerType">
+		<xs:attribute name="relationship" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="customerid" type="xs:string" use="required"></xs:attribute>
+	</xs:complexType>
+
+
+	<xs:complexType name="customers">
+		<xs:sequence>
+			<xs:element name="customer" type="rf:customerType" maxOccurs="unbounded" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="addresses">
+		<xs:sequence>
+			<xs:element name="address" type="rf:addressType" maxOccurs="unbounded" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="customerAddresses">
+		<xs:sequence>
+			<xs:element name="address" type="rf:customerAddressType" maxOccurs="unbounded" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="businesses">
+		<xs:sequence>
+			<xs:element name="business" type="rf:businessType" maxOccurs="unbounded" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="vehicles">
+		<xs:sequence>
+			<xs:element name="vehicle" type="rf:vehicleType" maxOccurs="unbounded" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="policies">
+		<xs:sequence>
+			<xs:element name="policy" type="rf:policyType" maxOccurs="unbounded" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="mortgages">
+		<xs:sequence>
+			<xs:element name="mortgage" type="rf:mortgageType" maxOccurs="unbounded" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="names">
+		<xs:sequence>
+			<xs:element name="name" type="rf:businessNameType" maxOccurs="unbounded" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="businessAddresses">
+		<xs:sequence>
+			<xs:element name="address" type="rf:businessAddressType" maxOccurs="unbounded" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="parameters">
+		<xs:sequence>
+			<xs:element name="parameter" type="rf:parameterType"
+				maxOccurs="unbounded" minOccurs="1">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="drivers">
+		<xs:sequence>
+			<xs:element name="driver" type="rf:vehicleCustomerType" maxOccurs="unbounded" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="policyHolders">
+		<xs:sequence>
+			<xs:element name="holder" type="rf:policyCustomerType" maxOccurs="unbounded" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="mortgagePolicyHolders">
+		<xs:sequence>
+			<xs:element name="holder" type="rf:mortgageCustomerType"
+				maxOccurs="unbounded" minOccurs="1">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="reportType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MVR"></xs:enumeration>
+			<xs:enumeration value="CBR"></xs:enumeration>
+			<xs:enumeration value="CLUE_AUTO"></xs:enumeration>
+			<xs:enumeration value="CLUE_PROPERTY"></xs:enumeration>
+			<xs:enumeration value="AUTO_DATAPREFILL"></xs:enumeration>
+			<xs:enumeration value="COMMERCIAL_DATAPREFILL"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="originatingSystemType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PC"></xs:enumeration>
+			<xs:enumeration value="CRS"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
+	<xs:complexType name="reportTypes">
+		<xs:sequence>
+			<xs:element name="reportType" type="rf:reportType" maxOccurs="4" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="stateType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AL"></xs:enumeration>
+			<xs:enumeration value="AK"></xs:enumeration>
+			<xs:enumeration value="AZ"></xs:enumeration>
+			<xs:enumeration value="AR"></xs:enumeration>
+			<xs:enumeration value="CA"></xs:enumeration>
+			<xs:enumeration value="CO"></xs:enumeration>
+			<xs:enumeration value="CT"></xs:enumeration>
+			<xs:enumeration value="DE"></xs:enumeration>
+			<xs:enumeration value="DC"></xs:enumeration>
+			<xs:enumeration value="FL"></xs:enumeration>
+			<xs:enumeration value="GA"></xs:enumeration>
+			<xs:enumeration value="HI"></xs:enumeration>
+			<xs:enumeration value="ID"></xs:enumeration>
+			<xs:enumeration value="IL"></xs:enumeration>
+			<xs:enumeration value="IN"></xs:enumeration>
+			<xs:enumeration value="IA"></xs:enumeration>
+			<xs:enumeration value="KS"></xs:enumeration>
+			<xs:enumeration value="KY"></xs:enumeration>
+			<xs:enumeration value="LA"></xs:enumeration>
+			<xs:enumeration value="ME"></xs:enumeration>
+			<xs:enumeration value="MD"></xs:enumeration>
+			<xs:enumeration value="MA"></xs:enumeration>
+			<xs:enumeration value="MI"></xs:enumeration>
+			<xs:enumeration value="MN"></xs:enumeration>
+			<xs:enumeration value="MS"></xs:enumeration>
+			<xs:enumeration value="MO"></xs:enumeration>
+			<xs:enumeration value="MT"></xs:enumeration>
+			<xs:enumeration value="NE"></xs:enumeration>
+			<xs:enumeration value="NV"></xs:enumeration>
+			<xs:enumeration value="NH"></xs:enumeration>
+			<xs:enumeration value="NJ"></xs:enumeration>
+			<xs:enumeration value="NM"></xs:enumeration>
+			<xs:enumeration value="NY"></xs:enumeration>
+			<xs:enumeration value="NC"></xs:enumeration>
+			<xs:enumeration value="ND"></xs:enumeration>
+			<xs:enumeration value="OH"></xs:enumeration>
+			<xs:enumeration value="OK"></xs:enumeration>
+			<xs:enumeration value="OR"></xs:enumeration>
+			<xs:enumeration value="PA"></xs:enumeration>
+			<xs:enumeration value="RI"></xs:enumeration>
+			<xs:enumeration value="SC"></xs:enumeration>
+			<xs:enumeration value="TX"></xs:enumeration>
+			<xs:enumeration value="UT"></xs:enumeration>
+			<xs:enumeration value="VT"></xs:enumeration>
+			<xs:enumeration value="VA"></xs:enumeration>
+			<xs:enumeration value="WA"></xs:enumeration>
+			<xs:enumeration value="WV"></xs:enumeration>
+			<xs:enumeration value="WI"></xs:enumeration>
+			<xs:enumeration value="WY"></xs:enumeration>
+			<xs:enumeration value="SD"></xs:enumeration>
+			<xs:enumeration value="TN"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

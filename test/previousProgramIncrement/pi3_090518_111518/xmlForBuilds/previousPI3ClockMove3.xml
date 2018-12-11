@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="CurrentProgramIncrement" verbose="1">
+    <listeners>
+        <listener class-name="repository.listeners.LocalSuiteTestListener"/>
+    </listeners>
+
+    <parameter name="application" value="Current Program Increment"/>
+    <parameter name="suiteName" value="PI3-Regression-Clock"/>
+    
+    <test name="Non Feature Related Work - NoExceptions">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.nonFeatures.NoExceptions.*"/>
+        </packages>
+    </test>
+
+</suite>

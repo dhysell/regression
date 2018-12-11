@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="CoreBusiness" verbose="1" parallel="tests" thread-count="45">
+    <listeners>
+        <listener class-name="repository.listeners.LocalSuiteTestListener"/>
+    </listeners>
+
+    <parameter name="application" value="Current Program Increment"/>
+    <parameter name="suiteName" value="CoreBusiness"/>
+
+    <test name="Business Rules" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="coreBusiness.businessRules.*"/>
+            <package name="coreBusiness.businessRules.*.*"/>
+            <package name="coreBusiness.businessRules.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="Cancellations" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="coreBusiness.cancel.*"/>
+            <package name="coreBusiness.cancel.*.*"/>
+            <package name="coreBusiness.cancel.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="Policy Changes" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="coreBusiness.change.*"/>
+            <package name="coreBusiness.change.*.*"/>
+            <package name="coreBusiness.change.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="Claims" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="coreBusiness.claimCenter.*"/>
+            <package name="coreBusiness.claimCenter.*.*"/>
+            <package name="coreBusiness.claimCenter.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="ContactManager" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="coreBusiness.contactManager.*"/>
+            <package name="coreBusiness.contactManager.*.*"/>
+            <package name="coreBusiness.contactManager.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="Forms and Documents" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="coreBusiness.forms_documents.*"/>
+            <package name="coreBusiness.forms_documents.*.*"/>
+            <package name="coreBusiness.forms_documents.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="Issuance" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="coreBusiness.issuance.*"/>
+            <package name="coreBusiness.issuance.*.*"/>
+            <package name="coreBusiness.issuance.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="Quoting" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="coreBusiness.quote.*"/>
+            <package name="coreBusiness.quote.*.*"/>
+            <package name="coreBusiness.quote.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="Rating" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="coreBusiness.rating.*"/>
+            <package name="coreBusiness.rating.*.*"/>
+            <package name="coreBusiness.rating.*.*.*"/>
+        </packages>
+    </test>
+
+
+    <test name="Reinstating" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="coreBusiness.reinstate.*"/>
+            <package name="coreBusiness.reinstate.*.*"/>
+            <package name="coreBusiness.reinstate.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="Renewals" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="coreBusiness.renewal.*"/>
+            <package name="coreBusiness.renewal.*.*"/>
+            <package name="coreBusiness.renewal.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="Rewrites" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="coreBusiness.rewrite.*"/>
+            <package name="coreBusiness.rewrite.*.*"/>
+            <package name="coreBusiness.rewrite.*.*.*"/>
+        </packages>
+    </test>
+</suite>

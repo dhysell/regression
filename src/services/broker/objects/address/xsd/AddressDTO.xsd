@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema  xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.idfbins.com/AddressDTO"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.idfbins.com/AddressDTO" xmlns:status="http://www.idfbins.com/common/ServiceStatus">
+
+	<import schemaLocation="ServiceStatus.xsd" namespace="http://www.idfbins.com/common/ServiceStatus"></import>
+
+
+	<complexType name="AddressResponse">
+		<sequence>
+			<element name="originalAddress" type="tns:Address"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="standardizedAddresses" type="tns:Address"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+			<element name="addressStatus" type="tns:AddressStatus"></element>
+			<element name="serviceStatus" type="status:ServiceStatus">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Address">
+		<sequence>
+			<element name="addressLine1" type="string"></element>
+			<element name="addressLine2" type="string"></element>
+			<element name="city" type="string"></element>
+			<element name="county" type="string" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="state">
+				<simpleType>
+					<restriction base="string">
+						<pattern value="[A-Za-z]{2}"></pattern>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="zip">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="5"></minLength>
+						<maxLength value="10"></maxLength>
+						<pattern value="\d{5}(-\d{4})?"></pattern>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="deliveryPoint">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="value"></enumeration>
+						<pattern value="\d{1}|\d{2}"></pattern>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="stdizationProblem" type="string" maxOccurs="unbounded" minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<simpleType name="AddressStatus">
+		<restriction base="string">
+			<enumeration value="VALID"></enumeration>
+			<enumeration value="INVALID"></enumeration>
+			<enumeration value="MULTIPLE"></enumeration>
+		</restriction>
+	</simpleType>
+
+	<element name="AddressRequest" type="tns:Address"></element>
+
+	<element name="AddressResponse" type="tns:AddressResponse"></element>
+
+
+
+
+	<simpleType name="StandardizationProblem">
+		<restriction base="string">
+			<enumeration value="value"></enumeration>
+			<enumeration value="value1"></enumeration>
+			<enumeration value="value2"></enumeration>
+			<enumeration value="value3"></enumeration>
+			<enumeration value="value4"></enumeration>
+			<enumeration value="value5"></enumeration>
+		</restriction>
+	</simpleType>
+</schema>

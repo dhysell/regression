@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AddressRequest xmlns="http://www.idfbins.com/AddressDTO">
+	<addressLine1>123 N Main St</addressLine1>
+	<city>pocatello</city>
+	<state>ID</state>
+	<zip>83201</zip>
+</AddressRequest>

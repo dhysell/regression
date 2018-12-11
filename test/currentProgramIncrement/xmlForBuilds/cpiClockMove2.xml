@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="CurrentProgramIncrement" verbose="1">
+    <listeners>
+        <listener class-name="repository.listeners.LocalSuiteTestListener"/>
+    </listeners>
+
+    <parameter name="application" value="Current Program Increment"/>
+    <parameter name="suiteName" value="CurrentProgramIncrement-Clock"/>
+    
+    
+    <test name="Non Feature Related Work - No Exceptions">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.nonFeatures.NoExceptions.*"/>
+        </packages>
+    </test>
+    
+    <test name="Maintenance Defects - No Exceptions">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.maintenanceDefects.NoExceptions.*"/>
+        </packages>
+    </test>
+    
+    <test name="Non Feature Related Work - Nucleus">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.nonFeatures.Nucleus.*"/>
+        </packages>
+    </test>
+    
+    <test name="Maintenance Defects - Nucleus">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.maintenanceDefects.Nucleus.*"/>
+        </packages>
+    </test>
+        
+
+	<test name="F435 Invoicing Lead Time - No Exceptions">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f435_InvoicingLeadTime_NoExceptions.*"/>
+            <package name="currentProgramIncrement.f435_InvoicingLeadTime_NoExceptions.*.*"/>
+            <package name="currentProgramIncrement.f435_InvoicingLeadTime_NoExceptions.*.*.*"/>
+        </packages>
+    </test>
+    
+    
+    <test name="F433 Tracking Agents Mandatory 4 Items - Nucleus">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f433_TrackingAgentsMandatory4Items_Nucleus.*"/>
+            <package name="currentProgramIncrement.f433_TrackingAgentsMandatory4Items_Nucleus.*.*"/>
+            <package name="currentProgramIncrement.f433_TrackingAgentsMandatory4Items_Nucleus.*.*.*"/>
+        </packages>
+    </test>
+    
+    <test name="F440 Lienholder CleanUp - Nucleus">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f440_LienholderCleanUp_Nucleus.*"/>
+            <package name="currentProgramIncrement.f440_LienholderCleanUp_Nucleus.*.*"/>
+            <package name="currentProgramIncrement.f440_LienholderCleanUp_Nucleus.*.*.*"/>
+        </packages>
+    </test>
+</suite>

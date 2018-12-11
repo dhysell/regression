@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		
+		<property name="hibernate.connection.driver_class">net.sourceforge.jtds.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:jtds:sqlserver://fbms2048/</property>
+		<property name="hibernate.connection.username">SeleniumUser</property>
+		<property name="hibernate.connection.password">seleniumuser</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.SQLServer2012Dialect</property>
+		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
+		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.format_sql">false</property>
+		
+		<property name="hibernate.hbm2ddl.auto">create</property>
+		
+		<mapping class="persistence.globaldatarepo.entities.Agents" />
+		<mapping class="persistence.globaldatarepo.entities.EventMessaging" />
+		<mapping class="persistence.globaldatarepo.entities.Underwriters" />
+		<mapping class="persistence.globaldatarepo.entities.RoutingNumbers" />
+		<mapping class="persistence.globaldatarepo.entities.CSRs" />
+		<mapping class="persistence.globaldatarepo.entities.PAs" />
+		<mapping class="persistence.globaldatarepo.entities.SAs" />
+		<mapping class="persistence.globaldatarepo.entities.Addresses" />
+		<mapping class="persistence.globaldatarepo.entities.BuildingClassCodes" />
+		<mapping class="persistence.globaldatarepo.entities.Contacts" />
+		<mapping class="persistence.globaldatarepo.entities.UserRegions" />
+		<mapping class="persistence.globaldatarepo.entities.CityCounty" />
+		<mapping class="persistence.globaldatarepo.entities.Spoilage" />
+		<mapping class="persistence.globaldatarepo.entities.TransitionRenewalTeam" />
+		<mapping class="persistence.globaldatarepo.entities.Names" />
+		<mapping class="persistence.globaldatarepo.entities.ARUsers" />
+		<mapping class="persistence.globaldatarepo.entities.FinanceUsers" />
+		<mapping class="persistence.globaldatarepo.entities.StandardAddresses" />
+		<mapping class="persistence.globaldatarepo.entities.LexisNexis" />
+		<mapping class="persistence.globaldatarepo.entities.Vin" />
+		<mapping class="persistence.globaldatarepo.entities.TeritoryCodes" />
+		<mapping class="persistence.globaldatarepo.entities.AddressesTemp" />
+		<mapping class="persistence.globaldatarepo.entities.GLClassCodes" />
+		<mapping class="persistence.globaldatarepo.entities.PcRoundTrip" />
+		<mapping class="persistence.globaldatarepo.entities.GwDocumentEvents" />
+		<mapping class="persistence.globaldatarepo.entities.GwDocumentsDocsEventsXref" />
+		<mapping class="persistence.globaldatarepo.entities.GwDocumentsDocs" />
+		<mapping class="persistence.globaldatarepo.entities.DriverLicenseNumbers" />
+		<mapping class="persistence.globaldatarepo.entities.GLUnderwriterQuestions" />
+		<mapping class="persistence.globaldatarepo.entities.GeneratedPolicies" />
+		<mapping class="persistence.globaldatarepo.entities.Glforms" />
+		<mapping class="persistence.globaldatarepo.entities.FormsCA" />
+		<mapping class="persistence.globaldatarepo.entities.GLUWIssues"/>
+		<mapping class="persistence.globaldatarepo.entities.CAUWIssues"/>
+		<mapping class="persistence.globaldatarepo.entities.AbUsers"/>
+		<mapping class="persistence.globaldatarepo.entities.AdminActivities"/>
+		<mapping class="persistence.globaldatarepo.entities.RegionCounty"/>
+		<mapping class="persistence.globaldatarepo.entities.LienHolder"/>
+		<mapping class="persistence.globaldatarepo.entities.CPClassCodes"/>
+		<mapping class="persistence.globaldatarepo.entities.CPSpecialClassCodes"/>
+		<mapping class="persistence.globaldatarepo.entities.CPCrimeClassCodes"/>
+		<mapping class="persistence.globaldatarepo.entities.ActivityPatterns"/>
+		<mapping class="persistence.globaldatarepo.entities.Permissions_SU"/>
+		<mapping class="persistence.globaldatarepo.entities.Permissions_Agent"/>
+		<mapping class="persistence.globaldatarepo.entities.Permissions_SA"/>
+		<mapping class="persistence.globaldatarepo.entities.Permissions_Underwriter"/>
+		<mapping class="persistence.globaldatarepo.entities.Permissions_CSR"/>
+		<mapping class="persistence.globaldatarepo.entities.PC_Users"/>
+		<mapping class="persistence.globaldatarepo.entities.CA_Terms"/>
+		<mapping class="persistence.globaldatarepo.entities.CA_TermOptions"/>
+		<mapping class="persistence.globaldatarepo.entities.ZipCodesIdaho"/>
+		<mapping class="persistence.globaldatarepo.entities.ServerCenterInfo"/>
+		<mapping class="persistence.globaldatarepo.entities.CPForms"/>
+		<mapping class="persistence.globaldatarepo.entities.TownshipRange"/>
+		<mapping class="persistence.globaldatarepo.entities.BOPSignOff"/>
+		<mapping class="persistence.globaldatarepo.entities.CPUWIssues"/>
+		<mapping class="persistence.globaldatarepo.entities.CPUWQuestions"/>
+		<mapping class="persistence.globaldatarepo.entities.PcProcessor"/>
+		<mapping class="persistence.globaldatarepo.entities.AccountsTabUpdate"/>
+		<mapping class="persistence.globaldatarepo.entities.ClaimsFNOLData"/>
+		<mapping class="persistence.globaldatarepo.entities.PcRolesBak"/>
+		<mapping class="persistence.globaldatarepo.entities.PcPermissionsBak"/>
+		<mapping class="persistence.globaldatarepo.entities.PcRolesPermissionsBak"/>
+		<mapping class="persistence.globaldatarepo.entities.PcuserUserRolesBak"/>
+		<mapping class="persistence.globaldatarepo.entities.PcuserUsersBak"/>
+		<mapping class="persistence.globaldatarepo.entities.IMUWQuestions"/>
+		
+		<mapping class="com.idfbins.hibernate.qa.guidewire.environments.Envs"/>
+		<mapping class="com.idfbins.hibernate.qa.guidewire.environments.EnvTypes"/>
+		<mapping class="com.idfbins.hibernate.qa.guidewire.environments.PortalUrls"/>
+		<mapping class="com.idfbins.hibernate.qa.guidewire.environments.PortalUrlTypes"/>
+		<mapping class="com.idfbins.hibernate.qa.guidewire.environments.Urls"/>
+		<mapping class="com.idfbins.hibernate.qa.guidewire.environments.UrlTypes"/>
+		
+		
+		
+
+	</session-factory>
+</hibernate-configuration>

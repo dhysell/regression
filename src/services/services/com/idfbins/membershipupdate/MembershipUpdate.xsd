@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema elementFormDefault="qualified" targetNamespace="http://www.idfbins.com/Membership" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.idfbins.com/Membership">
+    <element name="MembershipRecordsResponse" type="tns:MembershipRecords"></element>
+
+    <complexType name="MembershipRecords">
+    	<sequence>
+    		<element name="membershipRecord" type="tns:MembershipRecord"
+    			minOccurs="0" maxOccurs="unbounded">
+    		</element>
+    	</sequence>
+    </complexType>
+
+
+    <complexType name="MembershipRecord">
+    	<sequence>
+    		<element name="countyNumber" type="string"></element>
+    		<element name="effectiveDate" type="date"></element>
+    		<element name="membershipNumber" type="string"></element>
+    		<element name="contacts" type="tns:Contacts" minOccurs="0" maxOccurs="1"></element>
+    		<element name="years" type="tns:Years"></element>
+    		<element name="policyNumber" type="string" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ContactRecord">
+    	<sequence>
+    		<element name="firstName" type="string"></element>
+    		<element name="middleName" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="lastName" type="string"></element>
+    		<element name="ssn" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="birthdate" type="date" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+
+    <element name="MembershipRecordsRequest"
+    	type="tns:MembershipRecordsRequest">
+    </element>
+    
+    <complexType name="MembershipRecordsRequest">
+    	<sequence>
+    		<element name="asOfDate" type="date"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Contacts">
+    	<sequence>
+    		<element name="contact" type="tns:ContactRecord" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Years">
+    	<sequence>
+    		<element name="year" type="string" maxOccurs="10" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+</schema>

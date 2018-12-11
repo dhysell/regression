@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="CurrentProgramIncrement" verbose="1">
+	<listeners>
+		<listener class-name="repository.listeners.LocalSuiteTestListener" />
+	</listeners>
+
+	<parameter name="application" value="Current Program Increment" />
+	<parameter name="suiteName" value="CurrentProgramIncrement-Clock" />
+
+	<test name="F130 Market Conduct Claims Portion - Data Wizards">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f130_MarketConductClaimsPortion_DataWizards.*"/>
+            <package name="currentProgramIncrement.f130_MarketConductClaimsPortion_DataWizards.*.*"/>
+            <package name="currentProgramIncrement.f130_MarketConductClaimsPortion_DataWizards.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F144 Special Investigation Unit - Data Wizards">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f144_SpecialInvestigationUnit_DataWizards.*"/>
+            <package name="currentProgramIncrement.f144_SpecialInvestigationUnit_DataWizards.*.*"/>
+            <package name="currentProgramIncrement.f144_SpecialInvestigationUnit_DataWizards.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F17 Loan Maintenance - Finance">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f17_LoanMaintenance_Finance.*"/>
+            <package name="currentProgramIncrement.f17_LoanMaintenance_Finance.*.*"/>
+            <package name="currentProgramIncrement.f17_LoanMaintenance_Finance.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F252 Data Migration 4 - Finance">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f252_DataMigration4_Finance.*"/>
+            <package name="currentProgramIncrement.f252_DataMigration4_Finance.*.*"/>
+            <package name="currentProgramIncrement.f252_DataMigration4_Finance.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F257 Vendors Single Interest Insurance - Finance">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f257_VendorsSingleInterestInsurance_Finance.*"/>
+            <package name="currentProgramIncrement.f257_VendorsSingleInterestInsurance_Finance.*.*"/>
+            <package name="currentProgramIncrement.f257_VendorsSingleInterestInsurance_Finance.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F273 Activities Clean Up - Triton">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f273_ActivitiesCleanUp_Triton.*"/>
+            <package name="currentProgramIncrement.f273_ActivitiesCleanUp_Triton.*.*"/>
+            <package name="currentProgramIncrement.f273_ActivitiesCleanUp_Triton.*.*.*"/>
+        </packages>
+    </test>
+    
+     <test name="F278 BillingCenter Payment Clean Up - Triton">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f278_BillingCenterPaymentCleanup_Triton.*"/>
+            <package name="currentProgramIncrement.f278_BillingCenterPaymentCleanup_Triton.*.*"/>
+            <package name="currentProgramIncrement.f278_BillingCenterPaymentCleanup_Triton.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F291 Loan Maintenance Part 2 - Finance">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f291_LoanMaintenancePart2_Finance.*"/>
+            <package name="currentProgramIncrement.f291_LoanMaintenancePart2_Finance.*.*"/>
+            <package name="currentProgramIncrement.f291_LoanMaintenancePart2_Finance.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F340 Predictive Analytics For Renewals - ARTists">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f340_PredictiveAnalyticsForRenewals_ARTists.*"/>
+            <package name="currentProgramIncrement.f340_PredictiveAnalyticsForRenewals_ARTists.*.*"/>
+            <package name="currentProgramIncrement.f340_PredictiveAnalyticsForRenewals_ARTists.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F343 Estimated Premium Summary - Achievers">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f343_EstimatedPremiumSummary_Achievers.*"/>
+            <package name="currentProgramIncrement.f343_EstimatedPremiumSummary_Achievers.*.*"/>
+            <package name="currentProgramIncrement.f343_EstimatedPremiumSummary_Achievers.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F348 MVR Verisk - Achievers">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f348_MVRVerisk_Achievers.*"/>
+            <package name="currentProgramIncrement.f348_MVRVerisk_Achievers.*.*"/>
+            <package name="currentProgramIncrement.f348_MVRVerisk_Achievers.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F349 APLUS Reports - Scope Creeps">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f349_APLUSReports_ScopeCreeps.*"/>
+            <package name="currentProgramIncrement.f349_APLUSReports_ScopeCreeps.*.*"/>
+            <package name="currentProgramIncrement.f349_APLUSReports_ScopeCreeps.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F350 Insurance Score Verisk - ARTists">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f350_InsuranceScoreVerisk_ARTists.*"/>
+            <package name="currentProgramIncrement.f350_InsuranceScoreVerisk_ARTists.*.*"/>
+            <package name="currentProgramIncrement.f350_InsuranceScoreVerisk_ARTists.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F351 Prefill Verisk - Achievers">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f351_PrefillVerisk_Achievers.*"/>
+            <package name="currentProgramIncrement.f351_PrefillVerisk_Achievers.*.*"/>
+            <package name="currentProgramIncrement.f351_PrefillVerisk_Achievers.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F42 Checks Off The Mainframe - Aces">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f42_ChecksOffTheMainframe_Aces.*"/>
+            <package name="currentProgramIncrement.f42_ChecksOffTheMainframe_Aces.*.*"/>
+            <package name="currentProgramIncrement.f42_ChecksOffTheMainframe_Aces.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F433 Tracking Agents Mandatory 4 Items - Nucleus">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f433_TrackingAgentsMandatory4Items_Nucleus.*"/>
+            <package name="currentProgramIncrement.f433_TrackingAgentsMandatory4Items_Nucleus.*.*"/>
+            <package name="currentProgramIncrement.f433_TrackingAgentsMandatory4Items_Nucleus.*.*.*"/>
+        </packages>
+    </test>
+    
+    <test name="F435 Invoicing Lead Time - No Exceptions">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f435_InvoicingLeadTime_NoExceptions.*"/>
+            <package name="currentProgramIncrement.f435_InvoicingLeadTime_NoExceptions.*.*"/>
+            <package name="currentProgramIncrement.f435_InvoicingLeadTime_NoExceptions.*.*.*"/>
+        </packages>
+    </test>
+    
+    <test name="F440 Lienholder CleanUp - Nucleus">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f440_LienholderCleanUp_Nucleus.*"/>
+            <package name="currentProgramIncrement.f440_LienholderCleanUp_Nucleus.*.*"/>
+            <package name="currentProgramIncrement.f440_LienholderCleanUp_Nucleus.*.*.*"/>
+        </packages>
+    </test>
+    
+    <test name="F51 Funding Field Checks Account - Aces">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f51_FundingFieldChecksAccount_Aces.*"/>
+            <package name="currentProgramIncrement.f51_FundingFieldChecksAccount_Aces.*.*"/>
+            <package name="currentProgramIncrement.f51_FundingFieldChecksAccount_Aces.*.*.*"/>
+        </packages>
+    </test>
+    
+    
+    <test name="Maintenance Defects - Aces">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.maintenanceDefects.Aces.*"/>
+        </packages>
+    </test>
+
+    <test name="Maintenance Defects - Achievers">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.maintenanceDefects.Achievers.*"/>
+        </packages>
+    </test>
+    
+    <test name="Maintenance Defects - ARTists">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.maintenanceDefects.ARTists.*"/>
+        </packages>
+    </test>
+
+    <test name="Maintenance Defects - No Exceptions">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.maintenanceDefects.NoExceptions.*"/>
+        </packages>
+    </test>
+
+    <test name="Maintenance Defects - Nucleus">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.maintenanceDefects.Nucleus.*"/>
+        </packages>
+    </test>
+
+    <test name="Maintenance Defects - Scope Creeps">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.maintenanceDefects.ScopeCreeps.*"/>
+        </packages>
+    </test>
+
+    <test name="Maintenance Defects - Triton">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.maintenanceDefects.Triton.*"/>
+        </packages>
+    </test>
+
+
+
+
+
+    <test name="Non Feature Related Work - Aces">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.nonFeatures.Aces.*"/>
+        </packages>
+    </test>
+
+    <test name="Non Feature Related Work - Achievers">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.nonFeatures.Achievers.*"/>
+        </packages>
+    </test>
+    
+    <test name="Non Feature Related Work - ARTists">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.nonFeatures.ARTists.*"/>
+        </packages>
+    </test>
+
+    <test name="Non Feature Related Work - No Exceptions">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.nonFeatures.NoExceptions.*"/>
+        </packages>
+    </test>
+
+    <test name="Non Feature Related Work - Nucleus">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.nonFeatures.Nucleus.*"/>
+        </packages>
+    </test>
+
+    <test name="Non Feature Related Work - Scope Creeps">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.nonFeatures.ScopeCreeps.*"/>
+        </packages>
+    </test>
+
+    <test name="Non Feature Related Work - Triton">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.nonFeatures.Triton.*"/>
+        </packages>
+    </test>
+</suite>

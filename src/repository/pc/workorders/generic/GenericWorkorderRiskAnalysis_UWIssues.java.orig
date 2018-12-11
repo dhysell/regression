@@ -1,0 +1,979 @@
+package pc.workorders.generic;
+
+import com.idfbins.enums.OkCancel;
+import config.Configuration;
+import gw.activity.ActivityPopup;
+import gw.elements.Guidewire8Checkbox;
+import gw.enums.ContactSubType;
+import gw.enums.ProductLineType;
+import gw.enums.SR22FilingFee;
+import gw.enums.UnderwriterIssueType;
+import gw.generate.GeneratePolicy;
+import gw.generate.custom.Contact;
+import gw.generate.custom.FullUnderWriterIssues;
+import gw.generate.custom.UnderwriterIssue;
+import gw.helpers.TableUtils;
+import gw.infobar.InfoBar;
+import gw.login.Login;
+import gw.search.GWSearchAccounts;
+import gw.topinfo.TopInfo;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+import pc.account.AccountSummaryPC;
+import pc.activity.UWActivityPC;
+import pc.desktop.DesktopMyActivitiesPC;
+import pc.sidemenu.SideMenuPC;
+import persistence.globaldatarepo.entities.CSRs;
+import persistence.globaldatarepo.entities.Underwriters;
+import persistence.globaldatarepo.helpers.UnderwritersHelper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class GenericWorkorderRiskAnalysis_UWIssues extends GenericWorkorderRiskAnalysis {
+
+
+    public GenericWorkorderRiskAnalysis_UWIssues() {
+        PageFactory.initElements(Configuration.getWebDriver(), this);
+    }
+
+    @FindBy(xpath = "//div[contains(@id,':Job_RiskAnalysisScreen:RiskAnalysisCV:EvaluationIssuesCardTab:panelId')]//div[contains(@id, '-body')]//table")
+    private WebElement table_UWIssues;
+
+
+    private List<WebElement> buttons_SpecialApproveActive() {
+        return table_UWIssues.findElements(By.xpath(".//td/div/a[contains(.,'Special Approve')]"));
+    }
+
+    private List<WebElement> buttons_SpecialApproveInactive() {
+        return table_UWIssues.findElements(By.xpath(".//td/div/span[contains(.,'Special Approve')]"));
+    }
+
+    @FindBy(xpath = "//div[contains(@id, ':RiskEvaluationPanelSet:0-body')]/descendant::tbody/child::tr/child::td/div[contains(text(), 'Blocking Bind') or contains(text(), 'Blocking Submit')]")
+    private WebElement blockSubmit;
+
+    @FindBy(xpath = "//div[contains(@id, ':RiskEvaluationPanelSet:0-body')]/descendant::tbody/child::tr/child::td/div[contains(text(), 'Informational')]")
+    private WebElement informational;
+
+    @FindBy(xpath = "//div[contains(@id, ':RiskEvaluationPanelSet:0-body')]/descendant::tbody/child::tr/child::td/div[contains(text(), 'Blocking Issuance')]")
+    private WebElement blockIssuance;
+
+    @FindBy(xpath = "//div[contains(@id, ':RiskEvaluationPanelSet:0-body')]/descendant::tbody/child::tr/child::td/div[contains(text(), 'Informational')]")
+    private WebElement blockQuote;
+    
+    @FindBy(xpath = "//span[contains(@id, ':Approve-btnEl')]")
+    private WebElement approveAllButton;
+
+
+    public boolean checkIfSpecialApproveButtonsExist(boolean active) {
+        if (active) {
+            if (buttons_SpecialApproveActive().size() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (buttons_SpecialApproveInactive().size() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+
+    // GET BLOCK Submit LIST
+    public List<WebElement> getBlockSubmitList() {
+        List<WebElement> blockSubmitList = new ArrayList<WebElement>();
+        try {
+            int start = Integer.parseInt(blockSubmit.findElement(By.xpath(".//parent::td/parent::tr")).getAttribute("data-recordindex")) + 1;
+            int end;
+            try {
+                end = Integer.parseInt(informational.findElement(By.xpath(".//parent::td/parent::tr")).getAttribute("data-recordindex")) - 1;
+            } catch (Exception e) {
+                end = Integer.parseInt(blockIssuance.findElement(By.xpath(".//parent::td/parent::tr")).getAttribute("data-recordindex")) - 1;
+            }
+
+            for (int i = start; i <= end; i++) {
+                blockSubmitList.add(find(By.xpath("//a[contains(@id, 'RiskEvaluationPanelSet:" + i + ":UWIssueRowSet:ShortDescription')]")));
+            }
+        } catch (Exception e) {
+        }
+        return blockSubmitList;
+    }
+
+    // GET ALL UW ISSUES
+
+    public List<WebElement> getUWIssuesList() {
+        List<WebElement> uwIssueList = table_UWIssues.findElements(By.xpath("./tbody/child::tr"));
+        return uwIssueList;
+    }
+
+
+    public UnderwriterIssue getUWIssue(WebElement trWithIssue, UnderwriterIssueType type) {
+        UnderwriterIssue returnUWIssue = new UnderwriterIssue();
+        returnUWIssue.setType(type);
+
+        if (!trWithIssue.findElements(By.xpath(".//child::td[2]/div/a")).isEmpty()) {
+            trWithIssue.findElement(By.xpath(".//child::td[2]/div/a")).click();
+            delay(500);
+            returnUWIssue.setLongDescription(find(By.xpath("//textarea[contains(@id, ':IssueLongDescription-inputEl')]")).getText());
+            returnUWIssue.setShortDescription(find(By.xpath("//label[contains(@id, 'IssueLongDescription-labelEl')]")).getText());
+            clickReturnRiskAnalysisPage();
+        }//END IF
+
+        return returnUWIssue;
+    }//END getUWIssue
+    
+    public UnderwriterIssue getUWIssueBasic(WebElement trWithIssue, UnderwriterIssueType type) {
+        UnderwriterIssue returnUWIssue = new UnderwriterIssue();
+        returnUWIssue.setType(type);
+
+        if (!trWithIssue.findElements(By.xpath(".//child::td[2]/div/a")).isEmpty()) {
+            returnUWIssue.setShortDescription(find(By.xpath(".//child::td[2]/div/a")).getText());
+        }//END IF
+
+        return returnUWIssue;
+    }//END getUWIssue
+
+
+    /**
+     * @param fullUWIssues
+     * @param uwIssue
+     * @return UnderwriterIssueType
+     * @author jlarsen
+     * @Description - Loops thru Object lists and returns what list type it found the UW Issue in.
+     * @DATE - Sep 14, 2016
+     */
+
+    public UnderwriterIssueType hasUWIssue(FullUnderWriterIssues fullUWIssues, String uwIssue) {
+        SideMenuPC sidemenu = new SideMenuPC(driver);
+        sidemenu.clickSideMenuRiskAnalysis();
+        clickUWIssuesTab();
+
+        for (UnderwriterIssue listIssue : fullUWIssues.getInformationalList()) {
+            if (listIssue.getLongDescription() == null) {
+                delay(100);
+            }
+            if (listIssue.getShortDescription() == null) {
+                delay(100);
+            }
+            if (uwIssue != null) {
+                delay(100);
+                if (listIssue.getLongDescription().contains(uwIssue) || listIssue.getShortDescription().contains(uwIssue)) {
+                    return UnderwriterIssueType.Informational;
+                }
+            } else {
+                delay(100);
+            }
+
+        }
+
+        for (UnderwriterIssue listIssue : fullUWIssues.getBlockSubmitList()) {
+            if (listIssue.getLongDescription().contains(uwIssue) || listIssue.getShortDescription().contains(uwIssue)) {
+                return UnderwriterIssueType.BlockSubmit;
+            }
+        }
+
+        for (UnderwriterIssue listIssue : fullUWIssues.getBlockIssuanceList()) {
+            if (listIssue.getLongDescription().contains(uwIssue) || listIssue.getShortDescription().contains(uwIssue)) {
+                return UnderwriterIssueType.BlockIssuance;
+            }
+        }
+
+        for (UnderwriterIssue listIssue : fullUWIssues.getBlockQuoteList()) {
+            if (listIssue.getLongDescription().contains(uwIssue) || listIssue.getShortDescription().contains(uwIssue)) {
+                return UnderwriterIssueType.BlockQuote;
+            }
+        }
+
+        for (UnderwriterIssue listIssue : fullUWIssues.getBlockQuoteReleaseList()) {
+            if (listIssue.getLongDescription().contains(uwIssue) || listIssue.getShortDescription().contains(uwIssue)) {
+                return UnderwriterIssueType.BlockQuoteRelease;
+            }
+        }
+
+        for (UnderwriterIssue listIssue : fullUWIssues.getRejectList()) {
+            if (listIssue.getLongDescription().contains(uwIssue) || listIssue.getShortDescription().contains(uwIssue)) {
+                return UnderwriterIssueType.Reject;
+            }
+        }
+
+        for (UnderwriterIssue listIssue : fullUWIssues.getAlreadyApprovedList()) {
+            if (listIssue.getLongDescription().contains(uwIssue) || listIssue.getShortDescription().contains(uwIssue)) {
+                return UnderwriterIssueType.AlreadyApproved;
+            }
+        }
+        return UnderwriterIssueType.NONE;
+    }
+
+
+    private String getIssueType(WebElement trWithIssue) {
+        String returnText = null;
+        if (!trWithIssue.findElements(By.xpath(".//child::td[2]/div/a")).isEmpty()) {
+            return trWithIssue.findElement(By.xpath(".//child::td[2]/div/a")).getText();
+        } else if (!trWithIssue.findElements(By.xpath(".//child::td[2]/div")).isEmpty()) {
+            return trWithIssue.findElement(By.xpath(".//child::td[2]/div")).getText();
+        }
+        return returnText;
+    }
+
+
+    //returns an object with all UW Issues sorted by type
+
+    public FullUnderWriterIssues getUnderwriterIssues() {
+        FullUnderWriterIssues fullUWIssues = new FullUnderWriterIssues();
+        UnderwriterIssueType listType = UnderwriterIssueType.Informational;
+        delay(200);
+        List<WebElement> tempWebElementList = new GenericWorkorderRiskAnalysis_UWIssues().getUWIssuesList();
+
+        for (int i = 0; i <= tempWebElementList.size() - 1; i++) {
+            delay(500);
+            tempWebElementList = new GenericWorkorderRiskAnalysis_UWIssues().getUWIssuesList();
+            switch (getIssueType(tempWebElementList.get(i))) {
+                case "Informational":
+                    listType = UnderwriterIssueType.Informational;
+                    break;
+                case "Block Issuance":
+                case "Blocking Issuance":
+                    listType = UnderwriterIssueType.BlockIssuance;
+                    break;
+                case "Blocking Quote Release":
+                case "Block Quote Release":
+                    listType = UnderwriterIssueType.BlockQuoteRelease;
+                    break;
+                case "Block Bind":
+                case "Blocking Bind":
+                case "Block Submit":
+                case "Blocking Submit":
+                    listType = UnderwriterIssueType.BlockSubmit;
+                    break;
+                case "Block Quote":
+                case "Blocking Quote":
+                    listType = UnderwriterIssueType.BlockQuote;
+                    break;
+                case "Reject":
+                    listType = UnderwriterIssueType.Reject;
+                    break;
+                case "Already Approved":
+                    listType = UnderwriterIssueType.AlreadyApproved;
+                    break;
+                default:
+                    tempWebElementList = new GenericWorkorderRiskAnalysis_UWIssues().getUWIssuesList();
+                    switch (listType) {
+                        case Informational:
+                            fullUWIssues.getInformationalList().add(getUWIssue(tempWebElementList.get(i), listType));
+                            break;
+                        case BlockIssuance:
+                            fullUWIssues.getBlockIssuanceList().add(getUWIssue(tempWebElementList.get(i), listType));
+                            break;
+                        case BlockQuoteRelease:
+                            fullUWIssues.getBlockQuoteReleaseList().add(getUWIssue(tempWebElementList.get(i), listType));
+                            break;
+                        case BlockSubmit:
+                            fullUWIssues.getBlockSubmitList().add(getUWIssue(tempWebElementList.get(i), listType));
+                            break;
+                        case BlockQuote:
+                            fullUWIssues.getBlockQuoteList().add(getUWIssue(tempWebElementList.get(i), listType));
+                            break;
+                        case Reject:
+                            fullUWIssues.getRejectList().add(getUWIssue(tempWebElementList.get(i), listType));
+                            break;
+                        case AlreadyApproved:
+                            fullUWIssues.getAlreadyApprovedList().add(getUWIssue(tempWebElementList.get(i), listType));
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+            }//END SWITCH
+        }//END FOR
+        return fullUWIssues;
+    }
+    
+    public FullUnderWriterIssues getUnderwriterIssuesBasic() {
+        FullUnderWriterIssues fullUWIssues = new FullUnderWriterIssues();
+        UnderwriterIssueType listType = UnderwriterIssueType.Informational;
+        delay(200);
+        List<WebElement> tempWebElementList = new GenericWorkorderRiskAnalysis_UWIssues().getUWIssuesList();
+
+        for (int i = 0; i <= tempWebElementList.size() - 1; i++) {
+            delay(500);
+            tempWebElementList = new GenericWorkorderRiskAnalysis_UWIssues().getUWIssuesList();
+            switch (getIssueType(tempWebElementList.get(i))) {
+                case "Informational":
+                    listType = UnderwriterIssueType.Informational;
+                    break;
+                case "Block Issuance":
+                case "Blocking Issuance":
+                    listType = UnderwriterIssueType.BlockIssuance;
+                    break;
+                case "Blocking Quote Release":
+                case "Block Quote Release":
+                    listType = UnderwriterIssueType.BlockQuoteRelease;
+                    break;
+                case "Block Bind":
+                case "Blocking Bind":
+                case "Block Submit":
+                case "Blocking Submit":
+                    listType = UnderwriterIssueType.BlockSubmit;
+                    break;
+                case "Block Quote":
+                case "Blocking Quote":
+                    listType = UnderwriterIssueType.BlockQuote;
+                    break;
+                case "Reject":
+                    listType = UnderwriterIssueType.Reject;
+                    break;
+                case "Already Approved":
+                    listType = UnderwriterIssueType.AlreadyApproved;
+                    break;
+                default:
+                    tempWebElementList = new GenericWorkorderRiskAnalysis_UWIssues().getUWIssuesList();
+                    switch (listType) {
+                        case Informational:
+                            fullUWIssues.getInformationalList().add(getUWIssue(tempWebElementList.get(i), listType));
+                            break;
+                        case BlockIssuance:
+                            fullUWIssues.getBlockIssuanceList().add(getUWIssue(tempWebElementList.get(i), listType));
+                            break;
+                        case BlockQuoteRelease:
+                            fullUWIssues.getBlockQuoteReleaseList().add(getUWIssue(tempWebElementList.get(i), listType));
+                            break;
+                        case BlockSubmit:
+                            fullUWIssues.getBlockSubmitList().add(getUWIssue(tempWebElementList.get(i), listType));
+                            break;
+                        case BlockQuote:
+                            fullUWIssues.getBlockQuoteList().add(getUWIssue(tempWebElementList.get(i), listType));
+                            break;
+                        case Reject:
+                            fullUWIssues.getRejectList().add(getUWIssue(tempWebElementList.get(i), listType));
+                            break;
+                        case AlreadyApproved:
+                            fullUWIssues.getAlreadyApprovedList().add(getUWIssue(tempWebElementList.get(i), listType));
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+            }//END SWITCH
+        }//END FOR
+        return fullUWIssues;
+    }
+
+
+    public FullUnderWriterIssues getUnderwriterIssuesWithButtons() {
+        FullUnderWriterIssues fullUWIssues = new FullUnderWriterIssues();
+        UnderwriterIssueType listType = UnderwriterIssueType.Informational;
+        List<WebElement> tempWebElementList = new GenericWorkorderRiskAnalysis_UWIssues().getUWIssuesList();
+        String tempString = null;
+
+        for (int i = 0; i <= tempWebElementList.size() - 1; i++) {
+            tempWebElementList = new GenericWorkorderRiskAnalysis_UWIssues().getUWIssuesList();
+            tempString = getUWIssueText(tempWebElementList.get(i));
+            switch (tempString) {
+                case "Informational":
+                    listType = UnderwriterIssueType.Informational;
+                    break;
+                case "Block Issuance":
+                    listType = UnderwriterIssueType.BlockIssuance;
+                    break;
+                case "Block Quote Release":
+                    listType = UnderwriterIssueType.BlockQuoteRelease;
+                    break;
+                case "Block Bind":
+                case "Blocking Bind":
+                case "Block Submit":
+                case "Blocking Submit":
+                    listType = UnderwriterIssueType.BlockSubmit;
+                    break;
+                case "Block Quote":
+                    listType = UnderwriterIssueType.BlockQuote;
+                    break;
+                case "Reject":
+                    listType = UnderwriterIssueType.Reject;
+                    break;
+                case "Already Approved":
+                    listType = UnderwriterIssueType.AlreadyApproved;
+                    break;
+                default:
+                    tempWebElementList = new GenericWorkorderRiskAnalysis_UWIssues().getUWIssuesList();
+                    switch (listType) {
+                        case Informational:
+                            fullUWIssues.getInformationalList().add(getUWIssueWithButtons(tempWebElementList.get(i), listType));
+                            break;
+                        case BlockIssuance:
+                            fullUWIssues.getBlockIssuanceList().add(getUWIssueWithButtons(tempWebElementList.get(i), listType));
+                            break;
+                        case BlockQuoteRelease:
+                            fullUWIssues.getBlockQuoteReleaseList().add(getUWIssueWithButtons(tempWebElementList.get(i), listType));
+                            break;
+                        case BlockSubmit:
+                            fullUWIssues.getBlockSubmitList().add(getUWIssueWithButtons(tempWebElementList.get(i), listType));
+                            break;
+                        case BlockQuote:
+                            fullUWIssues.getBlockQuoteList().add(getUWIssueWithButtons(tempWebElementList.get(i), listType));
+                            break;
+                        case Reject:
+                            fullUWIssues.getRejectList().add(getUWIssueWithButtons(tempWebElementList.get(i), listType));
+                            break;
+                        case AlreadyApproved:
+                            fullUWIssues.getAlreadyApprovedList().add(getUWIssueWithButtons(tempWebElementList.get(i), listType));
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+            }//END SWITCH
+        }//END FOR
+
+        return fullUWIssues;
+    }//END getUnderwriterIssuesWithButtons
+
+    public UnderwriterIssue getUWIssueWithButtons(WebElement trWithIssue, UnderwriterIssueType type) {
+        UnderwriterIssue returnUWIssue = new UnderwriterIssue();
+
+        for (WebElement button : trWithIssue.findElements(By.xpath(".//child::td[5]/div/a"))) {
+            switch (button.getText()) {
+                case "Approve":
+                    returnUWIssue.setApprove(true);
+                    returnUWIssue.setApprove_Available(true);
+                    break;
+                case "Reject":
+                    returnUWIssue.setReject(true);
+                    returnUWIssue.setReject_Available(true);
+                    break;
+                case "Reopen":
+                    returnUWIssue.setReopen(true);
+                    returnUWIssue.setReopen_Available(true);
+                    break;
+                case "Special Approve":
+                    returnUWIssue.setSpecialApprove(true);
+                    returnUWIssue.setSpecialApprove_Available(true);
+                    break;
+            }//END SWITCH
+        }//END FOR
+
+        for (WebElement button : trWithIssue.findElements(By.xpath(".//child::td[5]/div/span"))) {
+            switch (button.getText()) {
+                case "Approve":
+                    returnUWIssue.setApprove(true);
+                    break;
+                case "Reject":
+                    returnUWIssue.setReject(true);
+                    break;
+                case "Reopen":
+                    returnUWIssue.setReopen(true);
+                    break;
+                case "Special Approve":
+                    returnUWIssue.setSpecialApprove(true);
+                    break;
+            }//END SWITCH
+        }//END FOR
+
+        returnUWIssue.setType(type);
+
+        if (!trWithIssue.findElements(By.xpath(".//child::td[2]/div/a")).isEmpty()) {
+            trWithIssue.findElement(By.xpath(".//child::td[2]/div/a")).click();
+            delay(100);
+            returnUWIssue.setLongDescription(find(By.xpath("//textarea[contains(@id, ':IssueLongDescription-inputEl')]")).getText());
+            returnUWIssue.setShortDescription(find(By.xpath("//label[contains(@id, 'IssueLongDescription-labelEl')]")).getText());
+            clickReturnRiskAnalysisPage();
+        }//END IF
+
+        return returnUWIssue;
+    }//END getUWIssueWithButtons
+
+    public List<String> getUWIssuesListLongDescription() {
+        List<WebElement> tempWebElementList = getUWIssuesList();
+        List<String> tempStringList = new ArrayList<String>();
+        String tempString = null;
+        for (int i = 0; i <= tempWebElementList.size() - 1; i++) {
+            tempWebElementList = getUWIssuesList();
+            tempString = getUWIssueText(tempWebElementList.get(i));
+            if (tempString != null) {
+                tempStringList.add(tempString);
+            }
+        }
+        return tempStringList;
+    }
+
+
+    public String getUWIssueText(WebElement trWithIssue) {
+        String returnText = null;
+        if (!trWithIssue.findElements(By.xpath(".//child::td[2]/div/a")).isEmpty()) {
+            trWithIssue.findElement(By.xpath(".//child::td[2]/div/a")).click();
+            delay(100);
+            if (!finds(By.xpath("//textarea[contains(@id, ':IssueLongDescription-inputEl')]")).isEmpty()) {
+                returnText = find(By.xpath("//textarea[contains(@id, ':IssueLongDescription-inputEl')]")).getText();
+            }
+            clickReturnRiskAnalysisPage();
+        } else if (!trWithIssue.findElements(By.xpath(".//child::td[2]/div")).isEmpty()) {
+            return trWithIssue.findElement(By.xpath(".//child::td[2]/div")).getText();
+        }
+        return returnText;
+    }
+
+    public boolean approveUWIssue(UnderwriterIssue uwIssue) {
+        //FIX FOR DYNAMIC CHANGING LIST.
+        List<WebElement> uwIssuesList = finds(By.xpath("//td/div/a[contains(text(), 'Approve')]"));//getUWIssuesList();
+        for (WebElement uwIssues : uwIssuesList) {
+            String uwIssueText = uwIssues.findElement(By.xpath("//ancestor::td/div/a[contains(@id, 'ShortDescription')]")).getText();
+            if (uwIssueText.equals(uwIssue.getShortDescription())) {
+                if (uwIssue.isApprove() && uwIssue.isApprove_Available()) {
+                    clickWhenClickable(uwIssues.findElement(By.xpath("//td/div/a[contains(text(), 'Approve')]")));
+                    delay(100);
+                    super.clickOK();
+                    selectOKOrCancelFromPopup(OkCancel.OK);
+                    break;
+                } else if (uwIssue.isApprove() && !uwIssue.isApprove_Available()) {
+                    systemOut("APPROVE button is visible to User but not Clickable.");
+                } else {
+                    systemOut("APPROVE button is not available");
+                }
+            }
+        }
+        return false;
+    }
+
+    
+    
+    
+    //Blindly Approve all UW Issues
+    public FullUnderWriterIssues approveAll() throws Exception {
+//        String uwIssueText = "";
+        boolean alreadyHandled = false;
+        
+        FullUnderWriterIssues uwIssues = getUnderwriterIssuesBasic();
+        
+        //FIX SOETHING FOR SR-22
+        if(!uwIssues.isInList_ShortDescription("SR-22 Charge").equals(UnderwriterIssueType.NONE) && alreadyHandled == false) {
+        	//Go to the drivers page
+            SideMenuPC sideMenu = new SideMenuPC(driver);
+            sideMenu.clickSideMenuPADrivers();
+            pageWaitUtils.waitForPostBack();
+            this.editPolicyTransaction();
+            //Edit Each Driver (In the interest of not having to change the signature of this method, we will loop through all drivers already
+            //set on the page and check if the SR-22 checkbox is already set. If so, we will charge the fee. If not, it will be left alone.)
+            GenericWorkorderSquireAutoDrivers_ContactDetail driversPage = new GenericWorkorderSquireAutoDrivers_ContactDetail();
+            for (int i = 1; i <= driversPage.getDriverTableRowsCount(); i++) {
+                driversPage.clickEditButtonInDriverTable(i);
+                //Add SR-22 Filing Charge
+                if (driversPage.isSR22CheckboxChecked()) {
+                    driversPage.setSR22FilingFee(SR22FilingFee.Charged);
+                }
+                driversPage.clickOk();
+                pageWaitUtils.waitForPostBack();
+            }
+            GenericWorkorder workflow = new GenericWorkorder(driver);
+            workflow.clickGenericWorkorderQuote();
+            pageWaitUtils.waitForPostBack();
+            sideMenu = new SideMenuPC(driver);
+            sideMenu.clickSideMenuRiskAnalysis();
+            pageWaitUtils.waitForPostBack();
+            alreadyHandled = true;
+        }
+        
+        List<UnderwriterIssue> approvableUWIssues = new ArrayList<UnderwriterIssue>();
+        approvableUWIssues.addAll(uwIssues.getAllApprovableUWIssues());
+        for(UnderwriterIssue issue : approvableUWIssues) {
+        	selectUnderWriterIssue(issue);
+        }
+        
+        clickWhenClickable(approveAllButton);
+        delay(500);
+        super.clickOK();
+        delay(500);
+        
+        
+        
+//        while (!finds(By.xpath("//td/div/a[contains(text(), 'Approve')]")).isEmpty()) {
+//            List<WebElement> uwIssuesList = finds(By.xpath("//td/div/a[contains(text(), 'Approve')]"));//getUWIssuesList();
+//            for (WebElement uwIssue : uwIssuesList) {
+//                uwIssueText = uwIssue.findElement(By.xpath("//ancestor::td/div/a[contains(@id, 'ShortDescription')]")).getText();
+//                if (!uwIssue.findElements(By.xpath("//td/div/a[contains(text(), 'Approve')]")).isEmpty()) {
+//                    clickWhenClickable(uwIssue.findElement(By.xpath("//td/div/a[contains(text(), 'Approve')]")));
+//                    pageWaitUtils.waitForPostBack();
+//                    super.clickOK();
+//                    pageWaitUtils.waitForPostBack();
+//                    selectOKOrCancelFromPopup(OkCancel.OK);
+//                    pageWaitUtils.waitForPostBack();
+//                    //This is specifically made to handle adding actual charges for SR-22 filings. If the UW issue to approve is an SR-22 Filing issue, it will
+//                    //leave the current page, charge the SR-22 charge, and return to the UW Issues page to continue through the loop.
+//                    if (uwIssueText.equals("SR-22 Charge") && alreadyHandled == false) {
+//                        //Go to the drivers page
+//                        SideMenuPC sideMenu = new SideMenuPC(driver);
+//                        sideMenu.clickSideMenuPADrivers();
+//                        pageWaitUtils.waitForPostBack();
+//                        this.editPolicyTransaction();
+//                        //Edit Each Driver (In the interest of not having to change the signature of this method, we will loop through all drivers already
+//                        //set on the page and check if the SR-22 checkbox is already set. If so, we will charge the fee. If not, it will be left alone.)
+//                        GenericWorkorderSquireAutoDrivers_ContactDetail driversPage = new GenericWorkorderSquireAutoDrivers_ContactDetail();
+//                        for (int i = 1; i <= driversPage.getDriverTableRowsCount(); i++) {
+//                            driversPage.clickEditButtonInDriverTable(i);
+//                            //Add SR-22 Filing Charge
+//                            if (driversPage.isSR22CheckboxChecked()) {
+//                                driversPage.setSR22FilingFee(SR22FilingFee.Charged);
+//                            }
+//                            driversPage.clickOk();
+//                            pageWaitUtils.waitForPostBack();
+//                        }
+//                        GenericWorkorder workflow = new GenericWorkorder(driver);
+//                        workflow.clickGenericWorkorderQuote();
+//                        pageWaitUtils.waitForPostBack();
+//                        sideMenu = new SideMenuPC(driver);
+//                        sideMenu.clickSideMenuRiskAnalysis();
+//                        pageWaitUtils.waitForPostBack();
+//                        alreadyHandled = true;
+//                    }
+//                    break;
+//                }
+//            }
+//        }
+        return uwIssues;
+    }
+
+    private void selectUnderWriterIssue(UnderwriterIssue issue) {
+<<<<<<< HEAD
+//    	@editor ecoleman 5/25/18: had issue of short description cutting out a double space which broke the xpath.
+    	if (isOnPage("//a[text()='" + issue.getShortDescription() + "']/ancestor::tr/child::td[1]/div/img")) {
+		clickWhenClickable(findElement(By.xpath("//a[text()='" + issue.getShortDescription() + "']/ancestor::tr/child::td[1]/div/img")));
+    	}
+    	else {
+    		clickWhenClickable(findElement(By.xpath("//a[text()='" + issue.getLongDescription() + "']/ancestor::tr/child::td[1]/div/img")));
+    	}
+=======
+		clickWhenClickable(findElement(By.xpath("//a[text()='" + issue.getShortDescription() + "']/ancestor::tr/child::td[1]/div/img[not(contains(@class, 'checked'))]")));
+>>>>>>> regression fix.
+	}
+
+	public void specialApproveAll() throws Exception {
+        while (buttons_SpecialApproveActive().size() > 0) {
+            buttons_SpecialApproveActive().get(0).click();
+            pageWaitUtils.waitForPostBack();
+            super.clickOK();
+            pageWaitUtils.waitForPostBack();
+            selectOKOrCancelFromPopup(OkCancel.OK);
+            pageWaitUtils.waitForPostBack();
+        }
+        approveAll();
+    }
+
+
+    public void handleBlockSubmitForPolicyChange() throws Exception {
+        SideMenuPC sideBar = new SideMenuPC(driver);
+        sideBar.clickSideMenuRiskAnalysis();
+        clickRequestApproval();
+        UWActivityPC activity = new UWActivityPC();
+        activity.setText("Please Approve this Stuff!!");
+        activity.setNewNoteSubject("Please Approve this Stuff!!");
+        activity.clickSendRequest();
+        delay(100);
+        Underwriters uw = null;
+        InfoBar infoBar = new InfoBar();
+        String accountNumber = infoBar.clickInfoBarAccountNumber();
+
+        AccountSummaryPC aSumm = new AccountSummaryPC(driver);
+        ArrayList<String> activityOwners = new ArrayList<String>();
+        activityOwners = aSumm.getActivityAssignedTo("Approval Requested");
+        uw = UnderwritersHelper.getUnderwriterInfoByFullName(activityOwners.get(activityOwners.size() - 1));
+        delay(100);
+        TopInfo topInfoStuff = new TopInfo();
+        topInfoStuff.clickTopInfoLogout();
+        delay(100);
+        Login loginPage = new Login();
+        loginPage.login(uw.getUnderwriterUserName(), uw.getUnderwriterPassword());
+        GWSearchAccounts search = new GWSearchAccounts();
+        search.searchAccountByAccountNumber(accountNumber);
+        delay(100);
+        AccountSummaryPC acct = new AccountSummaryPC(driver);
+        acct.clickActivitySubject("Approval Requested");
+        ActivityPopup actPop = new ActivityPopup();
+        actPop.clickCompleteButton();
+
+        sideBar = new SideMenuPC(driver);
+        sideBar.clickSideMenuRiskAnalysis();
+        delay(100);
+        approveAll();
+        if (isAlertPresent()) {
+            selectOKOrCancelFromPopup(OkCancel.OK);
+        }
+        if (new GenericWorkorderRiskAnalysis_UWIssues().checkIfSpecialApproveButtonsExist(false)) {
+            clickRequestApproval();
+            activity = new UWActivityPC();
+            activity.setText("Please Special Approve this Stuff!!");
+            activity.setNewNoteSubject("Please Special Approve this Stuff!!");
+            activity.clickSendRequest();
+            delay(100);
+            infoBar = new InfoBar();
+            infoBar.clickInfoBarAccountNumber();
+
+            aSumm = new AccountSummaryPC(driver);
+            activityOwners = aSumm.getActivityAssignedTo("Approval Requested");
+            uw = UnderwritersHelper.getUnderwriterInfoByFullName(activityOwners.get(activityOwners.size() - 1));
+            delay(100);
+            topInfoStuff = new TopInfo();
+            topInfoStuff.clickTopInfoLogout();
+            delay(100);
+            loginPage = new Login();
+            loginPage.login(uw.getUnderwriterUserName(), uw.getUnderwriterPassword());
+            search = new GWSearchAccounts();
+            search.searchAccountByAccountNumber(accountNumber);
+            delay(100);
+            acct = new AccountSummaryPC(driver);
+            acct.clickActivitySubject("Approval Requested");
+            actPop = new ActivityPopup();
+            actPop.clickCompleteButton();
+
+            sideBar = new SideMenuPC(driver);
+            sideBar.clickSideMenuRiskAnalysis();
+            delay(100);
+
+            specialApproveAll();
+        }
+
+        clickReleaseLock();
+        delay(500);
+
+        infoBar = new InfoBar();
+        infoBar.clickInfoBarAccountNumber();
+        delay(100);
+        acct = new AccountSummaryPC(driver);
+        acct.clickActivitySubject("Underwriter has reviewed this job");
+        delay(500);
+    }
+    public void handleBlockSubmitForPolicyChangeWithSameLogin() throws Exception {
+        SideMenuPC sideBar = new SideMenuPC(driver);
+        sideBar.clickSideMenuRiskAnalysis();
+
+        delay(100);
+        approveAll();
+        if (isAlertPresent()) {
+            selectOKOrCancelFromPopup(OkCancel.OK);
+        }
+        if (new GenericWorkorderRiskAnalysis_UWIssues().checkIfSpecialApproveButtonsExist(false)) {
+            delay(100);
+            specialApproveAll();
+        }
+        delay(500);
+    }
+
+    public void handleBlockSubmit(GeneratePolicy policy) throws Exception {
+        SideMenuPC sideBar = new SideMenuPC(driver);
+        sideBar.clickSideMenuRiskAnalysis();
+        clickRequestApproval();
+        UWActivityPC activity = new UWActivityPC();
+        activity.setText("Please Approve this Stuff!!");
+        activity.setNewNoteSubject("Please Approve this Stuff!!");
+        activity.clickSendRequest();
+        delay(100);
+        Underwriters uw = null;
+        InfoBar infoBar = new InfoBar();
+        infoBar.clickInfoBarAccountNumber();
+        delay(1000);
+        AccountSummaryPC aSumm = new AccountSummaryPC(driver);
+        ArrayList<String> activityOwners = new ArrayList<String>();
+        activityOwners = aSumm.getActivityAssignedTo("Approval Requested");
+        uw = UnderwritersHelper.getUnderwriterInfoByFullName(activityOwners.get(activityOwners.size() - 1));
+        delay(100);
+        TopInfo topInfoStuff = new TopInfo();
+        topInfoStuff.clickTopInfoLogout();
+        delay(100);
+        Login loginPage = new Login();
+        loginPage.login(uw.getUnderwriterUserName(), uw.getUnderwriterPassword());
+        GWSearchAccounts search = new GWSearchAccounts();
+        search.searchAccountByAccountNumber(policy.accountNumber);
+        delay(100);
+        AccountSummaryPC acct = new AccountSummaryPC(driver);
+        acct.clickActivitySubject("Approval Requested");
+        ActivityPopup actPop = new ActivityPopup();
+        actPop.clickCompleteButton();
+
+        sideBar = new SideMenuPC(driver);
+        sideBar.clickSideMenuRiskAnalysis();
+        delay(100);
+        approveAll();
+        if (isAlertPresent()) {
+            selectOKOrCancelFromPopup(OkCancel.OK);
+        }
+        if (new GenericWorkorderRiskAnalysis_UWIssues().checkIfSpecialApproveButtonsExist(false)) {
+            clickRequestApproval();
+            activity = new UWActivityPC();
+            activity.setText("Please Special Approve this Stuff!!");
+            activity.setNewNoteSubject("Please Special Approve this Stuff!!");
+            activity.clickSendRequest();
+            delay(100);
+            infoBar = new InfoBar();
+            infoBar.clickInfoBarAccountNumber();
+
+            aSumm = new AccountSummaryPC(driver);
+            activityOwners = aSumm.getActivityAssignedTo("Approval Requested");
+            uw = UnderwritersHelper.getUnderwriterInfoByFullName(activityOwners.get(activityOwners.size() - 1));
+            delay(100);
+            topInfoStuff = new TopInfo();
+            topInfoStuff.clickTopInfoLogout();
+            delay(100);
+            loginPage = new Login();
+            loginPage.login(uw.getUnderwriterUserName(), uw.getUnderwriterPassword());
+            search = new GWSearchAccounts();
+            search.searchAccountByAccountNumber(policy.accountNumber);
+            delay(100);
+            acct = new AccountSummaryPC(driver);
+            acct.clickActivitySubject("Approval Requested");
+            actPop = new ActivityPopup();
+            actPop.clickCompleteButton();
+
+            sideBar = new SideMenuPC(driver);
+            sideBar.clickSideMenuRiskAnalysis();
+            delay(100);
+
+            specialApproveAll();
+        }
+
+        clickReleaseLock();
+
+        if (policy.productType.equals(ProductLineType.Squire)) {
+            boolean driversContainSR22Charges = false;
+            for (Contact driver : policy.squire.squirePA.getDriversList()) {
+                if (driver.hasSR22Charges()) {
+                    driversContainSR22Charges = true;
+                    break;
+                }
+            }
+            if (policy.squire.squirePA.getDriversList().size() > 0 && driversContainSR22Charges) {
+                GenericWorkorderComplete quoteCompletePage = new GenericWorkorderComplete(driver);
+                quoteCompletePage.clickViewYourSubmission();
+
+                //Go to the drivers page
+                SideMenuPC sideMenu = new SideMenuPC(driver);
+                sideMenu.clickSideMenuPADrivers();
+                delay(500);
+                GenericWorkorderSquireAutoDrivers_ContactDetail driversPage = new GenericWorkorderSquireAutoDrivers_ContactDetail();
+
+                for (Contact driver : policy.squire.squirePA.getDriversList()) {
+                    String driverName = "";
+                    if (driver.getPersonOrCompany().equals(ContactSubType.Company)) {
+                        driverName = driver.getCompanyName();
+                    } else {
+                        driverName = (driver.getFirstName() + " " + driver.getLastName());
+                    }
+                    if (driver.hasSR22Charges()) {
+                        WebElement tableRow = TableUtils.getRowInTableByColumnNameAndValue(driversPage.getDriverDetailsTable(), "Name", driverName);
+                        TableUtils.clickRowInTableByRowNumber(driversPage.getDriverDetailsTable(), TableUtils.getRowNumberFromWebElementRow(tableRow));
+                        delay(500);
+                        if (driversPage.getSR22FilingFee().equals("Charged")) {
+                            driver.setSr22Charge(25.00);
+                        } else {
+                            Assert.fail("SR-22 fees should have been charged for this driver, but were not. test integrity cannot be trusted. Please investigate.");
+                        }
+                    }
+                }
+                delay(500);
+            }
+        }
+
+        logout();
+
+        loginPage = new Login();
+        loginPage.login(policy.agentInfo.getAgentUserName(), policy.agentInfo.getAgentPassword());
+
+        DesktopMyActivitiesPC myActivities = new DesktopMyActivitiesPC();
+        myActivities.searchMyActivitiesTableForSpecificSubjectLinkAndClick("Underwriter has reviewed this job", policy.accountNumber, (policy.pniContact.isPerson()) ? policy.pniContact.getFirstName() : policy.pniContact.getCompanyName());
+    }
+
+    public void handleBlockQuoteRelease(GeneratePolicy policy) throws Exception {
+        GenericWorkorderQuote quotePage = new GenericWorkorderQuote();
+        if (policy.handleBlockSubmitRelease) {
+            boolean blockQuoteRelease = quotePage.hasBlockQuoteRelease();
+            boolean blockQuote = quotePage.hasBlockQuote();
+            if (blockQuoteRelease) {
+                delay(600);
+                handleBlockSubmit(policy);
+            }
+            if (blockQuote) {
+                ActivityPopup actPop = new ActivityPopup();
+                actPop.clickCompleteButton();
+                clickGenericWorkorderQuote();
+            }
+            SideMenuPC sideMenuStuff = new SideMenuPC(driver);
+            sideMenuStuff.clickSideMenuQuote();
+        }
+    }
+
+
+    public void handleBlockQuote(GeneratePolicy policy) throws Exception {
+        handleBlockSubmit(policy);
+        if (isQuotable()) {
+            waitUntilElementIsClickable(find(By.xpath("//span[contains(@id, 'Quoute-btnEl')]")));
+            find(By.xpath("//span[contains(@id, 'Quoute-btnEl')]")).click();
+            delay(1000);
+        } else {
+            SideMenuPC sideMenuStuff = new SideMenuPC(driver);
+            sideMenuStuff.clickSideMenuQuote();
+        }
+    }
+
+
+    public String getUWBlockSubmitDescriptionByUWIssueShortDescription(WebElement trWebElement) {
+        clickWhenClickable(trWebElement.findElement(By.xpath(".//child::td[2]/div/a")));
+        delay(200);
+        return find(By.xpath("//textarea[contains(@id, ':IssueLongDescription-inputEl')]")).getText();
+    }
+
+
+    public void handleBlockSubmitCSR(GeneratePolicy policy, CSRs myCSR) throws Exception {
+        requestApproval(policy.underwriterInfo);
+        delay(100);
+        GenericWorkorderComplete info = new GenericWorkorderComplete(driver);
+        Underwriters uw = info.getUnderwriterInfo();
+        delay(100);
+        TopInfo topInfoStuff = new TopInfo();
+        topInfoStuff.clickTopInfoLogout();
+        delay(100);
+        Login loginPage = new Login();
+        loginPage.login(uw.getUnderwriterUserName(), uw.getUnderwriterPassword());
+        delay(100);
+        DesktopMyActivitiesPC myActivities = new DesktopMyActivitiesPC();
+        myActivities.searchMyActivitiesTableForSpecificSubjectLinkAndClick("Approval Needed", policy.accountNumber, policy.pniContact.getCompanyName() == null ? policy.pniContact.getFirstName() + " " + policy.pniContact.getLastName() : policy.pniContact.getCompanyName());
+        SideMenuPC sideBar = new SideMenuPC(driver);
+        sideBar = new SideMenuPC(driver);
+        sideBar.clickSideMenuRiskAnalysis();
+
+        new GenericWorkorderRiskAnalysis_UWIssues().approveAll();
+
+        clickReleaseLock();
+        UWActivityPC activity = new UWActivityPC();
+        activity = new UWActivityPC();
+        activity.setText("Stuff Approved");
+        activity.clickSendRequest();
+
+        topInfoStuff = new TopInfo();
+        topInfoStuff.clickTopInfoLogout();
+
+        loginPage = new Login();
+        loginPage.login(policy.agentInfo.getAgentUserName(), policy.agentInfo.getAgentPassword());
+
+        myActivities = new DesktopMyActivitiesPC();
+        myActivities.searchMyActivitiesTableForSpecificSubjectLinkAndClick("Underwriter has reviewed this job", policy.accountNumber, policy.pniContact.getCompanyName() == null ? policy.pniContact.getFirstName() + " " + policy.pniContact.getLastName() : policy.pniContact.getCompanyName());
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

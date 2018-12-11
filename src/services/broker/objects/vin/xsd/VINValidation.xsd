@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.idfbins.com/VINValidation"
+    xmlns:tns="http://www.idfbins.com/VINValidation"
+    xmlns:ss="http://www.idfbins.com/common/ServiceStatus"
+    elementFormDefault="qualified">
+
+    <xsd:import schemaLocation="ServiceStatus.xsd" namespace="http://www.idfbins.com/common/ServiceStatus"/>
+
+    <xsd:complexType name="ValidateVINRequest">
+        <xsd:sequence>
+            <xsd:element name="vin" type="tns:VIN" maxOccurs="1" minOccurs="1"/>
+            <xsd:element name="asOfDate" type="xsd:date" maxOccurs="1" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ValidateVINResponse">
+        <xsd:sequence>
+            <xsd:element name="serviceStatus" type="ss:ServiceStatus" maxOccurs="1" minOccurs="1"/>
+            <xsd:element name="vin" type="tns:VIN" maxOccurs="1" minOccurs="0"/>
+            <xsd:element name="effectiveDate" type="xsd:date" maxOccurs="1" minOccurs="0"/>
+            <xsd:element name="year" type="xsd:int" maxOccurs="1" minOccurs="0"/>
+            <xsd:element name="make" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+            <xsd:element name="model" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+            <xsd:element name="bodyStyle" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+            <xsd:element name="isoCollisionSymbol" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+            <xsd:element name="fbSymbol" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+            <xsd:element name="grossVehicleWeight" type="xsd:int" maxOccurs="1" minOccurs="0"/>
+            <xsd:element name="priceNewLowerBound" type="xsd:int" maxOccurs="1" minOccurs="0"/>
+            <xsd:element name="priceNewUpperBound" type="xsd:int" maxOccurs="1" minOccurs="0"/>
+            <xsd:element name="priceNewRemarks" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="VIN">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="17"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:element name="validateVINRequest" type="tns:ValidateVINRequest"/>
+    <xsd:element name="validateVINResponse" type="tns:ValidateVINResponse"/>
+
+</xsd:schema>

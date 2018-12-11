@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="CurrentProgramIncrement" verbose="1" parallel="tests" thread-count="45">
+    <listeners>
+        <listener class-name="repository.listeners.LocalSuiteTestListener"/>
+    </listeners>
+
+    <!--<parameter name="application" value="Current Program Increment"/>-->
+    <parameter name="application" value="Current Program Increment"/>
+    <parameter name="suiteName" value="PI3-Regression"/>
+
+    <test name="F42 Checks Off The Mainframe" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.f42_ChecksOffTheMainframe.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f42_ChecksOffTheMainframe.*.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f42_ChecksOffTheMainframe.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F51 Funding Field Checks Account" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.f51_FundingFieldChecksAccount.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f51_FundingFieldChecksAccount.*.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f51_FundingFieldChecksAccount.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F209 UM/UIM Rule 20 New Form" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.f209_UM_UIM_Rule20_NewForm.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f209_UM_UIM_Rule20_NewForm.*.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f209_UM_UIM_Rule20_NewForm.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F217 PolicyCenter Double Data Entry" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.f217_PolicyCenterDoubleDataEntry.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f217_PolicyCenterDoubleDataEntry.*.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f217_PolicyCenterDoubleDataEntry.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F276 BC Document Cleanup" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.f276_BC_Document_Cleanup.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f276_BC_Document_Cleanup.*.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f276_BC_Document_Cleanup.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F293 BC Document Enhancements" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.f293_BC_Document_Enchancements.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f293_BC_Document_Enchancements.*.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f293_BC_Document_Enchancements.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F298 EPLI Coverage BOP" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.f298_EPLI_BOP.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f298_EPLI_BOP.*.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f298_EPLI_BOP.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F329 Bankinfo Monthly Payment Plan Auto Populates EFT Form" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.f329_BankInfo_MPP_Auto_Populates_EFT_form.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f329_BankInfo_MPP_Auto_Populates_EFT_form.*.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f329_BankInfo_MPP_Auto_Populates_EFT_form.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F340 GW Predictive Analytics For Renewals" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.f340_GWPredictiveAnalyticsForRenewals.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f340_GWPredictiveAnalyticsForRenewals.*.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f340_GWPredictiveAnalyticsForRenewals.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F348 MVR Verisk" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.f348_MVR_Verisk.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f348_MVR_Verisk.*.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f348_MVR_Verisk.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F349 APLUS Reports Verisk" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.f349_APLUS_Reports_Verisk.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f349_APLUS_Reports_Verisk.*.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f349_APLUS_Reports_Verisk.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F350 Insurance Score Verisk TransUnion" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.f350_InsuranceScore_Verisk_TransUnion.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f350_InsuranceScore_Verisk_TransUnion.*.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f350_InsuranceScore_Verisk_TransUnion.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F351 Prefill Verisk" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.f351_InsuranceScore_Verisk_TransUnion.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f351_InsuranceScore_Verisk_TransUnion.*.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f351_InsuranceScore_Verisk_TransUnion.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F393 Membership Payer Changes" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.f393_MembershipPayerChanges.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f393_MembershipPayerChanges.*.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.f393_MembershipPayerChanges.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="Maintenance Defects" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.maintenanceDefects.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.maintenanceDefects.*.*"/>
+            <package name="previousProgramIncrement.pi3_090518_111518.maintenanceDefects.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="Non Feature Related Work - Aces" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.nonFeatures.Aces.*"/>
+        </packages>
+    </test>
+
+    <test name="Non Feature Related Work - Achievers" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.nonFeatures.Achievers.*"/>
+        </packages>
+    </test>
+
+    <test name="Non Feature Related Work - NoExceptions">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.nonFeatures.NoExceptions.*"/>
+        </packages>
+    </test>
+
+    <test name="Non Feature Related Work - Artists" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.nonFeatures.ARTists.*"/>
+        </packages>
+    </test>
+
+    <test name="Non Feature Related Work - Nucleus" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.nonFeatures.Nucleus.*"/>
+        </packages>
+    </test>
+
+    <test name="Non Feature Related Work - Scope Creeps" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.nonFeatures.Scope_Creeps.*"/>
+        </packages>
+    </test>
+
+    <test name="Non Feature Related Work - Triton" parallel="classes" thread-count="20">
+        <groups>
+            <run>
+                <exclude name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi3_090518_111518.nonFeatures.Triton.*"/>
+        </packages>
+    </test>
+</suite>

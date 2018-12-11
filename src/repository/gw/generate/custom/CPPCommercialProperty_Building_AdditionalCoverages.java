@@ -1,0 +1,1070 @@
+package repository.gw.generate.custom;
+
+import repository.gw.enums.Building;
+import repository.gw.enums.BusinessIncomeCoverageForm;
+import repository.gw.enums.CommercialProperty;
+
+public class CPPCommercialProperty_Building_AdditionalCoverages {
+	
+	//INCOME
+	private boolean businessIncomeCoverageForm = false;
+	private BusinessIncomeCoverageForm.BusinessIncomeCoverageType businessIncomeCoverageForm_BusinessIncomeCoverageType = BusinessIncomeCoverageForm.BusinessIncomeCoverageType.BusinessIncome_AndExtraExpense_CoverageForm_CP_00_30;
+	private BusinessIncomeCoverageForm.CoverageOptions businessIncomeCoverageForm_CoverageOptions = BusinessIncomeCoverageForm.CoverageOptions.Coinsurance;
+	private int businessIncomeCoverageForm_Limit = 2500;
+	private BusinessIncomeCoverageForm.CoverageType businessIncomeCoverageForm_CoverageType = BusinessIncomeCoverageForm.CoverageType.BusinessIncomeIncludingRentalValue;
+	private BusinessIncomeCoverageForm.PropertyDescription businessIncomeCoverageForm_PropertyDescription = BusinessIncomeCoverageForm.PropertyDescription.Manufacturing;
+	private BusinessIncomeCoverageForm.MonthlyLimit businessIncomeCoverageForm_MonthlyLimit = BusinessIncomeCoverageForm.MonthlyLimit.OneFourth;
+	private BusinessIncomeCoverageForm.CoinsurancePercent businessIncomeCoverageForm_Coinsurance = BusinessIncomeCoverageForm.CoinsurancePercent.EightyPercent;
+	private boolean businessIncomeCoverageForm_ExtendPeriodOfIndemnity = false;
+	
+	private boolean businessIncome_LandlordAsAdditionalInsuredRentalValue_CP_15_03 = false;
+	private boolean discretionaryPayrollExpense_CP_15_04 = false;
+	private CommercialProperty.DiscretionaryPayrollExpense_CP_15_04_NumberOfDays discretionaryPayrollExpense_CP_15_04_NumberOfDays = CommercialProperty.DiscretionaryPayrollExpense_CP_15_04_NumberOfDays.OnehundredEighty;
+	private String discretionaryPayrollExpense_CP_15_04_Description = "Little Bunny Foo Foo, and The Gang";
+	
+	
+	
+	
+	private boolean extraExpenseCoverageForm_CP_00_50 = false;
+	private int extraExpenseCoverageForm_CP_00_50_limit = 1000;
+	private boolean foodContamination_BusinessInterruptionAndExtraExpense_CP_15_05 = false;
+	private int foodContamination_BusinessInterruptionAndExtraExpense_CP_15_05_AnnualAggregateLimit = 1000;
+	private int foodContamination_BusinessInterruptionAndExtraExpense_CP_15_05_AnnualAdvertisingExpense = 1000;
+	
+	
+	
+	//ADDITIONAL COVERAGES
+	private boolean additionalBuildingProperty_CP_14_15 = false;
+	private String additionalBuildingProperty_CP_14_15_Description = "Stuff and Things";
+	private boolean additionalCoveredProperty_CP_14_10 = false;
+	private boolean additionalInsured_BuildingOwner_CP_12_19 = false;
+	private boolean buildersRiskRenovations_CP_11_13 = false;
+	private int buildersRiskRenovations_CP_11_13_Limit = 1;
+	
+	
+//	Unscheduled Building Property Tenant's Policy CP 14 02
+	private boolean UnscheduledBuildingPropertyTenantsPolicy_CP_14_02 = false;
+	private Building.ValuationMethod UnscheduledBuildingPropertyTenantsPolicy_CP_14_02_ValuationMethod = Building.ValuationMethod.ActualCashValue;
+	private String UnscheduledBuildingPropertyTenantsPolicy_CP_14_02_BuildingGlassDeductible = "500";
+	private String UnscheduledBuildingPropertyTenantsPolicy_CP_14_02_LimitOfInsuranceBuildingGlass = "500";
+	private String UnscheduledBuildingPropertyTenantsPolicy_CP_14_02_LimitOfInsuranceBuildingPropertyOtherThanGlass = "500";
+	
+	
+	
+	private boolean condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18 = false;
+	private CommercialProperty.CondominiumCommercialUnit_OwnersOptionalCoveragesCP0418LossAssessmentLimit condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_LossAssessmentLimit = CommercialProperty.CondominiumCommercialUnit_OwnersOptionalCoveragesCP0418LossAssessmentLimit.OneThousand;
+	private int condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_MiscellaneousRealPropertyLimit = 0;
+	private CommercialProperty.CondominiumCommercialUnit_OwnersOptionalCoveragesCP0428DeductibleLossAssessment condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_DeductibleLossAssessment = CommercialProperty.CondominiumCommercialUnit_OwnersOptionalCoveragesCP0428DeductibleLossAssessment.FiveHundred;
+
+
+	
+	private boolean dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38 = false;
+	private CommercialProperty.DischargeFromSewerDrainOrSumpNotFlood_RelatedCP1038AnnualAggregateLimit dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_AnnualAggregateLimit = CommercialProperty.DischargeFromSewerDrainOrSumpNotFlood_RelatedCP1038AnnualAggregateLimit.FiveThousand;
+	private CommercialProperty.DischargeFromSewerDrainOrSumpNotFlood_RelatedCP1038Coverage dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_Coverage = CommercialProperty.DischargeFromSewerDrainOrSumpNotFlood_RelatedCP1038Coverage.BusinessInterruption;
+	private CommercialProperty.DischargeFromSewerDrainOrSumpNotFlood_RelatedCP1038Deductible dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_Deductible = CommercialProperty.DischargeFromSewerDrainOrSumpNotFlood_RelatedCP1038Deductible.FiveHundred;
+
+	
+	
+	private boolean equipmentBreakdownEnhancementEndorsementID_CP_31_1002 = true;
+	private boolean functionalBuildingValuation_CP_04_38 = false;
+	private CommercialProperty.FunctionalBuildingValuationCP0438Limit functionalBuildingValuation_CP_04_38_Limit = CommercialProperty.FunctionalBuildingValuationCP0438Limit.CP0438;
+	
+	private boolean guestsPropertyValuation_CP_04_11 = false;
+	private String guestsPropertyValuation_CP_04_11_Deductible = "500";
+	private boolean guestsPropertyValuation_CP_04_11_SafeDepositBoxes = true;
+	private boolean guestsPropertyValuation_CP_04_11_InsideThePremises = false;
+
+
+
+	private boolean leasedProperty_CP_14_60 = false;
+	private boolean lossPayableProvisions_CP_12_18 = false;
+	private boolean ordinanceorLawCoverage_CP_04_05 = false;
+	private CommercialProperty.OrdinanceorLawCoverageCP0405CoverageA_CoverageForLossToTheUndamagedPortionOfTheBuilding ordinanceorLawCoverage_CP_04_05_CoverageA_CoverageForLossToTheUndamagedPortionOfTheBuilding = CommercialProperty.OrdinanceorLawCoverageCP0405CoverageA_CoverageForLossToTheUndamagedPortionOfTheBuilding.NotCovered;
+	private int ordinanceorLawCoverage_CP_04_05_CoverageB_DemolitionCostCoverage = 0;
+	private int ordinanceorLawCoverage_CP_04_05_CoverageC_IncreasedCostOfConstructionCoverage = 0;
+	private int ordinanceorLawCoverage_CP_04_05_CoverageBAndCCombinedLimitOfInsurance = 0;
+
+	
+	
+	private boolean outdoorSigns_CP_14_40 = false;
+	private CommercialProperty.OutdoorSignsCP1440SignConstruction outdoorSigns_CP_14_40_SignConstruction = CommercialProperty.OutdoorSignsCP1440SignConstruction.EntirelyMetalIncludingFrameandSupports;
+	private CommercialProperty.OutdoorSignsCP1440CoinsurancePercent outdoorSigns_CP_14_40_Coinsurance = CommercialProperty.OutdoorSignsCP1440CoinsurancePercent.EightyPercent;
+	private String outdoorSigns_CP_14_40_DescriptionOfSign = "";
+	private boolean outdoorSigns_CP_14_40_Isthesignattachedtothebuilding = false;
+
+	
+	
+	private boolean payrollLimitationOrExclusion_CP_15_10 = false;
+	private CommercialProperty.PayrollLimitationOrExclusion_CP_15_10_LimitationOrExclusion payrollLimitationOrExclusion_CP_15_10_LimitationOrExclusion = CommercialProperty.PayrollLimitationOrExclusion_CP_15_10_LimitationOrExclusion.PayrollExpenseExclusion;
+	private CommercialProperty.PayrollLimitationOrExclusion_CP_15_10_NumberOfDays payrollLimitationOrExclusion_CP_15_10_NumberOfDays = CommercialProperty.PayrollLimitationOrExclusion_CP_15_10_NumberOfDays.Zero;
+	private CommercialProperty.PayrollLimitationOrExclusion_CP_15_10_Thefollowingaresubjecttotheprovisionsofthisendorsementifsoindicatedintheschedule payrollLimitationOrExclusion_CP_15_10_Thefollowingaresubjecttotheprovisionsofthisendorsementifsoindicatedintheschedule = CommercialProperty.PayrollLimitationOrExclusion_CP_15_10_Thefollowingaresubjecttotheprovisionsofthisendorsementifsoindicatedintheschedule.EmployeesAndJobs;
+	private String payrollLimitationOrExclusion_CP_15_10_Except = "";
+	private String payrollLimitationOrExclusion_CP_15_10_JobClassificationAndOrEmployees = "";
+	
+	
+	private boolean peakSeasonLimitOfInsurance_CP_12_30 = false;
+	private int peakSeasonLimitOfInsurance_CP_12_30_AdditionalLimit = 1;
+	private String peakSeasonLimitOfInsurance_CP_12_30_PeakSeasonStartDate = "1/1/2018";
+	private String peakSeasonLimitOfInsurance_CP_12_30_PeakSeasonEndDate = "1/1/2018";
+
+	
+	
+	private boolean radioOrTelevisionAntennas_CP_14_50 = false;
+	private int radioOrTelevisionAntennas_CP_14_50_limit = 1000;
+	private boolean spoilageCoverage_CP_04_40 = false;
+	private int spoilageCoverage_CP_04_40_Limit = 1;
+	private CommercialProperty.SpoilageCoverageCP0440TypeofProperty spoilageCoverage_CP_04_40_TypeOfProperty = CommercialProperty.SpoilageCoverageCP0440TypeofProperty.BakeryGoods;
+	private CommercialProperty.SpoilageCoverageCP0440Coverage spoilageCoverage_CP_04_40_Coverage = CommercialProperty.SpoilageCoverageCP0440Coverage.BreakdownContamination;
+	private CommercialProperty.SpoilageCoverageCP0440Deductible spoilageCoverage_CP_04_40_Deductible = CommercialProperty.SpoilageCoverageCP0440Deductible.FiveHundred;
+	private boolean spoilageCoverage_CP_04_40_RefrigerationMaintenanceAgreement = false;
+
+	
+	
+	private boolean theftExclusion_CP_10_33 = false;
+	private boolean theftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44 = false;
+	private int theftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44_Limit = 1;
+	private CommercialProperty.TheftOfBuildingMaterialsAndSuppliesOtherThanBuildersRiskCP1044Deductible theftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44_Deductible = CommercialProperty.TheftOfBuildingMaterialsAndSuppliesOtherThanBuildersRiskCP1044Deductible.FiveHundred;
+
+	
+	
+	private boolean utilityServices_DirectDamage_CP_04_17 = false;
+	private String utilityServices_DirectDamage_CP_04_17_Coverageappliesto = "";
+	private int utilityServices_DirectDamage_CP_04_17_Limit = 0;
+	private CommercialProperty.UtilityServices_DirectDamageCP0417UtilityIs utilityServices_DirectDamage_CP_04_17_Utilityis = CommercialProperty.UtilityServices_DirectDamageCP0417UtilityIs.NotPublic;
+	private CommercialProperty.UtilityServices_DirectDamageCP0417WaterSupplyProperty utilityServices_DirectDamage_CP_04_17_WaterSupplyProperty = CommercialProperty.UtilityServices_DirectDamageCP0417WaterSupplyProperty.NotCovered;
+	private CommercialProperty.UtilityServices_DirectDamageCP0417Communication_notOHLines utilityServices_DirectDamage_CP_04_17_CommunicationSupplyProperty = CommercialProperty.UtilityServices_DirectDamageCP0417Communication_notOHLines.Covered;
+	private CommercialProperty.UtilityServices_DirectDamageCP0417Power_incOHLines utilityServices_DirectDamage_CP_04_17_PowerSupplyProperty = CommercialProperty.UtilityServices_DirectDamageCP0417Power_incOHLines.NotCovered;
+
+	
+	
+	private boolean utilityServices_TimeElements_CP_15_45 = false;
+	private int utilityServices_TimeElements_CP_15_45_Limit = 1;
+	private CommercialProperty.UtilityServices_TimeElementsCP1545WaterSupply utilityServices_TimeElements_CP_15_45_WaterSupplyProperty = CommercialProperty.UtilityServices_TimeElementsCP1545WaterSupply.Covered;
+	private CommercialProperty.UtilityServices_TimeElementsCP1545WastewaterRemovalProperty utilityServices_TimeElements_CP_15_45_WastewaterRemovalProperty = CommercialProperty.UtilityServices_TimeElementsCP1545WastewaterRemovalProperty.Covered;
+	private CommercialProperty.UtilityServices_TimeElementsCP1545CommunicationnotOHlines utilityServices_TimeElements_CP_15_45_CommunicationSupplyProperty = CommercialProperty.UtilityServices_TimeElementsCP1545CommunicationnotOHlines.Covered;
+	private CommercialProperty.UtilityServices_TimeElementsCP1545PowernotOHlines utilityServices_TimeElements_CP_15_45_PowerSupplyProperty = CommercialProperty.UtilityServices_TimeElementsCP1545PowernotOHlines.Covered;
+	
+	
+	public CPPCommercialProperty_Building_AdditionalCoverages() {
+		
+	}
+
+
+	public boolean isBusinessIncomeCoverageForm() {
+		return businessIncomeCoverageForm;
+	}
+
+
+	public void setBusinessIncomeCoverageForm(boolean businessIncomeCoverageForm) {
+		this.businessIncomeCoverageForm = businessIncomeCoverageForm;
+	}
+
+
+	public boolean isBusinessIncome_LandlordAsAdditionalInsuredRentalValue_CP_15_03() {
+		return businessIncome_LandlordAsAdditionalInsuredRentalValue_CP_15_03;
+	}
+
+
+	public void setBusinessIncome_LandlordAsAdditionalInsuredRentalValue_CP_15_03(boolean businessIncome_LandlordAsAdditionalInsuredRentalValue_CP_15_03) {
+		this.businessIncome_LandlordAsAdditionalInsuredRentalValue_CP_15_03 = businessIncome_LandlordAsAdditionalInsuredRentalValue_CP_15_03;
+	}
+
+
+	public boolean isDiscretionaryPayrollExpense_CP_15_04() {
+		return discretionaryPayrollExpense_CP_15_04;
+	}
+
+
+	public void setDiscretionaryPayrollExpense_CP_15_04(boolean discretionaryPayrollExpense_CP_15_04) {
+		this.discretionaryPayrollExpense_CP_15_04 = discretionaryPayrollExpense_CP_15_04;
+	}
+
+
+	public boolean isExtraExpenseCoverageForm_CP_00_50() {
+		return extraExpenseCoverageForm_CP_00_50;
+	}
+
+
+	public void setExtraExpenseCoverageForm_CP_00_50(boolean extraExpenseCoverageForm_CP_00_50) {
+		this.extraExpenseCoverageForm_CP_00_50 = extraExpenseCoverageForm_CP_00_50;
+	}
+
+
+	public boolean isFoodContamination_BusinessInterruptionAndExtraExpense_CP_15_05() {
+		return foodContamination_BusinessInterruptionAndExtraExpense_CP_15_05;
+	}
+
+
+	public void setFoodContamination_BusinessInterruptionAndExtraExpense_CP_15_05(boolean foodContamination_BusinessInterruptionAndExtraExpense_CP_15_05) {
+		this.foodContamination_BusinessInterruptionAndExtraExpense_CP_15_05 = foodContamination_BusinessInterruptionAndExtraExpense_CP_15_05;
+	}
+
+
+	public boolean isAdditionalBuildingProperty_CP_14_15() {
+		return additionalBuildingProperty_CP_14_15;
+	}
+
+
+	public void setAdditionalBuildingProperty_CP_14_15(boolean additionalBuildingProperty_CP_14_15) {
+		this.additionalBuildingProperty_CP_14_15 = additionalBuildingProperty_CP_14_15;
+	}
+
+
+	public boolean isAdditionalCoveredProperty_CP_14_10() {
+		return additionalCoveredProperty_CP_14_10;
+	}
+
+
+	public void setAdditionalCoveredProperty_CP_14_10(boolean additionalCoveredProperty_CP_14_10) {
+		this.additionalCoveredProperty_CP_14_10 = additionalCoveredProperty_CP_14_10;
+	}
+
+
+	public boolean isAdditionalInsured_BuildingOwner_CP_12_19() {
+		return additionalInsured_BuildingOwner_CP_12_19;
+	}
+
+
+	public void setAdditionalInsured_BuildingOwner_CP_12_19(boolean additionalInsured_BuildingOwner_CP_12_19) {
+		this.additionalInsured_BuildingOwner_CP_12_19 = additionalInsured_BuildingOwner_CP_12_19;
+	}
+
+
+	public boolean isBuildersRiskRenovations_CP_11_13() {
+		return buildersRiskRenovations_CP_11_13;
+	}
+
+
+	public void setBuildersRiskRenovations_CP_11_13(boolean buildersRiskRenovations_CP_11_13) {
+		this.buildersRiskRenovations_CP_11_13 = buildersRiskRenovations_CP_11_13;
+	}
+
+
+	public int getBuildersRiskRenovations_CP_11_13_Limit() {
+		return buildersRiskRenovations_CP_11_13_Limit;
+	}
+
+
+	public void setBuildersRiskRenovations_CP_11_13_Limit(int buildersRiskRenovations_CP_11_13_Limit) {
+		this.buildersRiskRenovations_CP_11_13_Limit = buildersRiskRenovations_CP_11_13_Limit;
+	}
+
+
+	public boolean isCondominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18() {
+		return condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18;
+	}
+
+
+	public void setCondominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18(boolean condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18) {
+		this.condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18 = condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18;
+	}
+
+
+	public CommercialProperty.CondominiumCommercialUnit_OwnersOptionalCoveragesCP0418LossAssessmentLimit getCondominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_LossAssessmentLimit() {
+		return condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_LossAssessmentLimit;
+	}
+
+
+	public void setCondominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_LossAssessmentLimit(CommercialProperty.CondominiumCommercialUnit_OwnersOptionalCoveragesCP0418LossAssessmentLimit condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_LossAssessmentLimit) {
+		this.condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_LossAssessmentLimit = condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_LossAssessmentLimit;
+	}
+
+
+	public int getCondominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_MiscellaneousRealPropertyLimit() {
+		return condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_MiscellaneousRealPropertyLimit;
+	}
+
+
+	public void setCondominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_MiscellaneousRealPropertyLimit(int condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_MiscellaneousRealPropertyLimit) {
+		this.condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_MiscellaneousRealPropertyLimit = condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_MiscellaneousRealPropertyLimit;
+	}
+
+
+	public CommercialProperty.CondominiumCommercialUnit_OwnersOptionalCoveragesCP0428DeductibleLossAssessment getCondominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_DeductibleLossAssessment() {
+		return condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_DeductibleLossAssessment;
+	}
+
+
+	public void setCondominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_DeductibleLossAssessment(CommercialProperty.CondominiumCommercialUnit_OwnersOptionalCoveragesCP0428DeductibleLossAssessment condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_DeductibleLossAssessment) {
+		this.condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_DeductibleLossAssessment = condominiumCommercialUnit_OwnersOptionalCoverages_CP_04_18_DeductibleLossAssessment;
+	}
+
+
+	public boolean isDischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38() {
+		return dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38;
+	}
+
+
+	public void setDischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38(boolean dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38) {
+		this.dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38 = dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38;
+	}
+
+
+	public CommercialProperty.DischargeFromSewerDrainOrSumpNotFlood_RelatedCP1038AnnualAggregateLimit getDischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_AnnualAggregateLimit() {
+		return dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_AnnualAggregateLimit;
+	}
+
+
+	public void setDischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_AnnualAggregateLimit(CommercialProperty.DischargeFromSewerDrainOrSumpNotFlood_RelatedCP1038AnnualAggregateLimit dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_AnnualAggregateLimit) {
+		this.dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_AnnualAggregateLimit = dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_AnnualAggregateLimit;
+	}
+
+
+	public CommercialProperty.DischargeFromSewerDrainOrSumpNotFlood_RelatedCP1038Coverage getDischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_Coverage() {
+		return dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_Coverage;
+	}
+
+
+	public void setDischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_Coverage(CommercialProperty.DischargeFromSewerDrainOrSumpNotFlood_RelatedCP1038Coverage dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_Coverage) {
+		this.dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_Coverage = dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_Coverage;
+	}
+
+
+	public CommercialProperty.DischargeFromSewerDrainOrSumpNotFlood_RelatedCP1038Deductible getDischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_Deductible() {
+		return dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_Deductible;
+	}
+
+
+	public void setDischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_Deductible(CommercialProperty.DischargeFromSewerDrainOrSumpNotFlood_RelatedCP1038Deductible dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_Deductible) {
+		this.dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_Deductible = dischargeFromSewerDrainOrSumpNotFlood_Related_CP_10_38_Deductible;
+	}
+
+
+	public boolean isEquipmentBreakdownEnhancementEndorsementID_CP_31_1002() {
+		return equipmentBreakdownEnhancementEndorsementID_CP_31_1002;
+	}
+
+
+	public void setEquipmentBreakdownEnhancementEndorsementID_CP_31_1002(boolean equipmentBreakdownEnhancementEndorsementID_CP_31_1002) {
+		this.equipmentBreakdownEnhancementEndorsementID_CP_31_1002 = equipmentBreakdownEnhancementEndorsementID_CP_31_1002;
+	}
+
+
+	public boolean isFunctionalBuildingValuation_CP_04_38() {
+		return functionalBuildingValuation_CP_04_38;
+	}
+
+
+	public void setFunctionalBuildingValuation_CP_04_38(boolean functionalBuildingValuation_CP_04_38) {
+		this.functionalBuildingValuation_CP_04_38 = functionalBuildingValuation_CP_04_38;
+	}
+
+
+	public CommercialProperty.FunctionalBuildingValuationCP0438Limit getFunctionalBuildingValuation_CP_04_38_Limit() {
+		return functionalBuildingValuation_CP_04_38_Limit;
+	}
+
+
+	public void setFunctionalBuildingValuation_CP_04_38_Limit(CommercialProperty.FunctionalBuildingValuationCP0438Limit functionalBuildingValuation_CP_04_38_Limit) {
+		this.functionalBuildingValuation_CP_04_38_Limit = functionalBuildingValuation_CP_04_38_Limit;
+	}
+
+
+	public boolean isLeasedProperty_CP_14_60() {
+		return leasedProperty_CP_14_60;
+	}
+
+
+	public void setLeasedProperty_CP_14_60(boolean leasedProperty_CP_14_60) {
+		this.leasedProperty_CP_14_60 = leasedProperty_CP_14_60;
+	}
+
+
+	public boolean isLossPayableProvisions_CP_12_18() {
+		return lossPayableProvisions_CP_12_18;
+	}
+
+
+	public void setLossPayableProvisions_CP_12_18(boolean lossPayableProvisions_CP_12_18) {
+		this.lossPayableProvisions_CP_12_18 = lossPayableProvisions_CP_12_18;
+	}
+
+
+	public boolean isOrdinanceorLawCoverage_CP_04_05() {
+		return ordinanceorLawCoverage_CP_04_05;
+	}
+
+
+	public void setOrdinanceorLawCoverage_CP_04_05(boolean ordinanceorLawCoverage_CP_04_05) {
+		this.ordinanceorLawCoverage_CP_04_05 = ordinanceorLawCoverage_CP_04_05;
+	}
+
+
+	public CommercialProperty.OrdinanceorLawCoverageCP0405CoverageA_CoverageForLossToTheUndamagedPortionOfTheBuilding getOrdinanceorLawCoverage_CP_04_05_CoverageA_CoverageForLossToTheUndamagedPortionOfTheBuilding() {
+		return ordinanceorLawCoverage_CP_04_05_CoverageA_CoverageForLossToTheUndamagedPortionOfTheBuilding;
+	}
+
+
+	public void setOrdinanceorLawCoverage_CP_04_05_CoverageA_CoverageForLossToTheUndamagedPortionOfTheBuilding(CommercialProperty.OrdinanceorLawCoverageCP0405CoverageA_CoverageForLossToTheUndamagedPortionOfTheBuilding ordinanceorLawCoverage_CP_04_05_CoverageA_CoverageForLossToTheUndamagedPortionOfTheBuilding) {
+		this.ordinanceorLawCoverage_CP_04_05_CoverageA_CoverageForLossToTheUndamagedPortionOfTheBuilding = ordinanceorLawCoverage_CP_04_05_CoverageA_CoverageForLossToTheUndamagedPortionOfTheBuilding;
+	}
+
+
+	public int getOrdinanceorLawCoverage_CP_04_05_CoverageB_DemolitionCostCoverage() {
+		return ordinanceorLawCoverage_CP_04_05_CoverageB_DemolitionCostCoverage;
+	}
+
+
+	public void setOrdinanceorLawCoverage_CP_04_05_CoverageB_DemolitionCostCoverage(int ordinanceorLawCoverage_CP_04_05_CoverageB_DemolitionCostCoverage) {
+		this.ordinanceorLawCoverage_CP_04_05_CoverageB_DemolitionCostCoverage = ordinanceorLawCoverage_CP_04_05_CoverageB_DemolitionCostCoverage;
+	}
+
+
+	public int getOrdinanceorLawCoverage_CP_04_05_CoverageC_IncreasedCostOfConstructionCoverage() {
+		return ordinanceorLawCoverage_CP_04_05_CoverageC_IncreasedCostOfConstructionCoverage;
+	}
+
+
+	public void setOrdinanceorLawCoverage_CP_04_05_CoverageC_IncreasedCostOfConstructionCoverage(int ordinanceorLawCoverage_CP_04_05_CoverageC_IncreasedCostOfConstructionCoverage) {
+		this.ordinanceorLawCoverage_CP_04_05_CoverageC_IncreasedCostOfConstructionCoverage = ordinanceorLawCoverage_CP_04_05_CoverageC_IncreasedCostOfConstructionCoverage;
+	}
+
+
+	public int getOrdinanceorLawCoverage_CP_04_05_CoverageBAndCCombinedLimitOfInsurance() {
+		return ordinanceorLawCoverage_CP_04_05_CoverageBAndCCombinedLimitOfInsurance;
+	}
+
+
+	public void setOrdinanceorLawCoverage_CP_04_05_CoverageBAndCCombinedLimitOfInsurance(int ordinanceorLawCoverage_CP_04_05_CoverageBAndCCombinedLimitOfInsurance) {
+		this.ordinanceorLawCoverage_CP_04_05_CoverageBAndCCombinedLimitOfInsurance = ordinanceorLawCoverage_CP_04_05_CoverageBAndCCombinedLimitOfInsurance;
+	}
+
+
+	public boolean isOutdoorSigns_CP_14_40() {
+		return outdoorSigns_CP_14_40;
+	}
+
+
+	public void setOutdoorSigns_CP_14_40(boolean outdoorSigns_CP_14_40) {
+		this.outdoorSigns_CP_14_40 = outdoorSigns_CP_14_40;
+	}
+
+
+	public CommercialProperty.OutdoorSignsCP1440SignConstruction getOutdoorSigns_CP_14_40_SignConstruction() {
+		return outdoorSigns_CP_14_40_SignConstruction;
+	}
+
+
+	public void setOutdoorSigns_CP_14_40_SignConstruction(CommercialProperty.OutdoorSignsCP1440SignConstruction outdoorSigns_CP_14_40_SignConstruction) {
+		this.outdoorSigns_CP_14_40_SignConstruction = outdoorSigns_CP_14_40_SignConstruction;
+	}
+
+
+	public CommercialProperty.OutdoorSignsCP1440CoinsurancePercent getOutdoorSigns_CP_14_40_Coinsurance() {
+		return outdoorSigns_CP_14_40_Coinsurance;
+	}
+
+
+	public void setOutdoorSigns_CP_14_40_Coinsurance(CommercialProperty.OutdoorSignsCP1440CoinsurancePercent outdoorSigns_CP_14_40_Coinsurance) {
+		this.outdoorSigns_CP_14_40_Coinsurance = outdoorSigns_CP_14_40_Coinsurance;
+	}
+
+
+	public String getOutdoorSigns_CP_14_40_DescriptionOfSign() {
+		return outdoorSigns_CP_14_40_DescriptionOfSign;
+	}
+
+
+	public void setOutdoorSigns_CP_14_40_DescriptionOfSign(String outdoorSigns_CP_14_40_DescriptionOfSign) {
+		this.outdoorSigns_CP_14_40_DescriptionOfSign = outdoorSigns_CP_14_40_DescriptionOfSign;
+	}
+
+
+	public boolean isOutdoorSigns_CP_14_40_Isthesignattachedtothebuilding() {
+		return outdoorSigns_CP_14_40_Isthesignattachedtothebuilding;
+	}
+
+
+	public void setOutdoorSigns_CP_14_40_Isthesignattachedtothebuilding(boolean outdoorSigns_CP_14_40_Isthesignattachedtothebuilding) {
+		this.outdoorSigns_CP_14_40_Isthesignattachedtothebuilding = outdoorSigns_CP_14_40_Isthesignattachedtothebuilding;
+	}
+
+
+	public boolean isPayrollLimitationOrExclusion_CP_15_10() {
+		return payrollLimitationOrExclusion_CP_15_10;
+	}
+
+
+	public void setPayrollLimitationOrExclusion_CP_15_10(boolean payrollLimitationOrExclusion_CP_15_10) {
+		this.payrollLimitationOrExclusion_CP_15_10 = payrollLimitationOrExclusion_CP_15_10;
+	}
+
+
+	public CommercialProperty.PayrollLimitationOrExclusion_CP_15_10_LimitationOrExclusion getPayrollLimitationOrExclusion_CP_15_10_LimitationOrExclusion() {
+		return payrollLimitationOrExclusion_CP_15_10_LimitationOrExclusion;
+	}
+
+
+	public void setPayrollLimitationOrExclusion_CP_15_10_LimitationOrExclusion(CommercialProperty.PayrollLimitationOrExclusion_CP_15_10_LimitationOrExclusion payrollLimitationOrExclusion_CP_15_10_LimitationOrExclusion) {
+		this.payrollLimitationOrExclusion_CP_15_10_LimitationOrExclusion = payrollLimitationOrExclusion_CP_15_10_LimitationOrExclusion;
+	}
+
+
+	public CommercialProperty.PayrollLimitationOrExclusion_CP_15_10_NumberOfDays getPayrollLimitationOrExclusion_CP_15_10_NumberOfDays() {
+		return payrollLimitationOrExclusion_CP_15_10_NumberOfDays;
+	}
+
+
+	public void setPayrollLimitationOrExclusion_CP_15_10_NumberOfDays(CommercialProperty.PayrollLimitationOrExclusion_CP_15_10_NumberOfDays payrollLimitationOrExclusion_CP_15_10_NumberOfDays) {
+		this.payrollLimitationOrExclusion_CP_15_10_NumberOfDays = payrollLimitationOrExclusion_CP_15_10_NumberOfDays;
+	}
+
+
+	public CommercialProperty.PayrollLimitationOrExclusion_CP_15_10_Thefollowingaresubjecttotheprovisionsofthisendorsementifsoindicatedintheschedule getPayrollLimitationOrExclusion_CP_15_10_Thefollowingaresubjecttotheprovisionsofthisendorsementifsoindicatedintheschedule() {
+		return payrollLimitationOrExclusion_CP_15_10_Thefollowingaresubjecttotheprovisionsofthisendorsementifsoindicatedintheschedule;
+	}
+
+
+	public void setPayrollLimitationOrExclusion_CP_15_10_Thefollowingaresubjecttotheprovisionsofthisendorsementifsoindicatedintheschedule(CommercialProperty.PayrollLimitationOrExclusion_CP_15_10_Thefollowingaresubjecttotheprovisionsofthisendorsementifsoindicatedintheschedule payrollLimitationOrExclusion_CP_15_10_Thefollowingaresubjecttotheprovisionsofthisendorsementifsoindicatedintheschedule) {
+		this.payrollLimitationOrExclusion_CP_15_10_Thefollowingaresubjecttotheprovisionsofthisendorsementifsoindicatedintheschedule = payrollLimitationOrExclusion_CP_15_10_Thefollowingaresubjecttotheprovisionsofthisendorsementifsoindicatedintheschedule;
+	}
+
+
+	public String getPayrollLimitationOrExclusion_CP_15_10_Except() {
+		return payrollLimitationOrExclusion_CP_15_10_Except;
+	}
+
+
+	public void setPayrollLimitationOrExclusion_CP_15_10_Except(String payrollLimitationOrExclusion_CP_15_10_Except) {
+		this.payrollLimitationOrExclusion_CP_15_10_Except = payrollLimitationOrExclusion_CP_15_10_Except;
+	}
+
+
+	public String getPayrollLimitationOrExclusion_CP_15_10_JobClassificationAndOrEmployees() {
+		return payrollLimitationOrExclusion_CP_15_10_JobClassificationAndOrEmployees;
+	}
+
+
+	public void setPayrollLimitationOrExclusion_CP_15_10_JobClassificationAndOrEmployees(String payrollLimitationOrExclusion_CP_15_10_JobClassificationAndOrEmployees) {
+		this.payrollLimitationOrExclusion_CP_15_10_JobClassificationAndOrEmployees = payrollLimitationOrExclusion_CP_15_10_JobClassificationAndOrEmployees;
+	}
+
+
+	public boolean isPeakSeasonLimitOfInsurance_CP_12_30() {
+		return peakSeasonLimitOfInsurance_CP_12_30;
+	}
+
+
+	public void setPeakSeasonLimitOfInsurance_CP_12_30(boolean peakSeasonLimitOfInsurance_CP_12_30) {
+		this.peakSeasonLimitOfInsurance_CP_12_30 = peakSeasonLimitOfInsurance_CP_12_30;
+	}
+
+
+	public int getPeakSeasonLimitOfInsurance_CP_12_30_AdditionalLimit() {
+		return peakSeasonLimitOfInsurance_CP_12_30_AdditionalLimit;
+	}
+
+
+	public void setPeakSeasonLimitOfInsurance_CP_12_30_AdditionalLimit(int peakSeasonLimitOfInsurance_CP_12_30_AdditionalLimit) {
+		this.peakSeasonLimitOfInsurance_CP_12_30_AdditionalLimit = peakSeasonLimitOfInsurance_CP_12_30_AdditionalLimit;
+	}
+
+
+	public String getPeakSeasonLimitOfInsurance_CP_12_30_PeakSeasonStartDate() {
+		return peakSeasonLimitOfInsurance_CP_12_30_PeakSeasonStartDate;
+	}
+
+
+	public void setPeakSeasonLimitOfInsurance_CP_12_30_PeakSeasonStartDate(String peakSeasonLimitOfInsurance_CP_12_30_PeakSeasonStartDate) {
+		this.peakSeasonLimitOfInsurance_CP_12_30_PeakSeasonStartDate = peakSeasonLimitOfInsurance_CP_12_30_PeakSeasonStartDate;
+	}
+
+
+	public String getPeakSeasonLimitOfInsurance_CP_12_30_PeakSeasonEndDate() {
+		return peakSeasonLimitOfInsurance_CP_12_30_PeakSeasonEndDate;
+	}
+
+
+	public void setPeakSeasonLimitOfInsurance_CP_12_30_PeakSeasonEndDate(String peakSeasonLimitOfInsurance_CP_12_30_PeakSeasonEndDate) {
+		this.peakSeasonLimitOfInsurance_CP_12_30_PeakSeasonEndDate = peakSeasonLimitOfInsurance_CP_12_30_PeakSeasonEndDate;
+	}
+
+
+	public boolean isRadioOrTelevisionAntennas_CP_14_50() {
+		return radioOrTelevisionAntennas_CP_14_50;
+	}
+
+
+	public void setRadioOrTelevisionAntennas_CP_14_50(boolean radioOrTelevisionAntennas_CP_14_50) {
+		this.radioOrTelevisionAntennas_CP_14_50 = radioOrTelevisionAntennas_CP_14_50;
+	}
+
+
+	public boolean isSpoilageCoverage_CP_04_40() {
+		return spoilageCoverage_CP_04_40;
+	}
+
+
+	public void setSpoilageCoverage_CP_04_40(boolean spoilageCoverage_CP_04_40) {
+		this.spoilageCoverage_CP_04_40 = spoilageCoverage_CP_04_40;
+	}
+
+
+	public int getSpoilageCoverage_CP_04_40_Limit() {
+		return spoilageCoverage_CP_04_40_Limit;
+	}
+
+
+	public void setSpoilageCoverage_CP_04_40_Limit(int spoilageCoverage_CP_04_40_Limit) {
+		this.spoilageCoverage_CP_04_40_Limit = spoilageCoverage_CP_04_40_Limit;
+	}
+
+
+	public CommercialProperty.SpoilageCoverageCP0440TypeofProperty getSpoilageCoverage_CP_04_40_TypeOfProperty() {
+		return spoilageCoverage_CP_04_40_TypeOfProperty;
+	}
+
+
+	public void setSpoilageCoverage_CP_04_40_TypeOfProperty(CommercialProperty.SpoilageCoverageCP0440TypeofProperty spoilageCoverage_CP_04_40_TypeOfProperty) {
+		this.spoilageCoverage_CP_04_40_TypeOfProperty = spoilageCoverage_CP_04_40_TypeOfProperty;
+	}
+
+
+	public CommercialProperty.SpoilageCoverageCP0440Coverage getSpoilageCoverage_CP_04_40_Coverage() {
+		return spoilageCoverage_CP_04_40_Coverage;
+	}
+
+
+	public void setSpoilageCoverage_CP_04_40_Coverage(CommercialProperty.SpoilageCoverageCP0440Coverage spoilageCoverage_CP_04_40_Coverage) {
+		this.spoilageCoverage_CP_04_40_Coverage = spoilageCoverage_CP_04_40_Coverage;
+	}
+
+
+	public CommercialProperty.SpoilageCoverageCP0440Deductible getSpoilageCoverage_CP_04_40_Deductible() {
+		return spoilageCoverage_CP_04_40_Deductible;
+	}
+
+
+	public void setSpoilageCoverage_CP_04_40_Deductible(CommercialProperty.SpoilageCoverageCP0440Deductible spoilageCoverage_CP_04_40_Deductible) {
+		this.spoilageCoverage_CP_04_40_Deductible = spoilageCoverage_CP_04_40_Deductible;
+	}
+
+
+	public boolean isSpoilageCoverage_CP_04_40_RefrigerationMaintenanceAgreement() {
+		return spoilageCoverage_CP_04_40_RefrigerationMaintenanceAgreement;
+	}
+
+
+	public void setSpoilageCoverage_CP_04_40_RefrigerationMaintenanceAgreement(boolean spoilageCoverage_CP_04_40_RefrigerationMaintenanceAgreement) {
+		this.spoilageCoverage_CP_04_40_RefrigerationMaintenanceAgreement = spoilageCoverage_CP_04_40_RefrigerationMaintenanceAgreement;
+	}
+
+
+	public boolean isTheftExclusion_CP_10_33() {
+		return theftExclusion_CP_10_33;
+	}
+
+
+	public void setTheftExclusion_CP_10_33(boolean theftExclusion_CP_10_33) {
+		this.theftExclusion_CP_10_33 = theftExclusion_CP_10_33;
+	}
+
+
+	public boolean isTheftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44() {
+		return theftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44;
+	}
+
+
+	public void setTheftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44(boolean theftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44) {
+		this.theftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44 = theftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44;
+	}
+
+
+	public int getTheftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44_Limit() {
+		return theftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44_Limit;
+	}
+
+
+	public void setTheftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44_Limit(int theftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44_Limit) {
+		this.theftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44_Limit = theftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44_Limit;
+	}
+
+
+	public CommercialProperty.TheftOfBuildingMaterialsAndSuppliesOtherThanBuildersRiskCP1044Deductible getTheftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44_Deductible() {
+		return theftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44_Deductible;
+	}
+
+
+	public void setTheftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44_Deductible(CommercialProperty.TheftOfBuildingMaterialsAndSuppliesOtherThanBuildersRiskCP1044Deductible theftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44_Deductible) {
+		this.theftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44_Deductible = theftOfBuildingMaterialsAndSuppliesOtherThanBuildersRisk_CP_10_44_Deductible;
+	}
+
+
+	public boolean isUtilityServices_DirectDamage_CP_04_17() {
+		return utilityServices_DirectDamage_CP_04_17;
+	}
+
+
+	public void setUtilityServices_DirectDamage_CP_04_17(boolean utilityServices_DirectDamage_CP_04_17) {
+		this.utilityServices_DirectDamage_CP_04_17 = utilityServices_DirectDamage_CP_04_17;
+	}
+
+
+	public String getUtilityServices_DirectDamage_CP_04_17_Coverageappliesto() {
+		return utilityServices_DirectDamage_CP_04_17_Coverageappliesto;
+	}
+
+
+	public void setUtilityServices_DirectDamage_CP_04_17_Coverageappliesto(String utilityServices_DirectDamage_CP_04_17_Coverageappliesto) {
+		this.utilityServices_DirectDamage_CP_04_17_Coverageappliesto = utilityServices_DirectDamage_CP_04_17_Coverageappliesto;
+	}
+
+
+	public int getUtilityServices_DirectDamage_CP_04_17_Limit() {
+		return utilityServices_DirectDamage_CP_04_17_Limit;
+	}
+
+
+	public void setUtilityServices_DirectDamage_CP_04_17_Limit(int utilityServices_DirectDamage_CP_04_17_Limit) {
+		this.utilityServices_DirectDamage_CP_04_17_Limit = utilityServices_DirectDamage_CP_04_17_Limit;
+	}
+
+
+	public CommercialProperty.UtilityServices_DirectDamageCP0417UtilityIs getUtilityServices_DirectDamage_CP_04_17_Utilityis() {
+		return utilityServices_DirectDamage_CP_04_17_Utilityis;
+	}
+
+
+	public void setUtilityServices_DirectDamage_CP_04_17_Utilityis(CommercialProperty.UtilityServices_DirectDamageCP0417UtilityIs utilityServices_DirectDamage_CP_04_17_Utilityis) {
+		this.utilityServices_DirectDamage_CP_04_17_Utilityis = utilityServices_DirectDamage_CP_04_17_Utilityis;
+	}
+
+
+	public CommercialProperty.UtilityServices_DirectDamageCP0417WaterSupplyProperty getUtilityServices_DirectDamage_CP_04_17_WaterSupplyProperty() {
+		return utilityServices_DirectDamage_CP_04_17_WaterSupplyProperty;
+	}
+
+
+	public void setUtilityServices_DirectDamage_CP_04_17_WaterSupplyProperty(CommercialProperty.UtilityServices_DirectDamageCP0417WaterSupplyProperty utilityServices_DirectDamage_CP_04_17_WaterSupplyProperty) {
+		this.utilityServices_DirectDamage_CP_04_17_WaterSupplyProperty = utilityServices_DirectDamage_CP_04_17_WaterSupplyProperty;
+	}
+
+
+	public CommercialProperty.UtilityServices_DirectDamageCP0417Communication_notOHLines getUtilityServices_DirectDamage_CP_04_17_CommunicationSupplyProperty() {
+		return utilityServices_DirectDamage_CP_04_17_CommunicationSupplyProperty;
+	}
+
+
+	public void setUtilityServices_DirectDamage_CP_04_17_CommunicationSupplyProperty(CommercialProperty.UtilityServices_DirectDamageCP0417Communication_notOHLines utilityServices_DirectDamage_CP_04_17_CommunicationSupplyProperty) {
+		this.utilityServices_DirectDamage_CP_04_17_CommunicationSupplyProperty = utilityServices_DirectDamage_CP_04_17_CommunicationSupplyProperty;
+	}
+
+
+	public CommercialProperty.UtilityServices_DirectDamageCP0417Power_incOHLines getUtilityServices_DirectDamage_CP_04_17_PowerSupplyProperty() {
+		return utilityServices_DirectDamage_CP_04_17_PowerSupplyProperty;
+	}
+
+
+	public void setUtilityServices_DirectDamage_CP_04_17_PowerSupplyProperty(CommercialProperty.UtilityServices_DirectDamageCP0417Power_incOHLines utilityServices_DirectDamage_CP_04_17_PowerSupplyProperty) {
+		this.utilityServices_DirectDamage_CP_04_17_PowerSupplyProperty = utilityServices_DirectDamage_CP_04_17_PowerSupplyProperty;
+	}
+
+
+	public boolean isUtilityServices_TimeElements_CP_15_45() {
+		return utilityServices_TimeElements_CP_15_45;
+	}
+
+
+	public void setUtilityServices_TimeElements_CP_15_45(boolean utilityServices_TimeElements_CP_15_45) {
+		this.utilityServices_TimeElements_CP_15_45 = utilityServices_TimeElements_CP_15_45;
+	}
+
+
+	public int getUtilityServices_TimeElements_CP_15_45_Limit() {
+		return utilityServices_TimeElements_CP_15_45_Limit;
+	}
+
+
+	public void setUtilityServices_TimeElements_CP_15_45_Limit(int utilityServices_TimeElements_CP_15_45_Limit) {
+		this.utilityServices_TimeElements_CP_15_45_Limit = utilityServices_TimeElements_CP_15_45_Limit;
+	}
+
+
+	public CommercialProperty.UtilityServices_TimeElementsCP1545WaterSupply getUtilityServices_TimeElements_CP_15_45_WaterSupplyProperty() {
+		return utilityServices_TimeElements_CP_15_45_WaterSupplyProperty;
+	}
+
+
+	public void setUtilityServices_TimeElements_CP_15_45_WaterSupplyProperty(CommercialProperty.UtilityServices_TimeElementsCP1545WaterSupply utilityServices_TimeElements_CP_15_45_WaterSupplyProperty) {
+		this.utilityServices_TimeElements_CP_15_45_WaterSupplyProperty = utilityServices_TimeElements_CP_15_45_WaterSupplyProperty;
+	}
+
+
+	public CommercialProperty.UtilityServices_TimeElementsCP1545WastewaterRemovalProperty getUtilityServices_TimeElements_CP_15_45_WastewaterRemovalProperty() {
+		return utilityServices_TimeElements_CP_15_45_WastewaterRemovalProperty;
+	}
+
+
+	public void setUtilityServices_TimeElements_CP_15_45_WastewaterRemovalProperty(CommercialProperty.UtilityServices_TimeElementsCP1545WastewaterRemovalProperty utilityServices_TimeElements_CP_15_45_WastewaterRemovalProperty) {
+		this.utilityServices_TimeElements_CP_15_45_WastewaterRemovalProperty = utilityServices_TimeElements_CP_15_45_WastewaterRemovalProperty;
+	}
+
+
+	public CommercialProperty.UtilityServices_TimeElementsCP1545CommunicationnotOHlines getUtilityServices_TimeElements_CP_15_45_CommunicationSupplyProperty() {
+		return utilityServices_TimeElements_CP_15_45_CommunicationSupplyProperty;
+	}
+
+
+	public void setUtilityServices_TimeElements_CP_15_45_CommunicationSupplyProperty(CommercialProperty.UtilityServices_TimeElementsCP1545CommunicationnotOHlines utilityServices_TimeElements_CP_15_45_CommunicationSupplyProperty) {
+		this.utilityServices_TimeElements_CP_15_45_CommunicationSupplyProperty = utilityServices_TimeElements_CP_15_45_CommunicationSupplyProperty;
+	}
+
+
+	public CommercialProperty.UtilityServices_TimeElementsCP1545PowernotOHlines getUtilityServices_TimeElements_CP_15_45_PowerSupplyProperty() {
+		return utilityServices_TimeElements_CP_15_45_PowerSupplyProperty;
+	}
+
+
+	public void setUtilityServices_TimeElements_CP_15_45_PowerSupplyProperty(CommercialProperty.UtilityServices_TimeElementsCP1545PowernotOHlines utilityServices_TimeElements_CP_15_45_PowerSupplyProperty) {
+		this.utilityServices_TimeElements_CP_15_45_PowerSupplyProperty = utilityServices_TimeElements_CP_15_45_PowerSupplyProperty;
+	}
+
+
+	public boolean isUnscheduledBuildingPropertyTenantsPolicy_CP_14_02() {
+		return UnscheduledBuildingPropertyTenantsPolicy_CP_14_02;
+	}
+
+
+	public void setUnscheduledBuildingPropertyTenantsPolicy_CP_14_02(boolean unscheduledBuildingPropertyTenantsPolicy_CP_14_02) {
+		UnscheduledBuildingPropertyTenantsPolicy_CP_14_02 = unscheduledBuildingPropertyTenantsPolicy_CP_14_02;
+	}
+
+
+	public Building.ValuationMethod getUnscheduledBuildingPropertyTenantsPolicy_CP_14_02_ValuationMethod() {
+		return UnscheduledBuildingPropertyTenantsPolicy_CP_14_02_ValuationMethod;
+	}
+
+
+	public void setUnscheduledBuildingPropertyTenantsPolicy_CP_14_02_ValuationMethod(Building.ValuationMethod unscheduledBuildingPropertyTenantsPolicy_CP_14_02_ValuationMethod) {
+		UnscheduledBuildingPropertyTenantsPolicy_CP_14_02_ValuationMethod = unscheduledBuildingPropertyTenantsPolicy_CP_14_02_ValuationMethod;
+	}
+
+
+	public String getUnscheduledBuildingPropertyTenantsPolicy_CP_14_02_BuildingGlassDeductible() {
+		return UnscheduledBuildingPropertyTenantsPolicy_CP_14_02_BuildingGlassDeductible;
+	}
+
+
+	public void setUnscheduledBuildingPropertyTenantsPolicy_CP_14_02_BuildingGlassDeductible(String unscheduledBuildingPropertyTenantsPolicy_CP_14_02_BuildingGlassDeductible) {
+		UnscheduledBuildingPropertyTenantsPolicy_CP_14_02_BuildingGlassDeductible = unscheduledBuildingPropertyTenantsPolicy_CP_14_02_BuildingGlassDeductible;
+	}
+
+
+	public String getUnscheduledBuildingPropertyTenantsPolicy_CP_14_02_LimitOfInsuranceBuildingGlass() {
+		return UnscheduledBuildingPropertyTenantsPolicy_CP_14_02_LimitOfInsuranceBuildingGlass;
+	}
+
+
+	public void setUnscheduledBuildingPropertyTenantsPolicy_CP_14_02_LimitOfInsuranceBuildingGlass(String unscheduledBuildingPropertyTenantsPolicy_CP_14_02_LimitOfInsuranceBuildingGlass) {
+		UnscheduledBuildingPropertyTenantsPolicy_CP_14_02_LimitOfInsuranceBuildingGlass = unscheduledBuildingPropertyTenantsPolicy_CP_14_02_LimitOfInsuranceBuildingGlass;
+	}
+
+
+	public String getUnscheduledBuildingPropertyTenantsPolicy_CP_14_02_LimitOfInsuranceBuildingPropertyOtherThanGlass() {
+		return UnscheduledBuildingPropertyTenantsPolicy_CP_14_02_LimitOfInsuranceBuildingPropertyOtherThanGlass;
+	}
+
+
+	public void setUnscheduledBuildingPropertyTenantsPolicy_CP_14_02_LimitOfInsuranceBuildingPropertyOtherThanGlass(String unscheduledBuildingPropertyTenantsPolicy_CP_14_02_LimitOfInsuranceBuildingPropertyOtherThanGlass) {
+		UnscheduledBuildingPropertyTenantsPolicy_CP_14_02_LimitOfInsuranceBuildingPropertyOtherThanGlass = unscheduledBuildingPropertyTenantsPolicy_CP_14_02_LimitOfInsuranceBuildingPropertyOtherThanGlass;
+	}
+
+
+	public BusinessIncomeCoverageForm.BusinessIncomeCoverageType getBusinessIncomeCoverageForm_BusinessIncomeCoverageType() {
+		return businessIncomeCoverageForm_BusinessIncomeCoverageType;
+	}
+
+
+	public void setBusinessIncomeCoverageForm_BusinessIncomeCoverageType(BusinessIncomeCoverageForm.BusinessIncomeCoverageType businessIncomeCoverageForm_BusinessIncomeCoverageType) {
+		this.businessIncomeCoverageForm_BusinessIncomeCoverageType = businessIncomeCoverageForm_BusinessIncomeCoverageType;
+	}
+
+
+	public BusinessIncomeCoverageForm.CoverageOptions getBusinessIncomeCoverageForm_CoverageOptions() {
+		return businessIncomeCoverageForm_CoverageOptions;
+	}
+
+
+	public void setBusinessIncomeCoverageForm_CoverageOptions(BusinessIncomeCoverageForm.CoverageOptions businessIncomeCoverageForm_CoverageOptions) {
+		this.businessIncomeCoverageForm_CoverageOptions = businessIncomeCoverageForm_CoverageOptions;
+	}
+
+
+	public int getBusinessIncomeCoverageForm_Limit() {
+		return businessIncomeCoverageForm_Limit;
+	}
+
+
+	public void setBusinessIncomeCoverageForm_Limit(int businessIncomeCoverageForm_Limit) {
+		this.businessIncomeCoverageForm_Limit = businessIncomeCoverageForm_Limit;
+	}
+
+
+	public BusinessIncomeCoverageForm.CoverageType getBusinessIncomeCoverageForm_CoverageType() {
+		return businessIncomeCoverageForm_CoverageType;
+	}
+
+
+	public void setBusinessIncomeCoverageForm_CoverageType(BusinessIncomeCoverageForm.CoverageType businessIncomeCoverageForm_CoverageType) {
+		this.businessIncomeCoverageForm_CoverageType = businessIncomeCoverageForm_CoverageType;
+	}
+
+
+	public BusinessIncomeCoverageForm.PropertyDescription getBusinessIncomeCoverageForm_PropertyDescription() {
+		return businessIncomeCoverageForm_PropertyDescription;
+	}
+
+
+	public void setBusinessIncomeCoverageForm_PropertyDescription(BusinessIncomeCoverageForm.PropertyDescription businessIncomeCoverageForm_PropertyDescription) {
+		this.businessIncomeCoverageForm_PropertyDescription = businessIncomeCoverageForm_PropertyDescription;
+	}
+
+
+	public BusinessIncomeCoverageForm.MonthlyLimit getBusinessIncomeCoverageForm_MonthlyLimit() {
+		return businessIncomeCoverageForm_MonthlyLimit;
+	}
+
+
+	public void setBusinessIncomeCoverageForm_MonthlyLimit(BusinessIncomeCoverageForm.MonthlyLimit businessIncomeCoverageForm_MonthlyLimit) {
+		this.businessIncomeCoverageForm_MonthlyLimit = businessIncomeCoverageForm_MonthlyLimit;
+	}
+
+
+	public BusinessIncomeCoverageForm.CoinsurancePercent getBusinessIncomeCoverageForm_Coinsurance() {
+		return businessIncomeCoverageForm_Coinsurance;
+	}
+
+
+	public void setBusinessIncomeCoverageForm_Coinsurance(BusinessIncomeCoverageForm.CoinsurancePercent businessIncomeCoverageForm_Coinsurance) {
+		this.businessIncomeCoverageForm_Coinsurance = businessIncomeCoverageForm_Coinsurance;
+	}
+
+
+	public boolean isBusinessIncomeCoverageForm_ExtendPeriodOfIndemnity() {
+		return businessIncomeCoverageForm_ExtendPeriodOfIndemnity;
+	}
+
+
+	public void setBusinessIncomeCoverageForm_ExtendPeriodOfIndemnity(boolean businessIncomeCoverageForm_ExtendPeriodOfIndemnity) {
+		this.businessIncomeCoverageForm_ExtendPeriodOfIndemnity = businessIncomeCoverageForm_ExtendPeriodOfIndemnity;
+	}
+
+
+	public CommercialProperty.DiscretionaryPayrollExpense_CP_15_04_NumberOfDays getDiscretionaryPayrollExpense_CP_15_04_NumberOfDays() {
+		return discretionaryPayrollExpense_CP_15_04_NumberOfDays;
+	}
+
+
+	public void setDiscretionaryPayrollExpense_CP_15_04_NumberOfDays(CommercialProperty.DiscretionaryPayrollExpense_CP_15_04_NumberOfDays discretionaryPayrollExpense_CP_15_04_NumberOfDays) {
+		this.discretionaryPayrollExpense_CP_15_04_NumberOfDays = discretionaryPayrollExpense_CP_15_04_NumberOfDays;
+	}
+
+
+	public String getDiscretionaryPayrollExpense_CP_15_04_Description() {
+		return discretionaryPayrollExpense_CP_15_04_Description;
+	}
+
+
+	public void setDiscretionaryPayrollExpense_CP_15_04_Description(String discretionaryPayrollExpense_CP_15_04_Description) {
+		this.discretionaryPayrollExpense_CP_15_04_Description = discretionaryPayrollExpense_CP_15_04_Description;
+	}
+
+
+	public String getAdditionalBuildingProperty_CP_14_15_Description() {
+		return additionalBuildingProperty_CP_14_15_Description;
+	}
+
+
+	public void setAdditionalBuildingProperty_CP_14_15_Description(
+			String additionalBuildingProperty_CP_14_15_Description) {
+		this.additionalBuildingProperty_CP_14_15_Description = additionalBuildingProperty_CP_14_15_Description;
+	}
+	
+
+	
+	
+	public boolean isGuestsPropertyValuation_CP_04_11() {
+		return guestsPropertyValuation_CP_04_11;
+	}
+
+
+	public void setGuestsPropertyValuation_CP_04_11(boolean guestsPropertyValuation_CP_04_11) {
+		this.guestsPropertyValuation_CP_04_11 = guestsPropertyValuation_CP_04_11;
+	}
+
+
+	public String getGuestsPropertyValuation_CP_04_11_Deductible() {
+		return guestsPropertyValuation_CP_04_11_Deductible;
+	}
+
+
+	public void setGuestsPropertyValuation_CP_04_11_Deductible(String guestsPropertyValuation_CP_04_11_Deductible) {
+		this.guestsPropertyValuation_CP_04_11_Deductible = guestsPropertyValuation_CP_04_11_Deductible;
+	}
+
+
+	public boolean isGuestsPropertyValuation_CP_04_11_SafeDepositBoxes() {
+		return guestsPropertyValuation_CP_04_11_SafeDepositBoxes;
+	}
+
+
+	public void setGuestsPropertyValuation_CP_04_11_SafeDepositBoxes(
+			boolean guestsPropertyValuation_CP_04_11_SafeDepositBoxes) {
+		this.guestsPropertyValuation_CP_04_11_SafeDepositBoxes = guestsPropertyValuation_CP_04_11_SafeDepositBoxes;
+	}
+
+
+	public boolean isGuestsPropertyValuation_CP_04_11_InsideThePremises() {
+		return guestsPropertyValuation_CP_04_11_InsideThePremises;
+	}
+
+
+	public void setGuestsPropertyValuation_CP_04_11_InsideThePremises(
+			boolean guestsPropertyValuation_CP_04_11_InsideThePremises) {
+		this.guestsPropertyValuation_CP_04_11_InsideThePremises = guestsPropertyValuation_CP_04_11_InsideThePremises;
+	}
+
+
+	public int getFoodContamination_BusinessInterruptionAndExtraExpense_CP_15_05_AnnualAggregateLimit() {
+		return foodContamination_BusinessInterruptionAndExtraExpense_CP_15_05_AnnualAggregateLimit;
+	}
+
+
+	public void setFoodContamination_BusinessInterruptionAndExtraExpense_CP_15_05_AnnualAggregateLimit(
+			int foodContamination_BusinessInterruptionAndExtraExpense_CP_15_05_AnnualAggregateLimit) {
+		this.foodContamination_BusinessInterruptionAndExtraExpense_CP_15_05_AnnualAggregateLimit = foodContamination_BusinessInterruptionAndExtraExpense_CP_15_05_AnnualAggregateLimit;
+	}
+
+
+	public int getFoodContamination_BusinessInterruptionAndExtraExpense_CP_15_05_AnnualAdvertisingExpense() {
+		return foodContamination_BusinessInterruptionAndExtraExpense_CP_15_05_AnnualAdvertisingExpense;
+	}
+
+
+	public void setFoodContamination_BusinessInterruptionAndExtraExpense_CP_15_05_AnnualAdvertisingExpense(
+			int foodContamination_BusinessInterruptionAndExtraExpense_CP_15_05_AnnualAdvertisingExpense) {
+		this.foodContamination_BusinessInterruptionAndExtraExpense_CP_15_05_AnnualAdvertisingExpense = foodContamination_BusinessInterruptionAndExtraExpense_CP_15_05_AnnualAdvertisingExpense;
+	}
+
+
+	public int getExtraExpenseCoverageForm_CP_00_50_limit() {
+		return extraExpenseCoverageForm_CP_00_50_limit;
+	}
+
+
+	public void setExtraExpenseCoverageForm_CP_00_50_limit(int extraExpenseCoverageForm_CP_00_50_limit) {
+		this.extraExpenseCoverageForm_CP_00_50_limit = extraExpenseCoverageForm_CP_00_50_limit;
+	}
+
+
+	public int getRadioOrTelevisionAntennas_CP_14_50_limit() {
+		return radioOrTelevisionAntennas_CP_14_50_limit;
+	}
+
+
+	public void setRadioOrTelevisionAntennas_CP_14_50_limit(int radioOrTelevisionAntennas_CP_14_50_limit) {
+		this.radioOrTelevisionAntennas_CP_14_50_limit = radioOrTelevisionAntennas_CP_14_50_limit;
+	}
+
+
+}

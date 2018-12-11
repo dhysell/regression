@@ -1,0 +1,1351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="PassportInqRq">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Header">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="OrderingCustomerOrgId" type="xs:string"/>
+							<xs:element name="ShippingCustomerOrgId" type="xs:string"/>
+							<xs:element name="ResellerId" minOccurs="0" type="xs:string"/>
+							<xs:element name="ParentRequestId" minOccurs="0" type="xs:string"/>
+							<xs:element name="UserId" minOccurs="0" type="xs:string"/>
+							<xs:element name="ReportDataType" minOccurs="0" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>Format for reports:
+00 - Fixed 
+02 - Xml 
+blank - Xml</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="ReturnOption" minOccurs="0" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>Y - send both request and response to customer
+N - send only response back to customer
+F - don't send anything, customer will come get it
+blank - same as Y</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="ReturnReportsAsync" minOccurs="0" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>'Y' - Used by synchronous customer who wants reports returned asynchronously</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="ReturnPartialResponse" minOccurs="0" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>'P' - Partial, return reports as they are available 
+'C' - Complete, return all reports together last report completes</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="OrderName" minOccurs="0" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>For customer use.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="DestinationId" minOccurs="0" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>Used to determine where to send asynch results</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="StandInDestinationId" minOccurs="0" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>Used to determine where to send asynch results when request is processed in StandIn mode.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="StandInDuration" minOccurs="0" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>#minutes before request is invalidated</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="ConditionalOrderingRulePlanId" minOccurs="0" type="xs:string"/>
+							<xs:element ref="ReportOptions" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Products">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ProductCd" maxOccurs="unbounded" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="AutoRequest" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="RawDataSegments" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="RawDataSegment" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="DataSourceId" type="xs:string"/>
+													<xs:element name="RawDataString">
+														<xs:complexType mixed="true">
+															<xs:sequence minOccurs="0">
+																<xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element ref="Business" minOccurs="0" maxOccurs = "unbounded"/>
+							<xs:element name="Drivers" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="PrimaryDriver" type="INQPARTY"/>
+										<xs:element name="Driver" type="INQPARTY" minOccurs="0" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Vehicles" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Vehicle" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="VehicleIdentificationNumber" minOccurs="0" type="xs:string"/>
+													<xs:element name="VINIssueDate" minOccurs="0" type="xs:string"/>
+													<xs:element name="LicensePlateNumber" minOccurs="0" type="xs:string"/>
+													<xs:element name="LicensePlateStateProvCd" minOccurs="0" type="xs:string"/>
+													<xs:element name="PolicyEffectiveDate" minOccurs="0" type="xs:string"/>
+													<xs:element name="Year" minOccurs="0" type="xs:string"/>
+													<xs:element name="Make" minOccurs="0" type="xs:string"/>
+													<xs:element name="Model" minOccurs="0" type="xs:string"/>
+													<xs:element name="CommuteMileage" minOccurs="0" type="xs:string"/>
+													<xs:element name="AnnualMileage" minOccurs="0" type="xs:string"/>
+													<xs:element name="UseCD" minOccurs="0" type="xs:string"/>
+													<xs:element name="RatedDrvID" minOccurs="0" type="xs:string"/>
+													<xs:element name="PoDrvID" minOccurs="0" type="xs:string"/>
+													<xs:element name="Addresses" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Addr" type="ADDRESS" maxOccurs="unbounded"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="OdometerReadings" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Odometer" type="ODOMETER" maxOccurs="unbounded"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element ref="ReportOptions" minOccurs="0"/>
+												</xs:sequence>
+												<xs:attribute name="id" type="xs:ID" use="optional"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Addresses" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Addr" type="ADDRESS" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="PropertyRequest" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="RawDataSegments" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="RawDataSegment" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="DataSourceId" type="xs:string"/>
+													<xs:element name="RawDataString">
+														<xs:complexType mixed="true">
+															<xs:sequence minOccurs="0">
+																<xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element ref="Business" minOccurs="0"/>
+							<xs:element name="FirstParty" type="INQPARTY" minOccurs="0"/>
+							<xs:element name="SecondParty" type="INQPARTY" minOccurs="0"/>
+							<xs:element name="Parties" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Party" type="INQPARTY" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Addresses" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Addr" type="ADDRESS" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Addr" type="xs:string"/>
+	<xs:element name="GeneralPartyInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="NameInfo" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Addresses" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Addr" type="ADDRESS" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref="Communications" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NameInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element ref="CommlName"/>
+					<xs:element ref="FamilyName"/>
+					<xs:element ref="PersonName"/>
+				</xs:choice>
+				<xs:element name="LegalEntityCd" type="StringCd" minOccurs="0"/>
+				<xs:element ref="TaxIdentity" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="NonTaxIdentity" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="NonTaxIdTypeCd" type="StringCd"/>
+							<xs:element name="NonTaxId" type="String"/>
+							<xs:element name="PrimaryNonTaxInd" type="String" minOccurs="0"/>
+							<xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+							<xs:element name="StateProv" type="String" minOccurs="0"/>
+							<xs:element name="CountryCd" type="StringCd" minOccurs="0"/>
+							<xs:element name="Country" type="String" minOccurs="0"/>
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:ID" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CommlName">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CommercialName" type="String"/>
+				<xs:element name="IndexName" type="String" minOccurs="0"/>
+				<xs:element name="SupplementaryNameInfo" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="SupplementaryNameCd" type="StringCd"/>
+							<xs:element name="SupplementaryName" type="String"/>
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:ID" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FamilyName">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="TitlePrefix" type="String" minOccurs="0"/>
+				<xs:element name="FamilyNames" type="String"/>
+				<xs:element name="Surname" type="String"/>
+				<xs:element name="NameSuffix" type="String" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TaxIdentity">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="TaxIdTypeCd" type="StringCd"/>
+				<xs:element name="TaxId" type="String"/>
+				<xs:element name="TaxIdSource" type="String" minOccurs="0"/>
+				<xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="StateProv" type="String" minOccurs="0"/>
+				<xs:element name="CountryCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="Country" type="String" minOccurs="0"/>
+				<xs:element name="County" type="String" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Communications">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="PhoneInfo" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="PhoneTypeCd" type="StringCd" minOccurs="0"/>
+							<xs:element name="CommunicationUseCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="PhoneNumber" type="String"/>
+							<xs:element name="EmailAddr" type="String" minOccurs="0"/>
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:ID" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="EmailInfo" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="CommunicationUseCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="EmailAddr" type="String"/>
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:ID" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="WebsiteInfo" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="CommunicationUseCd" type="StringCd" minOccurs="0"/>
+							<xs:element name="WebsiteURL" type="String"/>
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:ID" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DriversLicense">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="LicensedDt" type="String" minOccurs="0"/>
+				<xs:element name="DriversLicenseNumber" type="String"/>
+				<xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="CURRENCY">
+		<xs:sequence>
+			<xs:element name="Amt" type="String"/>
+			<xs:element name="CurCd" type="StringCd" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="ConversionRateRef" type="xs:IDREF" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="MEASUREMENT">
+		<xs:sequence>
+			<xs:element name="NumUnits" type="String"/>
+			<xs:element name="UnitMeasurementCd" type="StringCd" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PCCREDITSURCHARGE">
+		<xs:sequence>
+			<xs:element name="CreditSurchargeDt" type="String" minOccurs="0"/>
+			<xs:element name="CreditSurchargeCd" type="StringCd"/>
+			<xs:element name="NumericValue" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="FORMATTEDNUMBER">
+							<xs:attribute name="id" type="xs:ID" use="optional"/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SecondaryCd" type="StringCd" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FORMATTEDNUMBER">
+		<xs:choice minOccurs="0">
+			<xs:element name="FormatInteger" type="String"/>
+			<xs:element name="FormatCurrencyAmt">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="CURRENCY">
+							<xs:attribute name="id" type="xs:ID" use="optional"/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="FormatModFactor" type="String"/>
+			<xs:element name="FormatPct" type="String"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="PCDEDUCTIBLE">
+		<xs:complexContent>
+			<xs:extension base="FORMATTEDNUMBER">
+				<xs:sequence>
+					<xs:element name="DeductibleBasisCd" type="StringCd" minOccurs="0"/>
+					<xs:element name="DeductibleTypeCd" type="StringCd" minOccurs="0"/>
+					<xs:element name="DeductibleAppliesToCd" type="StringCd" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Option">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="OptionTypeCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="OptionCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="OptionValue" type="String" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Form">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FormNumber" type="String" minOccurs="0"/>
+				<xs:element name="FormName" type="String" minOccurs="0"/>
+				<xs:element name="CopyrightOwnerCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="CopyrightOwnerNameCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="FormDesc" type="String" minOccurs="0"/>
+				<xs:element name="EditionDt" type="String" minOccurs="0"/>
+				<xs:element name="FormDataArea" type="String" minOccurs="0"/>
+				<xs:element name="IterationNumber" type="String" minOccurs="0"/>
+				<xs:element name="FormSequencingNumber" type="String" minOccurs="0"/>
+				<xs:element name="BondFormOwner" type="String" minOccurs="0"/>
+				<xs:element name="BondFormNumberOwner" type="String" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MiscParty">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ItemIdInfo" minOccurs="0"/>
+				<xs:element ref="GeneralPartyInfo" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MiscPartyInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="MiscPartyRoleCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="MiscPartySubRoleCd" type="StringCd" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PersonInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GenderCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="BirthDt" type="String" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>BirthDt format is yyyy-MM-dd</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Age" minOccurs="0" type="xs:string"/>
+				<xs:element name="MaritalStatus" type="StringCd" minOccurs="0"/>
+				<xs:element name="DriverTypeCD" type="StringCd" minOccurs="0"/>
+				<xs:element name="Occupation" type="String" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InsuredOrPrincipal">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="GeneralPartyInfo" minOccurs="0"/>
+				<xs:element ref="InsuredOrPrincipalInfo" minOccurs="0"/>
+				<xs:element name="LengthTimeKnownByAgentBroker" minOccurs="0">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="MEASUREMENT">
+								<xs:attribute name="id" type="xs:ID" use="optional"/>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InsuredOrPrincipalInfo">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="INSUREDORPRINCIPALENTITY">
+					<xs:sequence>
+						<xs:element name="InsuredOrPrincipalRoleCd" type="StringCd" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="id" type="xs:ID" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="INSUREDORPRINCIPALENTITY">
+		<xs:choice>
+			<xs:element ref="PersonInfo"/>
+			<xs:element ref="BusinessInfo"/>
+			<xs:element ref="PrincipalInfo"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:element name="BusinessInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SICCd" type="String" minOccurs="0"/>
+				<xs:element name="NAICSCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="NatureBusinessCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="NumEmployees" type="String" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PrincipalInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="LiensSuitsJudgementsAgainstPrincipalInd" type="String" minOccurs="0"/>
+				<xs:element name="SICCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="KnownSinceDt" type="String" minOccurs="0"/>
+				<xs:element name="CreditScoreInfo" type="String" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CodeList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CodeListName" type="String" minOccurs="0"/>
+				<xs:element name="CodeListVersion" type="String" minOccurs="0"/>
+				<xs:element name="CodeListOwnerCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="Description" type="String" minOccurs="0"/>
+				<xs:element name="WebsiteURL" type="String" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ConversionRate">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="TargetMeasurement">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="MEASUREMENT">
+									<xs:attribute name="id" type="xs:ID" use="optional"/>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="TargetCurrency">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="CURRENCY">
+									<xs:attribute name="id" type="xs:ID" use="optional"/>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+				<xs:element name="ConversionFactor" type="String" minOccurs="0"/>
+				<xs:element name="ConversionDt" type="String" minOccurs="0"/>
+				<xs:element name="ConversionSource" type="String" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CreditScoreInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ReferenceNumber" type="String" minOccurs="0"/>
+				<xs:element name="CreditScore" type="String"/>
+				<xs:element name="CreditScoreDt" type="String"/>
+				<xs:element name="CSPolicyTypeCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="CSReasonCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="CSReasonDesc" type="String" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ReferralInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ReferredToCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="ReferredToDesc" type="String" minOccurs="0"/>
+				<xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="StateProv" type="String" minOccurs="0"/>
+				<xs:element name="CountryCd" type="StringCd" minOccurs="0"/>
+				<xs:element name="CountryDesc" type="String" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ClaimsPartyRelationship">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ClaimsPartyRole1Cd" minOccurs="0" type="xs:string"/>
+				<xs:element name="ClaimsPartyRole2Cd" minOccurs="0" type="xs:string"/>
+			</xs:sequence>
+			<xs:attribute name="ClaimsParty1Ref" type="xs:IDREF" use="required"/>
+			<xs:attribute name="ClaimsParty2Ref" type="xs:IDREF" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MsgStatus">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="MsgStatusCd" type="StringCd"/>
+				<xs:element name="MsgErrorCd" type="StringCd" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation/>
+						<xs:appinfo>
+							<seeDesc/>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="MsgStatusDesc" type="String" minOccurs="0"/>
+				<xs:element name="PendingResponseAvailDt" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation/>
+						<xs:appinfo>
+							<seeDesc/>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name="id" type="xs:ID" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="PendingResponseExpDt" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation/>
+						<xs:appinfo>
+							<seeDesc/>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name="id" type="xs:ID" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref="ExtendedStatus" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="ChangeStatus" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ExtendedStatus">
+		<xs:annotation>
+			<xs:appinfo>
+				<seeDesc/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ExtendedStatusCd" type="StringCd"/>
+				<xs:element name="ExtendedStatusDesc" type="String" minOccurs="0"/>
+				<xs:element name="MissingElementPath" type="String" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+			<xs:attribute name="idRefs" type="xs:IDREFS" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ISO">
+		<xs:annotation>
+			<xs:documentation>Root Element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element ref="SignonRq"/>
+					<xs:element ref="PassportSvcRq"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="PassportSvcRs">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Status">
+									<xs:annotation>
+										<xs:documentation>Contains request level errors  such as eligibility failures</xs:documentation>
+										<xs:appinfo>
+											<revhist>MR2786</revhist>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element ref="StatusCd"/>
+											<xs:element ref="StatusDesc" minOccurs="0"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="ErrorCd" minOccurs="0" type="xs:string">
+								</xs:element>
+								<xs:element name="ErrorMsgs" minOccurs="0">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="ErrorMsg" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="ErrorCd" type="xs:string"/>
+														<xs:element name="ErrorDesc" type="xs:string"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element ref="SPName">
+									<xs:annotation>
+										<xs:documentation/>
+										<xs:appinfo>
+											<revhist>MR2786</revhist>
+										</xs:appinfo>
+									</xs:annotation>
+								</xs:element>
+								<xs:element ref="RqUID" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation/>
+										<xs:appinfo>
+											<revhist>MR2786</revhist>
+										</xs:appinfo>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="RequestId" type="xs:string">
+									<xs:annotation>
+										<xs:documentation>Generated by ISO.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element ref="CodeList" minOccurs="0" maxOccurs="unbounded"/>
+								<xs:element name="Reports" minOccurs="0">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Report" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Status">
+															<xs:annotation>
+																<xs:documentation>Contains report level errors  such as data source validation.</xs:documentation>
+																<xs:appinfo>
+																	<revhist>MR2786</revhist>
+																</xs:appinfo>
+															</xs:annotation>
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element ref="StatusCd"/>
+																	<xs:element ref="StatusDesc" minOccurs="0"/>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="ErrorCd" minOccurs="0" type="xs:string"/>
+														<xs:element name="ProductCd" type="xs:string"/>
+														<xs:element name="ReportName" type="xs:string"/>
+														<xs:element name="CriticalResult" type="xs:string"/>
+														<xs:element name="OrderTimeStamp" type="xs:string"/>
+														<xs:element name="CompletedTimeStamp" type="xs:string"/>
+														<xs:element name="ReportData" minOccurs="0" type="xs:anyType"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element ref="PassportSvcRq" minOccurs="0"/>
+								<xs:element name="Quoteback" minOccurs="0" type="xs:string"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SignonRq">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="SignonPswd">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="SignonRoleCd" minOccurs="0"/>
+								<xs:element ref="CustId"/>
+								<xs:element name="CustPswd">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="EncryptionTypeCd" type="xs:string"/>
+											<xs:choice>
+												<xs:element name="Pswd">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:minLength value="0"/>
+															<xs:maxLength value="32"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="EncryptedPswd">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="ContentTypeCd" type="xs:string" minOccurs="0"/>
+															<xs:element name="BinLength" type="xs:long"/>
+															<xs:element name="BinData" type="xs:string"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:choice>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="SignonCert">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="SignonRoleCd" minOccurs="0"/>
+								<xs:element ref="CustId"/>
+								<xs:element name="Certificate">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="ContentTypeCd" type="xs:string" minOccurs="0"/>
+											<xs:element name="BinLength" type="xs:long"/>
+											<xs:element name="BinData" type="xs:string"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element ref="GenSessKey" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="SignonTransport">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="SignonRoleCd" minOccurs="0"/>
+								<xs:element ref="CustId"/>
+								<xs:element ref="GenSessKey" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+				<xs:element ref="ClientDt" minOccurs="0"/>
+				<xs:element ref="CustLangPref" minOccurs="0"/>
+				<xs:element ref="ClientApp" minOccurs="0"/>
+				<xs:element ref="ProxyClient" minOccurs="0"/>
+				<xs:element name="SuppressEcho" type="xs:boolean" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CustId">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SPName">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:minLength value="0"/>
+							<xs:maxLength value="36"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:choice>
+					<xs:sequence>
+						<xs:element name="CustPermId">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="0"/>
+									<xs:maxLength value="36"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element ref="CustLoginId" minOccurs="0"/>
+					</xs:sequence>
+					<xs:element ref="CustLoginId"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GenSessKey" type="xs:string"/>
+	<xs:element name="SignonRoleCd" type="xs:string"/>
+	<xs:element name="ClientDt" type="xs:dateTime"/>
+	<xs:element name="CustLangPref" type="xs:string"/>
+	<xs:element name="Org" type="xs:string"/>
+	<xs:element name="Version" type="xs:string"/>
+	<xs:element name="CustLoginId" type="xs:string"/>
+	<xs:element name="PassportSvcRq">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="SPName"/>
+				<xs:element ref="RqUID" minOccurs="0"/>
+				<xs:element ref="TransactionRequestDt" minOccurs="0"/>
+				<xs:element ref="CurCd" minOccurs="0"/>
+				<xs:element ref="CodeList" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:choice>
+					<xs:element ref="PassportInqRq"/>
+					<xs:element name="PassportGetDataRq">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="OrderingCustomerOrgId" type="xs:string"/>
+								<xs:element name="ShippingCustomerOrgId" type="xs:string"/>
+								<xs:element name="RequestId" type="xs:string" minOccurs="0"/>
+								<xs:element name="ProductCd" minOccurs="0" type="xs:string"/>
+								<xs:element name="ResellerId" minOccurs="0" type="xs:string"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+				<xs:element name="Quoteback" minOccurs="0" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>maxsize=150 chars</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RqUID" type="String">
+		<xs:annotation>
+			<xs:documentation>Request id generated by customer</xs:documentation>
+			<xs:appinfo>
+				<revhist>MR2786</revhist>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SPName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation/>
+			<xs:appinfo>
+				<revhist>MR2786</revhist>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TransactionRequestDt" type="String"/>
+	<xs:element name="CurCd" type="String"/>
+	<xs:element name="SuppressMatchInd" type="String"/>
+	<xs:element name="SearchBasisCd" type="StringCd"/>
+	<xs:element name="ReferralInd" type="String"/>
+	<xs:element name="RemarkText">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="String">
+					<xs:attribute name="idref" type="xs:IDREF" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Status">
+		<xs:annotation>
+			<xs:appinfo>
+				<revhist>MR2786</revhist>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StatusCd"/>
+				<xs:element ref="StatusDesc" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="StatusCd" type="xs:string"/>
+	<xs:element name="StatusDesc" type="xs:string"/>
+	<xs:element name="SignonRs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Status" minOccurs="0"/>
+				<xs:element ref="SignonRoleCd" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation/>
+						<xs:appinfo>
+							<echoed/>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="CustId" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation/>
+						<xs:appinfo>
+							<echoed/>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="GenSessKey" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation/>
+						<xs:appinfo>
+							<echoed/>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="ClientDt">
+					<xs:annotation>
+						<xs:documentation/>
+						<xs:appinfo>
+							<echoed/>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="CustLangPref">
+					<xs:annotation>
+						<xs:documentation/>
+						<xs:appinfo>
+							<echoed/>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="ClientApp"/>
+				<xs:element ref="ProxyClient" minOccurs="0"/>
+				<xs:element ref="ServerDt"/>
+				<xs:element ref="SessKey" minOccurs="0"/>
+				<xs:element ref="ExpDt" minOccurs="0"/>
+				<xs:element ref="Language"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ServerDt" type="xs:string"/>
+	<xs:element name="SessKey" type="xs:string"/>
+	<xs:element name="ExpDt" type="xs:string"/>
+	<xs:element name="Language" type="xs:string"/>
+	<xs:element name="ClientApp">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Org"/>
+				<xs:element name="Name" type="xs:string"/>
+				<xs:element ref="Version"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProxyClient">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Org"/>
+				<xs:element name="Name">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:minLength value="0"/>
+							<xs:maxLength value="40"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element ref="Version"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SuppressNotificationInd" type="xs:string"/>
+	<xs:element name="PendingResponseInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="MsgRqUID"/>
+				<xs:element ref="MsgNameCd"/>
+				<xs:element ref="TransactionRequestDt" minOccurs="0"/>
+				<xs:element ref="NotificationDt" minOccurs="0"/>
+				<xs:element ref="PendingResponseExpDt" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MsgRqUID" type="xs:string"/>
+	<xs:element name="MsgNameCd" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>As used here, the name of the original message request.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NotificationDt" type="xs:date"/>
+	<xs:element name="PendingResponseExpDt" type="xs:date"/>
+	<xs:element name="ClaimsSvcRs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Status" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation/>
+						<xs:appinfo>
+							<revhist>MR2786</revhist>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="RqUID">
+					<xs:annotation>
+						<xs:documentation/>
+						<xs:appinfo>
+							<revhist>MR2786</revhist>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="SPName" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation/>
+						<xs:appinfo>
+							<revhist>MR2786</revhist>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SignoffRs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Status" minOccurs="0"/>
+				<xs:element ref="CustId" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PendingResponseInqRq">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RqUID"/>
+				<xs:element ref="TransactionRequestDt"/>
+				<xs:element ref="PendingResponseInfo" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PendingResponseInqRs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RqUID"/>
+				<xs:element ref="TransactionRequestDt"/>
+				<xs:element name="TransactionResponseDt" type="xs:string"/>
+				<xs:element ref="MsgStatus"/>
+				<xs:element ref="PendingResponseInfo" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TaxCodeInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="TaxCd" type="StringCd"/>
+				<xs:element name="TaxTypeCd" type="StringCd" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="String">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="id" type="xs:ID" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="StringCd">
+		<xs:simpleContent>
+			<xs:extension base="String">
+				<xs:attribute name="codelistref" type="xs:IDREF" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:element name="PersonName">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Surname" type="String"/>
+				<xs:element name="GivenName" type="String" minOccurs="0"/>
+				<xs:element name="OtherGivenName" type="String" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="MiddleInitial" minOccurs="0" type="xs:string"/>
+				<xs:element name="TitlePrefix" type="String" minOccurs="0"/>
+				<xs:element name="NameSuffix" type="String" minOccurs="0"/>
+				<xs:element name="NickName" type="String" minOccurs="0"/>
+				<xs:element name="AkaSurname" type="String" minOccurs="0"/>
+				<xs:element name="AkaGivenName" type="String" minOccurs="0"/>
+				<xs:element name="AkaOtherGivenName" type="String" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="AkaMiddleInitial" minOccurs="0" type="xs:string"/>
+				<xs:element name="AkaTitlePrefix" type="String" minOccurs="0"/>
+				<xs:element name="AkaNameSuffix" type="String" minOccurs="0"/>
+				<xs:element name="AkaNickName" type="String" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TransactionResponseDt" type="xs:string"/>
+	<xs:element name="MatchReasonInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="MatchReasonCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+			<xs:attribute name="ClaimsPartyRef" type="xs:IDREF" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="INQPARTY">
+		<xs:sequence>
+			<xs:element ref="GeneralPartyInfo" minOccurs="0"/>
+			<xs:element ref="PersonInfo" minOccurs="0"/>
+			<xs:element ref="DriversLicense" minOccurs="0"/>
+			<xs:element name="PriorDriversLicense" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="LicensedDt" type="String" minOccurs="0"/>
+						<xs:element name="DriversLicenseNumber" type="String"/>
+						<xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element ref="ReportOptions" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChangeStatus">
+		<xs:annotation>
+			<xs:appinfo>
+				<seeDesc/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ActionCd">
+					<xs:annotation>
+						<xs:appinfo>
+							<revhist>MR2907</revhist>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name="id" type="xs:ID" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="PreviousValue" minOccurs="0">
+					<xs:annotation>
+						<xs:appinfo>
+							<revhist>MR2907</revhist>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name="id" type="xs:ID" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="RefNameCd" minOccurs="0">
+					<xs:annotation>
+						<xs:appinfo>
+							<revhist>MR2907</revhist>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name="id" type="xs:ID" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ChangeDesc" minOccurs="0">
+					<xs:complexType>
+						<xs:attribute name="id" type="xs:ID" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ItemIdInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AgencyId" type="String" minOccurs="0"/>
+				<xs:element name="InsurerId" type="String" minOccurs="0"/>
+				<xs:element name="SystemId" type="String" minOccurs="0"/>
+				<xs:element name="OtherIdentifier" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="OtherIdTypeCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="OtherId" type="String" minOccurs="0"/>
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:ID" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ODOMETER">
+		<xs:sequence>
+			<xs:element name="Reading" type="String"/>
+			<xs:element name="Date" type="String"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UnparsedAddress">
+		<xs:sequence>
+			<xs:element name="AddrTypeCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Addr1" type="String" minOccurs="0"/>
+			<xs:element name="Addr2" type="String" minOccurs="0"/>
+			<xs:element name="Addr3" type="String" minOccurs="0"/>
+			<xs:element name="Addr4" type="String" minOccurs="0"/>
+			<xs:element name="City" type="String" minOccurs="0"/>
+			<xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+			<xs:element name="StateProv" type="String" minOccurs="0"/>
+			<xs:element name="PostalCode" type="String" minOccurs="0"/>
+			<xs:element name="CountryCd" type="StringCd" minOccurs="0"/>
+			<xs:element name="Country" type="String" minOccurs="0"/>
+			<xs:element name="Latitude" type="String" minOccurs="0"/>
+			<xs:element name="Longitude" type="String" minOccurs="0"/>
+			<xs:element name="County" type="String" minOccurs="0"/>
+			<xs:element name="Region" type="String" minOccurs="0"/>
+			<xs:element name="RegionCd" type="StringCd" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ParsedAddress">
+		<xs:sequence>
+			<xs:element name="AddrTypeCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="HouseNumber" minOccurs="0" type="xs:string"/>
+			<xs:element name="PreDirection" minOccurs="0" type="xs:string"/>
+			<xs:element name="StreetName" type="String" minOccurs="0"/>
+			<xs:element name="StreetType" type="String" minOccurs="0"/>
+			<xs:element name="PostDirection" minOccurs="0" type="xs:string"/>
+			<xs:element name="ApartmentNumber" minOccurs="0" type="xs:string"/>
+			<xs:element name="City" type="String" minOccurs="0"/>
+			<xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+			<xs:element name="PostalCode" type="String" minOccurs="0"/>
+			<xs:element name="Zip4" minOccurs="0" type="xs:string"/>
+			<xs:element name="ZipCarrierRoute" minOccurs="0" type="xs:string"/>
+			<xs:element name="CountryCd" type="StringCd" minOccurs="0"/>
+			<xs:element name="Country" type="String" minOccurs="0"/>
+			<xs:element name="Latitude" type="String" minOccurs="0"/>
+			<xs:element name="Longitude" type="String" minOccurs="0"/>
+			<xs:element name="County" type="String" minOccurs="0"/>
+			<xs:element name="Region" type="String" minOccurs="0"/>
+			<xs:element name="RegionCd" type="StringCd" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ScrubbedAddress">
+		<xs:sequence>
+			<xs:element name="StreetNumber" minOccurs="0" type="xs:string"/>
+			<xs:element name="StreetPreDir" minOccurs="0" type="xs:string"/>
+			<xs:element name="StreetName" type="String" minOccurs="0"/>
+			<xs:element name="StreetType" type="String" minOccurs="0"/>
+			<xs:element name="StreetPostDir" minOccurs="0" type="xs:string"/>
+			<xs:element name="City" type="String" minOccurs="0"/>
+			<xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+			<xs:element name="PostalCode" type="String" minOccurs="0"/>
+			<xs:element name="Zip4" minOccurs="0" type="xs:string"/>
+			<xs:element name="Country" type="String" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ADDRESS">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="ParsedAddress" type="ParsedAddress"/>
+				<xs:element name="UnparsedAddress" type="UnparsedAddress"/>
+			</xs:choice>
+			<xs:element name="ScrubbedAddress" type="ScrubbedAddress" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The values are generated by  address scrubbing software</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ReportOptions" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ReportOptions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ReportOption" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DataSourceId" type="xs:string"/>
+							<xs:element name="OptionName" type="xs:string"/>
+							<xs:element name="OptionValue" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Business">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CommlName" minOccurs="0"/>
+				<xs:element ref="TaxIdentity" minOccurs="0"/>
+				<xs:element ref="Communications" minOccurs="0"/>
+				<xs:element ref="PolicyNumber" minOccurs="0"/>
+				<xs:element ref="Owners" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Owners">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Person" type="INQPARTY" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PolicyNumber" type="xs:string"/>
+</xs:schema>

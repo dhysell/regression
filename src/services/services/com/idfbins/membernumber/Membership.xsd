@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.idfbins.com/Membership" xmlns:tns="http://www.idfbins.com/Membership" xmlns:ss="http://www.idfbins.com/common/ServiceStatus" elementFormDefault="qualified">
+
+	<import schemaLocation="ServiceStatus.xsd" namespace="http://www.idfbins.com/common/ServiceStatus"/>
+
+	<element name="MembershipRecordsRequest" type="tns:MembershipRecordsRequest"/>
+	<element name="MembershipRecordsResponse" type="tns:MembershipRecords"/>
+
+	<complexType name="MembershipRecordsRequest">
+		<sequence>
+			<element name="asOfDate" type="date"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="MembershipRecords">
+		<sequence>
+			<element name="membershipRecord" type="tns:MembershipRecord" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="MembershipRecord">
+		<sequence>
+			<element name="countyNumber" type="string"/>
+			<element name="effectiveDate" type="date"/>
+			<element name="membershipNumber" type="string"/>
+			<element name="contacts" type="tns:Contacts" minOccurs="0" maxOccurs="1"/>
+			<element name="years" type="tns:Years"/>
+			<element name="policyNumber" type="string" maxOccurs="1" minOccurs="0"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="Contacts">
+		<sequence>
+			<element name="contact" type="tns:ContactRecord" maxOccurs="unbounded" minOccurs="1"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="ContactRecord">
+		<sequence>
+			<element name="firstName" type="string"/>
+			<element name="middleName" type="string" maxOccurs="1" minOccurs="0"/>
+			<element name="lastName" type="string"/>
+			<element name="ssn" type="string" maxOccurs="1" minOccurs="0"/>
+			<element name="birthdate" type="date" maxOccurs="1" minOccurs="0"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="Years">
+		<sequence>
+			<element name="year" type="string" maxOccurs="10" minOccurs="1"/>
+		</sequence>
+	</complexType>
+
+	<element name="membershipQueryRequest" type="tns:MembershipQueryRequest"/>
+	<element name="membershipQueryResponse" type="tns:MembershipQueryResponse"/>
+
+	<complexType name="MembershipQueryRequest">
+		<sequence>
+			<element name="memberNumber" type="tns:MemberNumber"/>
+		</sequence>
+	</complexType>
+
+	<simpleType name="MemberNumber">
+		<restriction base="string">
+			<pattern value="\d{6}"/>
+		</restriction>
+	</simpleType>
+
+	<complexType name="MembershipQueryResponse">
+		<sequence>
+			<element name="serviceStatus" type="ss:ServiceStatus"/>
+			<element name="fedRecord" type="tns:FedRecord" maxOccurs="unbounded" minOccurs="0"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="FedRecord">
+		<sequence>
+			<element name="company" type="string"/>
+			<element name="memberNumber" type="tns:MemberNumber"/>
+			<element name="fedSuffix" type="string"/>
+			<element name="lineOfBusiness" type="string"/>
+			<element name="status" type="string"/>
+			<element name="membershipType" type="string"/>
+			<element name="countyCode" type="string"/>
+			<element name="inceptionDate" type="date" minOccurs="0"/>
+			<element name="effectiveDate" type="date" minOccurs="0"/>
+			<element name="expiryDate" type="date" minOccurs="0"/>
+			<element name="cancelDate" type="date" minOccurs="0"/>
+			<element name="nameAndAddress1" type="string"/>
+			<element name="nameAndAddress2" type="string"/>
+			<element name="nameAndAddress3" type="string"/>
+			<element name="nameAndAddress4" type="string" minOccurs="0"/>
+			<element name="nameAndAddress5" type="string" minOccurs="0"/>
+			<element name="nameAndAddress6" type="string" minOccurs="0"/>
+			<element name="duesYear1" type="int" minOccurs="0"/>
+			<element name="duesYear2" type="int" minOccurs="0"/>
+			<element name="duesYear3" type="int" minOccurs="0"/>
+			<element name="duesYear4" type="int" minOccurs="0"/>
+			<element name="duesYear5" type="int" minOccurs="0"/>
+			<element name="duesYear6" type="int" minOccurs="0"/>
+			<element name="duesYear7" type="int" minOccurs="0"/>
+			<element name="duesYear8" type="int" minOccurs="0"/>
+			<element name="duesYear9" type="int" minOccurs="0"/>
+			<element name="duesYear10" type="int" minOccurs="0"/>
+		</sequence>
+	</complexType>
+
+</schema>

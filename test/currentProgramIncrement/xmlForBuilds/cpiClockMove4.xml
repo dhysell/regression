@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="CurrentProgramIncrement" verbose="1">
+    <listeners>
+        <listener class-name="repository.listeners.LocalSuiteTestListener"/>
+    </listeners>
+
+    <parameter name="application" value="Current Program Increment"/>
+    <parameter name="suiteName" value="CurrentProgramIncrement-Clock"/>
+    
+    <test name="Non Feature Related Work - Aces">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.nonFeatures.Aces.*"/>
+        </packages>
+    </test>
+    
+    <test name="Maintenance Defects - Aces">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.maintenanceDefects.Aces.*"/>
+        </packages>
+    </test>
+    
+    
+    <test name="F42 Checks Off The Mainframe - Aces">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f42_ChecksOffTheMainframe_Aces.*"/>
+            <package name="currentProgramIncrement.f42_ChecksOffTheMainframe_Aces.*.*"/>
+            <package name="currentProgramIncrement.f42_ChecksOffTheMainframe_Aces.*.*.*"/>
+        </packages>
+    </test>
+    
+    <test name="F51 Funding Field Checks Account - Aces">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="currentProgramIncrement.f51_FundingFieldChecksAccount_Aces.*"/>
+            <package name="currentProgramIncrement.f51_FundingFieldChecksAccount_Aces.*.*"/>
+            <package name="currentProgramIncrement.f51_FundingFieldChecksAccount_Aces.*.*.*"/>
+        </packages>
+    </test>
+</suite>

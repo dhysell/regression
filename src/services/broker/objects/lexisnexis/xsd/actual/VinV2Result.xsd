@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 12/30/2003 - rlr -->
+<xs:schema targetNamespace="http://cp.com/rules/client" xmlns:rf="http://cp.com/rules/client" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" elementFormDefault="qualified" attributeFormDefault="unqualified" jxb:version="1.0">
+    
+    <xs:include schemaLocation="../CPRulesCommonElementsSchema.xsd"/>
+    
+    <xs:simpleType name="edits_date">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[01][0-9]/[0-3][0-9]/[012][0-9]{3}"/>
+        </xs:restriction>
+        <!-- global Simple Type -->
+    </xs:simpleType>
+    
+    <xs:simpleType name="counter">
+        <xs:annotation>
+            <xs:appinfo>
+                <jxb:javaType name="int" parseMethod="javax.xml.bind.DatatypeConverter.parseInt" 
+                                    printMethod="javax.xml.bind.DatatypeConverter.printInt"/>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:restriction base="xs:nonNegativeInteger">
+            <xs:maxInclusive value="999"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="entity_classification">
+        <xs:annotation>
+            <xs:appinfo>
+                <jxb:typesafeEnumClass name="EntityTypeEnum"/>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="residence"/>
+            <xs:enumeration value="former"/>
+            <xs:enumeration value="unknown"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    
+    <xs:simpleType name="edits_time">
+        <xs:restriction base="xs:string">
+ <!--           <xs:pattern value="\[012][0-9][0-5][0-9]"/> -->
+ <!-- Changed by Chip to make this a valid RegEx, not sure this is a good match -->
+ 			<xs:pattern value="\\[012][0-9][0-5][0-9]"/>
+        </xs:restriction>
+        
+    </xs:simpleType>
+    
+    
+    <xs:element name="vin_report">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="rf:admin"/>
+                <xs:element ref="rf:report"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- root element requence -->
+    <xs:element name="report">
+        <xs:complexType>
+            <xs:sequence>
+               <xs:element ref="rf:summary"/>
+               <xs:element name="messages" minOccurs="0">
+            	  <xs:complexType>
+            	     <xs:sequence>
+                        <xs:element name="message" type="rf:messageType" maxOccurs="99"/>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>  
+               <xs:element ref="rf:search_dataset" minOccurs="0"/>
+               <xs:element ref="rf:results_dataset" minOccurs="0"/>
+               <xs:element ref="rf:supplementary_data" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- report -->
+    <xs:element name="admin">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="quoteback" type="rf:quotebackType" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element name="service_type" type="rf:vin_result_report_type"/>
+                <xs:element name="report_usage" type="xs:string"/>
+             <xs:element name="pnc_account">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="name" type="xs:string" use="optional"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+                <!-- pnc account-->
+                <xs:element name="product_reference" type="xs:string"/>
+                <xs:element name="status">
+                    <xs:simpleType>
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <jxb:typesafeEnumClass name="processingStatusEnum"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="Completed"/>
+                            <xs:enumeration value="No Hit"/>
+                            <xs:enumeration value="Order Rejected"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                    <!-- RI51 Processing Status -->
+                </xs:element>
+                <xs:element name="special_billing_id" minOccurs="0">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="15"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="product_ordered" minOccurs="0">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:attribute name="code" type="rf:product_code" use="optional"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                
+                <xs:element name="date_report_ordered" type="rf:USDateType" minOccurs="0"/>
+                <xs:element name="date_order_received" type="rf:USDateType" minOccurs="0"/>
+                <xs:element name="date_report_completed" type="rf:USDateType" minOccurs="0"/>
+                <xs:element name="report_processed_time" minOccurs="0" type="rf:edits_time"/>
+                <xs:element name="product_group" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!--admin-->
+        
+    <xs:element name="search_dataset">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="messages" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="message" type="rf:messageType" minOccurs="1" maxOccurs="99"/>
+
+                        </xs:sequence>    
+                    </xs:complexType>
+                </xs:element>
+                
+                <xs:element name="subject" minOccurs="0" >
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="name">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="prefix" type="xs:string" minOccurs="0"/>
+                                        <xs:element name="first" type="xs:string" minOccurs="0"/>
+                                        <xs:element name="middle" type="xs:string" minOccurs="0"/>
+                                        <xs:element name="last" type="xs:string" minOccurs="0"/>
+                                        <xs:element name="suffix" type="xs:string" minOccurs="0"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="birth_date" type="rf:USDateType" minOccurs="0"/>
+                            <xs:element name="ssn" minOccurs="0">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:pattern value="\d{9}"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="gender" minOccurs="0">
+                                <xs:simpleType>
+                                    <xs:annotation>
+                                        <xs:appinfo>
+                                            <jxb:typesafeEnumClass name="VinInqGenderEnum"/>
+                                        </xs:appinfo>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Female"/>
+                                        <xs:enumeration value="Male"/>
+                                        <xs:enumeration value="Unknown"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>							
+                            <xs:element name="address" minOccurs="0" maxOccurs="1">
+                                <xs:complexType>
+                                    <xs:attribute name="type" type="rf:inquiry_address_types" use="required"/>
+                                    <xs:attribute name="ref" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="vehicle" minOccurs="0" maxOccurs="99">
+                                <xs:complexType>
+                                    <xs:attribute name="ref" type="xs:IDREF" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="type" use="required">
+                            <xs:simpleType>
+                                <xs:annotation>
+                                    <xs:appinfo>
+                                        <jxb:typesafeEnumClass name="subjectRelationshipEnum"/>
+                                    </xs:appinfo>
+                                </xs:annotation>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="primary"/>
+                                    <xs:enumeration value="spouse"/>
+                                    <xs:enumeration value="unknown"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        <xs:attribute name="unit_number" type="xs:nonNegativeInteger" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <!-- subject -->                
+                <xs:element name="address" type="rf:addressType" minOccurs="0"/>
+                <xs:element name="vehicles" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="vehicle" type="rf:inquiryVehicleType" maxOccurs="99"/>                            
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element> 
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+<!-- search_dataset -->    
+
+    
+    <xs:element name="results_dataset">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result_messages" minOccurs="0" maxOccurs="25">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="unit_number" type="xs:nonNegativeInteger" minOccurs="0"/>
+                            <xs:element name="id" type="xs:IDREF" minOccurs="0"/>
+                            <xs:element name="message"  type="rf:messageType" maxOccurs="99"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="vehicles" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                                <xs:element name="vehicle" type="rf:resultVehicleType" minOccurs="1" maxOccurs="50"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="discovered_vehicles_messages" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="message" type="rf:messageType" minOccurs="1" maxOccurs="99"/>
+                        </xs:sequence>    
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <!-- results database -->
+
+    <xs:element name="summary">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="number_matched" type="rf:counter" minOccurs="0"/>
+                <xs:element name="number_not_found" type="rf:counter" minOccurs="0"/>
+                <xs:element name="number_error" minOccurs="0">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="rf:counter">
+                                <xs:attribute name="status" use="optional">
+                                    <xs:simpleType>
+                                        <xs:annotation>
+                                            <xs:appinfo>
+                                                <jxb:typesafeEnumClass name="VinSummaryStatusEnum"/>
+                                            </xs:appinfo>
+                                        </xs:annotation>
+                                        <xs:restriction base="xs:string">
+                                            <xs:enumeration value="State Unavailable"/>
+                                            <xs:enumeration value="Unreturned"/>
+											<xs:enumeration value="Unknown"/>
+                                        </xs:restriction>
+                                    </xs:simpleType>
+                                </xs:attribute>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element> <!-- number_error -->
+                <xs:element name="number_developed" type="rf:counter" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <!-- summary -->
+        
+    <xs:element name="supplementary_data">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="messages">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="message" type="rf:messageType" maxOccurs="99"/>
+                        </xs:sequence>                        
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+        
+    </xs:element>
+    <!--supplementary_data-->
+    
+</xs:schema>

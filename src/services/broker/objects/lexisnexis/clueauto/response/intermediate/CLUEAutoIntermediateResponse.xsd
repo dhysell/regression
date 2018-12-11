@@ -1,0 +1,119 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://cp.com/rules/client" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="result">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="client">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="quoteback">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="name"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="id"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="order_dataset">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="subjects">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="subject">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="name">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:string" name="first"/>
+                                <xs:element type="xs:string" name="middle"/>
+                                <xs:element type="xs:string" name="last"/>
+                              </xs:sequence>
+                              <xs:attribute type="xs:string" name="type"/>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element type="xs:string" name="birthdate"/>
+                          <xs:element type="xs:int" name="ssn"/>
+                          <xs:element name="address">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:string" name="type"/>
+                                  <xs:attribute type="xs:string" name="ref"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="driverslicense">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:string" name="state"/>
+                                  <xs:attribute type="xs:string" name="number"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:string" name="id"/>
+                        <xs:attribute type="xs:string" name="quoteback"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="addresses">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="address">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:short" name="house"/>
+                          <xs:element type="xs:string" name="street1"/>
+                          <xs:element type="xs:string" name="city"/>
+                          <xs:element type="xs:string" name="state"/>
+                          <xs:element type="xs:int" name="postalcode"/>
+                          <xs:element type="xs:short" name="zip4"/>
+                        </xs:sequence>
+                        <xs:attribute type="xs:string" name="id"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="product_results">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="clue_personal_auto">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="report">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="format"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="transaction_id"/>
+      <xs:attribute type="xs:dateTime" name="timestamp"/>
+      <xs:attribute type="xs:string" name="final"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

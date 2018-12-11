@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="previousProgramIncrement.pi2_062818_090518" verbose="1">
+    <listeners>
+        <listener class-name="repository.listeners.LocalSuiteTestListener"/>
+    </listeners>
+
+    <parameter name="application" value="Current Program Increment"/>
+    <parameter name="suiteName" value="PI2-Regression-Clock"/>
+
+    <test name="Maintenance Defects">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi2_062818_090518.maintenanceDefects.*"/>
+            <package name="previousProgramIncrement.pi2_062818_090518.maintenanceDefects.*.*"/>
+            <package name="previousProgramIncrement.pi2_062818_090518.maintenanceDefects.*.*.*"/>
+        </packages>
+    </test>
+    
+    <test name="Non Feature Related Work - ARTists">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi2_062818_090518.nonFeatures.ARTists.*"/>
+        </packages>
+    </test>
+    
+    <test name="Non Feature Related Work - No Exceptions">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi2_062818_090518.nonFeatures.NoExceptions.*"/>
+        </packages>
+    </test>
+    
+    <test name="F284 Auto Policy Change">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi2_062818_090518.f284_AutoPolicyChange.*"/>
+            <package name="previousProgramIncrement.pi2_062818_090518.f284_AutoPolicyChange.*.*"/>
+            <package name="previousProgramIncrement.pi2_062818_090518.f284_AutoPolicyChange.*.*.*"/>
+        </packages>
+    </test>
+    
+    <test name="Non Feature Related Work - Triton">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi2_062818_090518.nonFeatures.Triton.*"/>
+        </packages>
+    </test>
+    
+</suite>

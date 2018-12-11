@@ -1,0 +1,26 @@
+
+GET RANDOM
+
+private static final List<RiskCategoryCode> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
+private static final Random RANDOM = new Random();
+
+public static RiskCategoryCode random()  {
+	return VALUES.get(RANDOM.nextInt(VALUES.size()));
+}
+
+
+RETURN ENUM
+public static MaritalStatus getEnumFromStringValue(String text){
+        for(MaritalStatus status: MaritalStatus.values()){
+            if(text.equalsIgnoreCase(status.value)){
+                return status;
+            }
+        }
+        return null;
+    }
+
+
+
+	
+	
+	

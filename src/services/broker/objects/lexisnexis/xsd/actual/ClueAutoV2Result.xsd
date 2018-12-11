@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ **************************************************************
+  (c) 2006 by ChoicePoint Asset Company.  All rights reserved.
+ **************************************************************
+-->
+
+<xs:schema xmlns:rf="http://cp.com/rules/client" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" targetNamespace="http://cp.com/rules/client" elementFormDefault="qualified" attributeFormDefault="unqualified" jxb:version="1.0">
+
+   <xs:include schemaLocation="../ClueCommonElements.xsd"/>
+
+   <xs:element name="clue_personal_auto">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="rf:admin"/>
+            <xs:element ref="rf:report"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>   <!-- clue_personal_auto -->
+
+   <xs:element name="admin">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="rf:commonAdminType">
+               <xs:sequence>
+                  <xs:element name="status">
+                     <xs:simpleType>
+                        <xs:annotation>
+                           <xs:appinfo>
+                              <jxb:typesafeEnumClass name="AdminStatusEnum"/>
+                           </xs:appinfo>
+                        </xs:annotation>
+                        <xs:restriction base="xs:string">
+                           <xs:enumeration value="processing complete, with results information"/>
+                           <xs:enumeration value="processing complete, results clear"/>
+                           <xs:enumeration value="not processed; product unavailable"/>
+                           <xs:enumeration value="not processed; invalid LexisNexis Account Number"/>
+                           <xs:enumeration value="not processed; insufficient search data"/>
+                           <xs:enumeration value="not processed; state limitation"/>
+                           <xs:enumeration value="not processed; errors"/>
+                           <xs:enumeration value="CLUE and Current Carrier are not Ordered"/>
+                        </xs:restriction>
+                     </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="service_type">
+                     <xs:simpleType>
+                        <xs:annotation>
+                           <xs:appinfo>
+                              <jxb:typesafeEnumClass name="AdminServiceTypeEnum"/>
+                           </xs:appinfo>
+                        </xs:annotation>
+                        <xs:restriction base="xs:string">
+                           <xs:enumeration value="Subject and VIN search"/>
+                           <xs:enumeration value="Subject only search"/>
+                           <xs:enumeration value="VIN only search"/>
+                           <xs:enumeration value="Subject and VIN with Driver Discovery search"/>
+                           <xs:enumeration value="Subject with Driver Discovery search"/>
+                           <xs:enumeration value="Driver Discovery only search"/>
+                           <xs:enumeration value="Subject and VIN/Current Carrier"/>
+                           <xs:enumeration value="Subject Only/Current Carrier"/>
+                           <xs:enumeration value="Subject and VIN with Driver Discovery/Current Carrier"/>
+                           <xs:enumeration value="Subject Only with Driver Discovery/Current Carrier"/>
+                           <xs:enumeration value="CLUE and Current Carrier not ordered"/>
+                        </xs:restriction>
+                     </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="report_usage">
+                     <xs:simpleType>
+                        <xs:annotation>
+                           <xs:appinfo>
+                              <jxb:typesafeEnumClass name="AdminReportUsageEnum"/>
+                           </xs:appinfo>
+                        </xs:annotation>
+                        <xs:restriction base="xs:string">
+                           <xs:enumeration value="Personal Auto/Underwriting"/>
+                           <xs:enumeration value="Commercial Auto/Underwriting"/>
+                        </xs:restriction>
+                     </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="requestor_producer_name" type="xs:string" minOccurs="0"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>   <!-- admin -->
+
+   <xs:element name="report">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="inquiry_processing_summary" type="rf:summaryType" minOccurs="0" />
+            <xs:element name="unit_processing_summary" type="rf:summaryType" minOccurs="0" maxOccurs="51">
+              <xs:annotation>
+                <xs:appinfo>
+                  <jxb:property name="unitProcessingList" />
+                </xs:appinfo>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="messages" type="rf:messageListType" minOccurs="0"/>
+            <xs:element ref="rf:search_dataset" minOccurs="0"/>
+            <xs:element ref="rf:results_dataset" minOccurs="0"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>   <!-- report -->
+
+   <xs:complexType name="summaryType">
+      <xs:sequence>
+         <xs:element name="classification" type="rf:ClassificationType" minOccurs="0"/>
+         <xs:element name="claim_reported">
+            <xs:complexType>
+               <xs:attribute name="status">
+                  <xs:simpleType>
+                     <xs:annotation>
+                        <xs:appinfo>
+                           <jxb:typesafeEnumClass name="ClaimReportedStatusEnum"/>
+                        </xs:appinfo>
+                     </xs:annotation>
+                     <xs:restriction base="xs:string">
+                        <xs:enumeration value="Claims reported"/>
+                        <xs:enumeration value="No claims reported"/>
+                        <xs:enumeration value="Claims search unavailable"/>
+                        <xs:enumeration value="Claims search not requested"/>
+                        <xs:enumeration value="Search not processed; state limitation"/>
+                     </xs:restriction>
+                  </xs:simpleType>
+               </xs:attribute>
+               <xs:attribute name="count" type="rf:counterType"/>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="prior_inquiries_reported">
+            <xs:complexType>
+               <xs:attribute name="status">
+                  <xs:simpleType>
+                     <xs:annotation>
+                        <xs:appinfo>
+                           <jxb:typesafeEnumClass name="PriorInquiriesReportedStatusEnum"/>
+                        </xs:appinfo>
+                     </xs:annotation>
+                     <xs:restriction base="xs:string">
+                        <xs:enumeration value="Inquiry History reported"/>
+                        <xs:enumeration value="No Inquiry History reported"/>
+                        <xs:enumeration value="Inquiry History search unavailable"/>
+                        <xs:enumeration value="Inquiry History search not requested"/>
+                     </xs:restriction>
+                  </xs:simpleType>
+               </xs:attribute>
+               <xs:attribute name="count" type="rf:counterType"/>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="driverdiscovery_reported" minOccurs="0">
+            <xs:complexType>
+               <xs:attribute name="status">
+                  <xs:simpleType>
+                     <xs:annotation>
+                        <xs:appinfo>
+                           <jxb:typesafeEnumClass name="ADDReportedStatusEnum"/>
+                        </xs:appinfo>
+                     </xs:annotation>
+                     <xs:restriction base="xs:string">
+                        <xs:enumeration value="Driver Discovery reported"/>
+                        <xs:enumeration value="No Driver Discovery reported"/>
+                        <xs:enumeration value="Driver Discovery search unavailable"/>
+                        <xs:enumeration value="Driver Discovery search not requested"/>
+                        <xs:enumeration value="Driver Discovery state unavailable"/>
+                        <xs:enumeration value="Requested state not on Driver Discovery database"/>
+                        <xs:enumeration value="Search not processed; state limitation."/>
+                     </xs:restriction>
+                  </xs:simpleType>
+               </xs:attribute>
+               <xs:attribute name="count" type="rf:counterType"/>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="at_fault_info_requested_status" type="rf:yesNoType" minOccurs="0"/>
+         <xs:element name="homeowner_verification_status" minOccurs="0">
+            <xs:simpleType>
+               <xs:annotation>
+                  <xs:appinfo>
+                     <jxb:typesafeEnumClass name="HomeownerVerifStatusEnum"/>
+                  </xs:appinfo>
+               </xs:annotation>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="Processing complete with results"/>
+                  <xs:enumeration value="Processing complete no results available"/>
+                  <xs:enumeration value="Processing not complete. Application unavailable"/>
+                  <xs:enumeration value="Processing not complete. Invalid LexisNexis Account or Invalid LexisNexis Account-Z"/>
+                  <xs:enumeration value="Processing not complete. Insufficient data."/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="unit_number" type="xs:nonNegativeInteger"/>
+      <xs:attribute name="id" type="xs:ID" use="optional"/>
+   </xs:complexType>   <!-- summary -->
+
+   <xs:element name="search_dataset">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="group_address" type="rf:clueAddressType" minOccurs="0" maxOccurs="2" />
+            <xs:element name="group_prior_policy" type="rf:cluePolicyType" minOccurs="0"/>
+            <xs:element name="subjects" minOccurs="0" >
+               <xs:complexType>
+                 <xs:annotation>
+                   <xs:appinfo>
+                     <jxb:property name="subjectList" />
+                   </xs:appinfo>
+                 </xs:annotation>
+                  <xs:sequence>
+                     <xs:element name="subject" type="rf:clueSubjectType" minOccurs="1" maxOccurs="50" />
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element >
+            <xs:element name="vehicle" type="rf:clueVehicleType" minOccurs="0" maxOccurs="50"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>   <!-- search_dataset -->
+
+   <xs:element name="results_dataset">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="claims_history" minOccurs="0" maxOccurs="4">
+               <xs:complexType>
+                 <xs:annotation>
+                   <xs:appinfo>
+                     <jxb:property name="claimsHistoryList" />
+                   </xs:appinfo>
+                 </xs:annotation>
+                  <xs:sequence>
+                     <xs:element name="claim" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:annotation>
+                            <xs:appinfo>
+                              <jxb:property name="claimList" />
+                            </xs:appinfo>
+                          </xs:annotation>
+                           <xs:complexContent>
+                              <xs:extension base="rf:claimType">
+                                 <xs:sequence>
+                                    <xs:element name="first_payment_date" type="rf:LenientDateType" minOccurs="0"/>
+                                    <xs:element name="claim_association_indicator" minOccurs="0">
+                                       <xs:simpleType>
+                                         <xs:annotation>
+                                           <xs:appinfo>
+                                             <jxb:typesafeEnumClass name="ClaimAssociationIndicatorEnum"/>
+                                           </xs:appinfo>
+                                         </xs:annotation>
+                                          <xs:restriction base="xs:string">
+                                             <xs:enumeration value="Indicates the policyholder was the person matched"/>
+                                             <xs:enumeration value="Indicates the Vehicle Operator was the person matched"/>
+                                          </xs:restriction>
+                                       </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element name="vehicle" type="rf:clueVehicleType"/>
+                                 </xs:sequence>
+                              </xs:extension>
+                           </xs:complexContent>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="type" use="required">
+                     <xs:simpleType>
+                       <xs:annotation>
+                         <xs:appinfo>
+                           <jxb:typesafeEnumClass name="ClaimsHistoryEnum"/>
+                         </xs:appinfo>
+                       </xs:annotation>
+                        <xs:restriction base="xs:string">
+                           <xs:enumeration value="Subject Section"/>
+                           <xs:enumeration value="Vehicle Section"/>
+                           <xs:enumeration value="Possible Related Section"/>
+                           <xs:enumeration value="Agent (Summary) Section"/>
+                        </xs:restriction>
+                     </xs:simpleType>
+                  </xs:attribute>
+               </xs:complexType>
+            </xs:element>
+            <xs:element name="inquiry_history" minOccurs="0" >
+               <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="inquiry_handling_history" minOccurs="0" maxOccurs="25">
+                      <xs:complexType>
+                        <xs:annotation>
+                          <xs:appinfo>
+                            <jxb:property name="inquiryHandlingHistoryList" />
+                          </xs:appinfo>
+                        </xs:annotation>
+                        <xs:attribute name="id" type="xs:string"/>
+                        <xs:attribute name="date" type="rf:LenientDateType"/>
+                        <xs:attribute name="name" type="xs:string"/>
+                        <xs:attribute name="quoteback" type="xs:string"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+            <xs:element name="additional_driver_discovery" minOccurs="0">
+                <xs:complexType>
+                  <xs:annotation>
+                    <xs:appinfo>
+                      <jxb:property name="AdditionalDriverDiscoveryList" />
+                    </xs:appinfo>
+                  </xs:annotation>
+                    <xs:sequence>
+                      <xs:element name="subject" type="rf:clueBaseSubjectType" maxOccurs="10"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="additional_information" type="rf:messageListType" minOccurs="0"/>
+            <xs:element name="attached_products" type="rf:attachedProductsType" minOccurs="0"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>   <!-- results_datset -->
+
+   <xs:simpleType name="ClassificationType">
+      <xs:annotation>
+         <xs:appinfo>
+            <jxb:typesafeEnumClass name="ClassificationTypeEnum"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Inquiry"/>
+         <xs:enumeration value="Subject"/>
+         <xs:enumeration value="Vehicle"/>
+         <xs:enumeration value="Possible Related Claims"/>
+      </xs:restriction>
+   </xs:simpleType>
+
+</xs:schema>
+
+

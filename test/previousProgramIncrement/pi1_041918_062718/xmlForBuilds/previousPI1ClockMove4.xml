@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="previousProgramIncrement.pi1_041918_062718" verbose="3">
+    <listeners>
+        <listener class-name="repository.listeners.LocalSuiteTestListener"/>
+    </listeners>
+
+    <parameter name="application" value="Current Program Increment"/>
+    <parameter name="suiteName" value="PI1-Regression-Clock"/>
+
+    <test name="F144 Fix Regular Renewal Defects">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi1_041918_062718.f144_FixRegularRenewalDefects.*"/>
+            <package name="previousProgramIncrement.pi1_041918_062718.f144_FixRegularRenewalDefects.*.*"/>
+            <package name="previousProgramIncrement.pi1_041918_062718.f144_FixRegularRenewalDefects.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="F164 Policy Change Payment Preview">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi1_041918_062718.f164_PolicyChangePaymentPreview.*"/>
+            <package name="previousProgramIncrement.pi1_041918_062718.f164_PolicyChangePaymentPreview.*.*"/>
+            <package name="previousProgramIncrement.pi1_041918_062718.f164_PolicyChangePaymentPreview.*.*.*"/>
+        </packages>
+    </test>
+
+    <test name="Non Feature Related Work - Achievers">
+        <groups>
+            <run>
+                <include name="ClockMove"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="previousProgramIncrement.pi1_041918_062718.nonFeatures.Achievers.*"/>
+        </packages>
+    </test>
+
+</suite>

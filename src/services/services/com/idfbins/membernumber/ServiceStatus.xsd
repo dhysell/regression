@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema targetNamespace="http://www.idfbins.com/common/ServiceStatus"
+	elementFormDefault="qualified" xmlns="http://www.idfbins.com/common/ServiceStatus"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<xsd:element name="serviceStatus" type="ServiceStatus"></xsd:element>
+
+	<xsd:complexType name="ServiceStatus">
+		<xsd:annotation>
+			<xsd:documentation>Goals: (1) Provide a common schema format.
+				(2) Make it convenient for developers.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="code" type="ServiceStatusCode"
+				minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>A string of three characters consisting of
+						numeric digits.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="description" type="xsd:string"
+				minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>A description of the meaning of the status code.
+						This is provided for developer convenience to avoid having to look
+						up the meaning of the codes.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="details" type="xsd:string" minOccurs="0"
+				maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>This is information about the status code.
+						It
+						might contain an explanation of why the error occurred.
+						In the case
+						of an exception, it might contain a stack trace.
+						In the case of bad
+						input data, it might specify the field and
+						explain how the value
+						did not meet the criteria, if known.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="ServiceStatusCode">
+		<xsd:annotation>
+			<xsd:documentation>Chosen as a three numeric digit character code for
+				visibility and consistency.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="\d{3}"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>

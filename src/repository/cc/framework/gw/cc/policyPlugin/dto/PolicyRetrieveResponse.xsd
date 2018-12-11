@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:tns="http://www.idfbins.com/PolicyRetrieveResponse"
+        targetNamespace="http://www.idfbins.com/PolicyRetrieveResponse" elementFormDefault="qualified"
+        xmlns="http://www.w3.org/2001/XMLSchema">
+    <complexType name="Policy">
+        <sequence>
+            <element name="PolicyNumber" type="string"/>
+            <element name="Insured" type="tns:Contact" minOccurs="0"/>
+            <element name="PolicyHolder" type="tns:Contact"
+                     minOccurs="0" maxOccurs="1">
+            </element>
+            <element name="PolicyContacts" type="tns:PolicyContacts"/>
+            <element name="PolicyCoverages" type="tns:PolicyCoverage"
+                     minOccurs="0" maxOccurs="1">
+            </element>
+            <element name="PolicyLocations" type="tns:PolicyLocations"
+                     minOccurs="0" maxOccurs="1">
+            </element>
+            <element name="RiskUnits" type="tns:RiskUnits" minOccurs="1"
+                     maxOccurs="1">
+            </element>
+
+            <element name="ID" type="string"/>
+            <element name="PublicID" type="string"/>
+
+            <element name="CancelDate" type="string"/>
+            <element name="InceptionDate" type="string"/>
+            <element name="PolicyEffectiveDate" type="string"/>
+            <element name="PolicyExpirationDate" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Contact">
+        <sequence>
+            <element name="ID" type="string"/>
+            <element name="OrganizationType" type="string"/>
+            <element name="Name" type="string"/>
+            <element name="DisplayName" type="string"/>
+            <element name="MailLocation" type="tns:Location"/>
+            <element name="Email1" type="string"/>
+            <element name="Email2" type="string"/>
+            <element name="FaxPhone" type="string"/>
+            <element name="Notes" type="string"/>
+            <element name="Primary" type="tns:Location"/>
+            <element name="PrimaryLanguage" type="string"/>
+            <element name="PrimaryPhone" type="string"/>
+            <element name="Retired" type="boolean"/>
+            <element name="SSNOfficialID" type="string"/>
+            <element name="STAXOfficialID" type="string"/>
+            <element name="STUNOfficialID" type="string"/>
+            <element name="SubType" type="string"/>
+            <element name="Synced" type="string"/>
+            <element name="TaxID" type="string"/>
+            <element name="TaxStatus" type="string"/>
+            <element name="TUNSOfficialID" type="string"/>
+            <element name="VendorNumber" type="string"/>
+            <element name="VendorType" type="string"/>
+            <element name="W9Received" type="string"/>
+            <element name="W9ReceivedDate" type="string"/>
+            <element name="W9ValidFrom" type="string"/>
+            <element name="W9ValidTo" type="string"/>
+            <element name="WorkPhone" type="string"/>
+            <element name="CellPhone" type="string"/>
+            <element name="DOB" type="date"/>
+            <element name="Employer" type="string"/>
+            <element name="FirstName" type="string"/>
+            <element name="LastName" type="string"/>
+            <element name="MaritalStatus" type="string"/>
+            <element name="Gender" type="string"/>
+            <element name="LicenseNumber" type="string"/>
+            <element name="LicenseState" type="string"/>
+            <element name="Occupation" type="string"/>
+            <element name="PublicID" type="string"/>
+            <element name="OrganizationName" type="string"/>
+        </sequence>
+        <attribute name="ContactType" type="string"/>
+    </complexType>
+
+    <element name="Policy" type="tns:Policy"/>
+
+
+    <complexType name="Location">
+        <sequence>
+            <element name="ID" type="string"/>
+            <element name="DisplayName" type="string"/>
+            <element name="AddressLine1" type="string"/>
+            <element name="AddressLine2" type="string"/>
+            <element name="AddressLine3" type="string"/>
+            <element name="AddressLine4" type="string"/>
+            <element name="LocationType" type="string"/>
+            <element name="Street" type="string"/>
+            <element name="City" type="string"/>
+            <element name="State" type="string"/>
+            <element name="PostalCode" type="string"/>
+            <element name="Latitude" type="string"/>
+            <element name="Longitude" type="string"/>
+            <element name="Retired" type="boolean"/>
+            <element name="Lot" type="string"/>
+            <element name="Block" type="string"/>
+            <element name="Quarter" type="string"/>
+            <element name="Section" type="string"/>
+            <element name="Township" type="string"/>
+            <element name="TNSP_N_S" type="string"/>
+            <element name="Range" type="string"/>
+            <element name="Range_E_W" type="string"/>
+            <element name="PublicID" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="PolicyLocations">
+        <sequence>
+            <element name="PolicyLocation" type="tns:PolicyLocation" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="RiskUnit">
+        <sequence>
+            <element name="ID" type="string"/>
+            <element name="Vehicle" type="tns:Vehicle" minOccurs="0"
+                     maxOccurs="1">
+            </element>
+            <element name="Building" type="tns:Building" minOccurs="0"
+                     maxOccurs="1">
+            </element>
+            <element name="Coverages" type="tns:Coverages"/>
+            <element name="ClassCode" type="tns:ClassCode" minOccurs="0"
+                     maxOccurs="1">
+            </element>
+            <element name="Displayname" type="string"/>
+            <element name="PublicID" type="string"/>
+            <element name="RUNumber" type="int"/>
+            <element name="SubType" type="string"/>
+            <element name="Retired" type="boolean"/>
+            <element name="Sequence" type="string"/>
+            <element name="LocationID" type="string"/>
+            <element name="RiskUnitType" type="string"/>
+        </sequence>
+
+    </complexType>
+
+
+    <complexType name="CoverageType">
+        <sequence>
+            <element name="Code" type="string"/>
+            <element name="DisplayName" type="string"/>
+            <element name="Description" type="string"/>
+            <element name="ClassTranCode" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="CoverageTerm">
+        <sequence>
+            <element name="ID" type="string"/>
+            <element name="Code" type="string"/>
+            <element name="DisplayName" type="string"/>
+            <element name="Description" type="string"/>
+            <element name="Value" type="float"/>
+            <element name="PublicID" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Deduction"/>
+
+
+    <complexType name="Building">
+        <sequence>
+            <element name="ID" type="string"/>
+            <element name="Notes" type="string"/>
+            <element name="BuildingNumber" type="string"/>
+            <element name="PublicID" type="string"/>
+            <element name="Description" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Vehicle">
+        <sequence>
+            <element name="VehicleOwners" type="tns:VehicleOwners"/>
+            <element name="ID" type="string"/>
+            <element name="PublicID" type="string"/>
+            <element name="LicensePlate" type="string"/>
+            <element name="Make" type="string"/>
+            <element name="Manufacturer" type="tns:ManufacturerType"/>
+            <element name="Model" type="string"/>
+            <element name="OffRoadStyle" type="tns:OffRoadStyleType"/>
+            <element name="State" type="string"/>
+            <element name="VehicleStyle" type="tns:VehicleStyleType"/>
+            <element name="VehicleSRP" type="tns:VehicleSRPType"/>
+            <element name="Vin" type="string"/>
+            <element name="year" type="int"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="PolicyCoverage">
+        <sequence>
+            <element name="Coverages" type="tns:Coverages"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="ContactRole">
+        <sequence>
+            <element name="RoleName" type="string" minOccurs="0"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="PolicyContact">
+        <sequence>
+            <element name="ContactRoles" type="tns:ContactRoles" maxOccurs="1" minOccurs="0"/>
+            <element name="Contact" type="tns:Contact"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="PolicyLocation">
+        <sequence>
+            <element name="Location" type="tns:Location"/>
+            <element name="Buildings" type="tns:Buildings" maxOccurs="1"
+                     minOccurs="0">
+            </element>
+            <element name="PropertyOwners" type="tns:PropertyOwners"/>
+            <element name="PropertyItems" type="tns:PropertyItem"
+                     minOccurs="0" maxOccurs="unbounded">
+            </element>
+            <element name="PolicyLocationNumber" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Owner">
+        <sequence>
+            <element name="ID" type="string"/>
+            <element name="Lienholder" type="tns:Contact"/>
+            <element name="DisplayName" type="string"/>
+            <element name="OwnerType" type="string"/>
+            <element name="PublicID" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="PropertyItem">
+        <sequence>
+            <element name="ID" type="string"/>
+            <element name="AppraisalValue" type="string"/>
+            <element name="Description" type="string"/>
+            <element name="DisplayName" type="string"/>
+            <element name="PublicID" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="RiskUnits">
+        <sequence>
+            <element name="RiskUnit" type="tns:RiskUnit" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="PropertyOwners">
+        <sequence>
+            <element name="PropertyOwner" type="tns:Owner" maxOccurs="unbounded" minOccurs="0"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="PolicyContacts">
+        <sequence>
+            <element name="PolicyContact" type="tns:PolicyContact" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Coverage">
+        <sequence>
+            <element name="Displayname" type="string"/>
+            <element name="EffectiveDate" type="string"/>
+            <element name="ExpirationDate" type="string"/>
+            <element name="ExposureLimit" type="string"/>
+            <element name="IncidentLimit" type="string"/>
+            <element name="Notes" type="string"/>
+            <element name="State" type="string"/>
+            <element name="LimitsIndicator" type="string"/>
+            <element name="PublicID" type="string"/>
+            <element name="CoverageType" type="tns:CoverageType"/>
+            <element name="CoverageTerms" type="tns:CoverageTerms"/>
+            <element name="Deductible" type="float"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="CoverageTerms">
+        <sequence>
+            <element name="CoverageTerm" type="tns:CoverageTerm" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Coverages">
+        <sequence>
+            <element name="Coverage" type="tns:Coverage" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="ClassCode">
+        <sequence>
+            <element name="ID" type="string"/>
+            <element name="Code" type="string"/>
+            <element name="Comments" type="string"/>
+            <element name="Description" type="string"/>
+            <element name="DisplayName" type="string"/>
+            <element name="PublicID" type="string"/>
+            <element name="Retired" type="boolean"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="VehicleOwners">
+        <sequence>
+            <element name="VehicleOwner" type="tns:Owner" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="ManufacturerType">
+        <sequence>
+            <element name="Code" type="string"/>
+            <element name="DisplayName" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="OffRoadStyleType">
+        <sequence>
+            <element name="Code" type="string"/>
+            <element name="DisplayName" type="string"/>
+            <element name="Description" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="VehicleStyleType">
+        <sequence>
+            <element name="Code" type="string"/>
+            <element name="DisplayName" type="string"/>
+            <element name="Description" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="VehicleSRPType">
+        <sequence>
+            <element name="Code" type="string"/>
+            <element name="DisplayName" type="string"/>
+            <element name="Description" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Buildings">
+        <sequence>
+            <element name="Building" type="tns:Building" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="PropertyItems">
+        <sequence>
+            <element name="PropertyItem" type="tns:PropertyItem" maxOccurs="unbounded" minOccurs="0"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="ContactRoles">
+        <sequence>
+            <element name="ContactRole" type="tns:ContactRole" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+</schema>

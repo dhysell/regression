@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 12/30/2003 - rlr -->
+<!--
+ **************************************************************
+  (c) 2006 by ChoicePoint Asset Company.  All rights reserved.
+ **************************************************************
+-->
+<xs:schema targetNamespace="http://cp.com/rules/client" xmlns:rf="http://cp.com/rules/client"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	elementFormDefault="qualified" attributeFormDefault="unqualified" jxb:version="1.0">
+	<xs:include schemaLocation="../CPRulesCommonElementsSchema.xsd"/>
+	<xs:simpleType name="edits_date">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[01][0-9][0-3][0-9][012][0-9]{3}"/>
+			<!-- MMDDYYYY -->
+		</xs:restriction>
+		<!-- global Simple Type -->
+	</xs:simpleType>
+
+	<xs:simpleType name="short_edits_date">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[01][0-9][0-3][0-9][0-9][0-9]"/>
+			<!-- MMDDYY -->
+		</xs:restriction>
+		<!-- global Simple Type -->
+	</xs:simpleType>
+
+	<xs:complexType name="MvrMessageListType">
+		<xs:sequence>
+			<xs:element name="message" type="rf:mvrMessage" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property name="messageList"/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- messageListType -->
+
+	<xs:complexType name="MvrLicensesListType">
+		<xs:sequence>
+			<xs:element name="license" type="rf:mvrLicense" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property name="licenseList"/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- messageListType -->
+
+	<xs:complexType name="mvrMessage">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="type" type="rf:mvrMessageType" use="required"/>
+				<xs:attribute name="code" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- messageType -->
+
+	<xs:simpleType name="mvrMessageType">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass name="MvrMessageTypeEnum"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Miscellaneous"/>
+			<xs:enumeration value="Processing Information"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="mvrLicense">
+		<xs:sequence>
+			<xs:element name="state" type="xs:string" minOccurs="0"/>
+			<xs:element name="license_class" type="xs:string" minOccurs="0"/>
+			<xs:element name="issued_date" type="rf:LenientDateType" minOccurs="0"/>
+			<xs:element name="expiration_date" type="rf:LenientDateType" minOccurs="0"/>
+			<xs:element name="status" type="xs:string" minOccurs="0"/>
+			<xs:element name="restrictions" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+
+	</xs:complexType>
+	<xs:simpleType name="mvr_transmission_mode">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass name="MvrTransModeEnum"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Batch"/>
+			<xs:enumeration value="Interactive"/>
+			<xs:enumeration value="Unknown"/>
+		</xs:restriction>
+		<!-- global Simple Type -->
+	</xs:simpleType>
+
+	<xs:complexType name="violationsListType">
+		<xs:sequence>
+			<xs:element name="violation" type="rf:violationType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property name="voilationsList"/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- subjectListType -->
+
+	<xs:complexType name="mvrViolationDescriptionType">
+		<xs:sequence>
+			<xs:element name="description" type="xs:string" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property name="mvrViolationDescriptionList"/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ViolationDescriptionType -->
+
+	<xs:complexType name="mvrReturnedNameAddressType">
+		<xs:sequence>
+			<xs:element name="name_address" type="xs:string" maxOccurs="4">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property name="mvrReturnedNameAddressList"/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- subjectListType -->
+
+	<xs:simpleType name="svc_over_limit">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass name="SVCOverLimitEnum"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Speeding, Generally"/>
+			<xs:enumeration value="Miles Per Hour Over Limit 1-10"/>
+			<xs:enumeration value="Miles Per Hour Over Limit 11-15"/>
+			<xs:enumeration value="Miles Per Hour Over Limit 16-20"/>
+			<xs:enumeration value="Miles Per Hour Over Limit 21-25"/>
+			<xs:enumeration value="Miles Per Hour Over Limit 26-30"/>
+			<xs:enumeration value="Miles Per Hour Over Limit 31-35"/>
+			<xs:enumeration value="Miles Per Hour Over Limit 36-45"/>
+			<xs:enumeration value="Miles Per Hour Over Limit 46 Plus"/>
+			<xs:enumeration value="Unknown"/>
+		</xs:restriction>
+		<!-- global Simple Type -->
+	</xs:simpleType>
+
+	<xs:simpleType name="svc_limit">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass name="SVCSpeedLimitEnum"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Speed Limit 5 Miles Per Hour"/>
+			<xs:enumeration value="Speed Limit 10 Miles Per Hour"/>
+			<xs:enumeration value="Speed Limit 15 Miles Per Hour"/>
+			<xs:enumeration value="Speed Limit 20 Miles Per Hour"/>
+			<xs:enumeration value="Speed Limit 25 Miles Per Hour"/>
+			<xs:enumeration value="Speed Limit 30 Miles Per Hour"/>
+			<xs:enumeration value="Speed Limit 35 Miles Per Hour"/>
+			<xs:enumeration value="Speed Limit 40 Miles Per Hour"/>
+			<xs:enumeration value="Speed Limit 45 Miles Per Hour"/>
+			<xs:enumeration value="Speed Limit 50 Miles Per Hour"/>
+			<xs:enumeration value="Speed Limit 55 Miles Per Hour"/>
+			<xs:enumeration value="Speed Limit 60 Miles Per Hour"/>
+			<xs:enumeration value="Speed Limit 65 Miles Per Hour"/>
+			<xs:enumeration value="Speed Limit 70 Miles Per Hour"/>
+			<xs:enumeration value="Speed Limit Unknown"/>
+		</xs:restriction>
+		<!-- global Simple Type -->
+	</xs:simpleType>
+
+
+	<xs:complexType name="svc_speeding">
+		<xs:sequence>
+			<xs:element name="over_limit" type="rf:svc_over_limit"/>
+			<xs:element name="speed_limit" type="rf:svc_limit"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- svc_speeding -->
+
+	<xs:simpleType name="svc_points">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass name="SVCPointsEnum"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Points Assigned 0"/>
+			<!-- A -->
+			<xs:enumeration value="Points Assigned 1"/>
+			<!-- B -->
+			<xs:enumeration value="Points Assigned 2"/>
+			<!-- C -->
+			<xs:enumeration value="Points Assigned 3"/>
+			<!-- D -->
+			<xs:enumeration value="Points Assigned 4"/>
+			<!-- E -->
+			<xs:enumeration value="Points Assigned 5"/>
+			<!-- F -->
+			<xs:enumeration value="Points Assigned 6"/>
+			<!-- G -->
+			<xs:enumeration value="Points Assigned 7"/>
+			<!-- H -->
+			<xs:enumeration value="Points Assigned 8"/>
+			<!-- I -->
+			<xs:enumeration value="Points Assigned 9"/>
+			<!-- J -->
+			<xs:enumeration value="Points Assigned 10"/>
+			<!-- K -->
+			<xs:enumeration value="Points Assigned 11"/>
+			<!-- L -->
+			<xs:enumeration value="Points Assigned 12"/>
+			<!-- M -->
+			<xs:enumeration value="Points Assigned 13"/>
+			<!-- N -->
+			<xs:enumeration value="Points Assigned 14"/>
+			<!-- P -->
+			<xs:enumeration value="Points Assigned 15"/>
+			<!-- Q -->
+			<xs:enumeration value="Points Assigned 16"/>
+			<!-- R -->
+			<xs:enumeration value="Points Assigned 17"/>
+			<!-- S -->
+			<xs:enumeration value="Points Assigned 18"/>
+			<!-- T -->
+			<xs:enumeration value="Points Assigned 19"/>
+			<!-- U -->
+			<xs:enumeration value="Points Assigned 20"/>
+			<!-- V -->
+			<xs:enumeration value="Points Assigned 21+"/>
+			<!-- W -->
+			<xs:enumeration value="Unknown or Not Implemented"/>
+			<!-- Code Z -->
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="svc_classification">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass name="SVCClassificationEnum"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Registration, Titling and Licensing"/>
+			<xs:enumeration value="Financial Responsibilities and Accidents"/>
+			<xs:enumeration value="General Moving Violations"/>
+			<xs:enumeration value="Motorcycle Violations"/>
+			<xs:enumeration value="Serious Offenses ( includes serious moving violations)"/>
+			<xs:enumeration value="Equipment Violations"/>
+			<xs:enumeration value="Parking Violations"/>
+			<xs:enumeration value="Miscellaneous Violations"/>
+			<xs:enumeration value="Unknown"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="mvr_source_origin">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass name="MvrSourceOriginEnum"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Department of Motor Vehicles"/>
+			<xs:enumeration value="Driver History Database"/>
+			<xs:enumeration value="Duplicate Order Check File"/>
+			<xs:enumeration value="Database File"/>
+			<xs:enumeration value="Precycle"/>
+			<xs:enumeration value="Recycle"/>
+			<xs:enumeration value="DHDB 2.0 Batch"/>
+			<xs:enumeration value="DHDB 2.0 Interactive"/>
+			<xs:enumeration value="REN DHDB 2.0 Batch"/>
+			<xs:enumeration value="REN DHDB 2.0 Interactive"/>
+			<xs:enumeration value="Unknown"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="svc_additional_underwriting">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass name="MvrSvcAdditionalUnderwritingEnum"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="above abstract dismissed"/>
+			<xs:enumeration value="nonchargeable violation"/>
+			<xs:enumeration value="first violation not chargeable - ok with 2+ per hsehld"/>
+			<xs:enumeration value="chargeable only with other permissible violation"/>
+			<xs:enumeration value="out of state violation"/>
+			<xs:enumeration value="four point violation"/>
+			<xs:enumeration value="first offense not chargeable"/>
+			<xs:enumeration value="chargeable if 3+ same violation with 12 months"/>
+			<xs:enumeration value="out of state, first offense non-chargeable"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="svc_commercial_hazardous">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass name="MvrSvcCommercialHazardousEnum"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Commercial Violation"/>
+			<xs:enumeration value="Hazardous Materials Violation"/>
+			<xs:enumeration value="Either a Commercial or Hazardous Materials Violation"/>
+			<xs:enumeration value="None Commercial Violation"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="source_origin_values">
+		<xs:sequence>
+			<xs:element name="transmission_mode" type="rf:mvr_transmission_mode" minOccurs="0"/>
+			<xs:element name="result_source" type="rf:mvr_source_origin" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="mvr_report">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="rf:admin"/>
+				<xs:element ref="rf:mvr_search_dataset" minOccurs="0"/>
+				<xs:element ref="rf:report"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- root element requence -->
+	<xs:element name="report">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="rf:identification" minOccurs="0"/>
+				<xs:element name="licenses" type="rf:MvrLicensesListType" minOccurs="0"/>
+				<xs:element name="violations" type="rf:violationsListType" minOccurs="0"/>
+				<xs:element name="messages" type="rf:MvrMessageListType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- report -->
+	<xs:element name="admin">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="order_number" type="xs:string"/>
+				<xs:element name="state" type="xs:string"/>
+				<xs:element name="reported_license_number" type="xs:string" minOccurs="0"/>
+				<xs:element name="quoteback" type="xs:string" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="pnc_account">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="\d{6}([0-9 A-Z]{3})?"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="status">
+					<xs:simpleType>
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:typesafeEnumClass name="processingStatusEnum"/>
+							</xs:appinfo>
+						</xs:annotation>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="Clear"/>
+							<xs:enumeration value="Hit - Activity Found"/>
+							<xs:enumeration value="No Hit"/>
+							<xs:enumeration value="Invalid Order"/>
+							<xs:enumeration value="Pending Information"/>
+							<xs:enumeration value="Renewal Clear"/>
+							<xs:enumeration value="Soundex Rejected"/>
+							<xs:enumeration value="DMV Did Not Respond"/>
+							<xs:enumeration value="Additional Response - Hit"/>
+							<xs:enumeration value="Additional Response - No Hit"/>
+							<xs:enumeration value="Additional Response - Clear"/>
+							<xs:enumeration value="Unreturned"/>
+						</xs:restriction>
+					</xs:simpleType>
+					<!--          -->
+				</xs:element>
+				<xs:element name="date_processed" type="rf:USDateType"/>
+				<xs:element name="source" type="rf:source_origin_values"/>
+				<xs:element name="origin" type="rf:source_origin_values"/>
+				<xs:element name="mvr_return_count" type="xs:int"/>
+				<xs:element name="no_hit_credit_indicator" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="identification">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="returned_name_address" type="rf:mvrReturnedNameAddressType"
+					minOccurs="0"/>
+				<xs:element name="birth_date" type="rf:LenientDateType" minOccurs="0"/>
+				<xs:element name="height" type="xs:string" minOccurs="0"/>
+				<xs:element name="weight" type="xs:string" minOccurs="0"/>
+				<xs:element name="gender" minOccurs="0">
+					<xs:simpleType>
+						<xs:annotation>
+							<xs:appinfo>
+								<jxb:typesafeEnumClass name="MvrIdGenderEnum"/>
+							</xs:appinfo>
+						</xs:annotation>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="Female"/>
+							<xs:enumeration value="Male"/>
+							<xs:enumeration value="Unknown"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="eye_color" type="xs:string" minOccurs="0"/>
+				<xs:element name="hair_color" type="xs:string" minOccurs="0"/>
+				<xs:element name="also_known_as" type="xs:string" minOccurs="0"/>
+				<xs:element name="ssn" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="9" fixed="false"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="MvrStandardViolationsListType">
+		<xs:sequence>
+			<xs:element name="standard_violation" type="rf:standard_violation" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:property name="standardViolationList"/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- MvrStandardViolationsListType -->
+
+	<xs:complexType name="standard_violation">
+		<xs:sequence>
+			<xs:element name="code" type="xs:string" minOccurs="0"/>
+			<xs:element name="classification" type="rf:svc_classification" minOccurs="0"/>
+			<xs:element name="point_assignment" type="rf:svc_points" minOccurs="0"/>
+			<xs:element name="additional_underwriting" type="rf:svc_additional_underwriting"
+				minOccurs="0"/>
+			<xs:element name="commercial_hazardous" type="rf:svc_commercial_hazardous" minOccurs="0"/>
+			<xs:element name="speeding" type="rf:svc_speeding" minOccurs="0"/>
+			<xs:element name="description" type="xs:string" minOccurs="0"/>
+			<xs:element name="customer_specific_code" type="xs:string" minOccurs="0"/>
+			<xs:element name="violation_severity_code" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Violation -->
+
+	<xs:complexType name="violationType">
+		<xs:sequence>
+			<xs:element name="description" minOccurs="0">
+				<xs:simpleType>
+					<xs:annotation>
+						<xs:appinfo>
+							<jxb:typesafeEnumClass name="MvrViolationEnum"/>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Accident"/>
+						<xs:enumeration value="Cancellation"/>
+						<xs:enumeration value="Conviction"/>
+						<xs:enumeration value="Departmental"/>
+						<xs:enumeration value="Disqualified"/>
+						<xs:enumeration value="Financial Responsibility"/>
+						<xs:enumeration value="Miscellaneous"/>
+						<xs:enumeration value="Probation"/>
+						<xs:enumeration value="Reinstatement"/>
+						<xs:enumeration value="Revocation"/>
+						<xs:enumeration value="Suspension"/>
+						<xs:enumeration value="Violation"/>
+						<xs:enumeration value="Warning"/>
+						<xs:enumeration value="Unclassified(unknown)"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="type" type="xs:string" minOccurs="0"/>
+			<xs:element name="violation_suspension_date" type="rf:LenientDateType" minOccurs="0"/>
+			<xs:element name="conviction_reinstatement_date" type="rf:LenientDateType" minOccurs="0"/>
+			<xs:element name="descriptions" type="rf:mvrViolationDescriptionType" minOccurs="0"/>
+			<xs:element name="state_violation_code" type="xs:string" minOccurs="0"/>
+			<xs:element name="points" type="xs:string" minOccurs="0"/>
+			<xs:element name="standard_violations" type="rf:MvrStandardViolationsListType"
+				minOccurs="0"/>
+			<xs:element name="unidentifiable_raw_data" type="xs:string" minOccurs="0"> </xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- results database -->
+	<xs:element name="mvr_search_dataset">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="mvr_subject">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="first" type="xs:string" minOccurs="0"/>
+										<xs:element name="middle" type="xs:string" minOccurs="0"/>
+										<xs:element name="last" type="xs:string" minOccurs="0"/>
+										<xs:element name="suffix" type="xs:string" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="drivers_license" type="xs:string" minOccurs="0"/>
+							<xs:element name="birth_date" type="rf:USDateType" minOccurs="0"/>
+							<xs:element name="ssn" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:length value="9" fixed="false"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="gender" minOccurs="0">
+								<xs:simpleType>
+									<xs:annotation>
+										<xs:appinfo>
+											<jxb:typesafeEnumClass name="MvrSearchGenderEnum"/>
+										</xs:appinfo>
+									</xs:annotation>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="Female"/>
+										<xs:enumeration value="Male"/>
+										<xs:enumeration value="Unknown"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

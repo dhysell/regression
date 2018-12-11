@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Document   : AutoDataPrefilV2Result.xsd
+	Created on : November 30, 2007, 10:28 AM
+	Author     : euce205
+	Description:
+	Schema to define the V2 DataPrefill XML Result
+	@version $Revision:   1.26  $	
+-->
+<!--
+	**************************************************************
+	(c) 2006 by ChoicePoint Asset Company.  All rights reserved.
+	**************************************************************
+-->
+<xs:schema xmlns:rf="http://cp.com/rules/client" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" targetNamespace="http://cp.com/rules/client"
+	elementFormDefault="qualified" attributeFormDefault="unqualified" jxb:version="1.0">
+	<xs:include schemaLocation="../../ClueCommonElements.xsd"/>
+	<xs:element name="dataprefill_report">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="admin" type="rf:dataprefill_admin_type"/>
+				<xs:element ref="rf:report"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- dataprefill_report -->
+
+	<xs:complexType name="dataprefill_admin_type">
+		<xs:complexContent>
+			<xs:extension base="rf:commonAdminType">
+				<xs:sequence>
+					<xs:element name="CC_DriverDiscovery_admin" type="rf:dataprefillAdminSubGroup" minOccurs="0"/>
+					<xs:element name="vin_admin" type="rf:dataprefillAdminSubGroup" minOccurs="0"/>
+					<xs:element name="vmr_admin" type="rf:dataprefillAdminSubGroup" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--dataprefill_admin_type-->
+	
+	<xs:simpleType name="auto_dataprefill_vmr_status">
+		<xs:annotation>
+			<xs:appinfo> 
+				<jxb:typesafeEnumClass name="VmrAdminStatusEnum"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Successful"/>
+			<xs:enumeration value="Failed"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="dataprefillAdminSubGroup">
+		<xs:sequence>
+			<xs:element name="product_reference" type="xs:string" minOccurs="0"/>
+			<xs:element name="report_usage" type="xs:string" minOccurs="0"/>
+			<xs:element name="service_type" type="xs:string"/>
+			<xs:element name="receipt_date" type="rf:USDateType" minOccurs="0"/>
+			<xs:element name="date_request_ordered" type="rf:USDateType"/>
+			<xs:element name="time_request_processed" type="rf:editsTimeType" minOccurs="0"/>
+			<xs:element name="date_request_completed" type="rf:USDateType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--dataprefillAdminSubGroup-->
+
+	<xs:element name="report">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="summary" type="rf:dataprefill_summaryType" minOccurs="0"/>
+				<xs:element name="search_dataset" type="rf:dataprefill_dataset" minOccurs="0"/>
+				<!--will contain a resident subject and a current and former DriverDiscoveryress, current and prior DL and prior auto ploicy-->
+				<xs:element name="dataprefill_CC_DriverDiscovery" type="rf:dataprefill_cc_driverdiscovery" minOccurs="0"/>
+				<xs:element name="dataprefill_vin" type="rf:dataprefill_vin_discovered_vehicles"
+				minOccurs="0"/>
+				<xs:element name="dataprefill_vmr" type="rf:dataprefill_vmr" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--report -->
+
+	<xs:complexType name="dataprefill_dataset">
+		<xs:sequence>
+			<xs:element name="subjects" minOccurs="0">
+				<xs:complexType>
+					<xs:annotation>
+						<xs:appinfo>
+							<jxb:property name="subjectList"/>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:sequence>
+						<xs:element name="subject" type="rf:dataprefill_clue_ADDSubjectType" minOccurs="1"
+							maxOccurs="50"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="dataprefill_summaryType">
+		<xs:sequence>
+			<xs:element name="DriverDiscovery_report" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="status" type="rf:auto_dataprefill_add_status"/>
+						<xs:element name="number_driverdiscovery_reported" type="xs:nonNegativeInteger"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CC_report" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="status" type="xs:string" minOccurs="0"/>
+						<xs:element name="messages" type="rf:messageListType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vin_report" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="status" type="rf:auto_dataprefill_vin_status"
+							minOccurs="0"/>
+						<xs:element name="number_vin_developed" type="xs:nonNegativeInteger"/>
+						<xs:element name="messages" type="rf:messageListType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="vmr_report" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="status" type="rf:auto_dataprefill_vmr_status" minOccurs="0"/>
+						<xs:element name="messages" type="rf:messageListType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--dataprefill_summaryType-->
+
+	<xs:simpleType name="auto_dataprefill_add_status">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass name="ADDAdminStatusEnum"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="No Driver Discovery reported"/>
+			<xs:enumeration value="Driver Discovery reported"/>
+			<xs:enumeration value="not processed; invalid LexisNexis Account Number"/>
+			<xs:enumeration value="not processed; insufficient search data"/>
+			<xs:enumeration value="Driver Discovery search unavailable"/>
+			<xs:enumeration value="Driver Discovery search not requested"/>
+			<xs:enumeration value="Driver Discovery  state unavailable"/>
+			<xs:enumeration value="Requested state not on Driver Discovery database"/>
+			<xs:enumeration value="Search not processed; state limitation"/>
+		</xs:restriction>
+
+	</xs:simpleType>
+
+	<xs:simpleType name="auto_dataprefill_vin_status">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass name="VinProcessingStatusEnum"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Completed"/>
+			<xs:enumeration value="No Hit"/>
+			<xs:enumeration value="Order Rejected"/>
+			<xs:enumeration value="State Unavailable"/>
+			<xs:enumeration value="Unreturned"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:complexType name="dataprefill_clue_ADDSubjectType">
+		<xs:complexContent>
+			<xs:extension base="rf:clueBaseSubjectType">
+				<xs:attribute name="unit_number" type="xs:nonNegativeInteger" use="optional"/>
+				<xs:attribute name="id" type="xs:string" use="optional"/>
+ 				<xs:attribute name="classification" use="optional" type="rf:ADDSubjectTypeEnum"/>
+				<xs:attribute name="group_sequence" use="optional" type="xs:nonNegativeInteger"/>
+				<xs:attribute name="marital_status" use="optional" type="rf:MaritalStatusTypeEnum"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--dataprefill_clue_ADDSubjectType-->
+
+	<xs:simpleType name="ADDSubjectTypeEnum">
+		<xs:union memberTypes="rf:subjectTypeEnum rf:AdditionalSubjectTypeEnum">
+			
+		</xs:union>
+	</xs:simpleType>
+	
+	<xs:simpleType name="AdditionalSubjectTypeEnum">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass name="AdditionalSubjectTypeEnum"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Selected Subject"/>
+			<xs:enumeration value="Primary Policyholder"/>
+			<xs:enumeration value="Excluded Driver"/>
+			<xs:enumeration value="Listed Driver"/>
+		</xs:restriction>
+	</xs:simpleType> <!--ADDSubjectTypeEnum-->
+	
+	
+	<xs:complexType name="dataprefill_cc_driverdiscovery">
+		<xs:sequence>
+			<xs:element name="additional_driver_discovery" minOccurs="0">
+				<xs:complexType>
+					<xs:annotation>
+						<xs:appinfo>
+							<jxb:property name="AdditionalDriverDiscoveryList"/>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:sequence>
+						<xs:element name="subject" type="rf:dataprefill_clue_ADDSubjectType"
+							maxOccurs="10"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="current_carrier" minOccurs="0" type="rf:cc_info_reportType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- dataprefill_clue_results_dataset -->
+
+	<xs:complexType name="cc_info_reportType">
+		<xs:sequence>
+			<xs:element name="CC_report" type="rf:messageListType" minOccurs="0"/>
+			<xs:element name="discovered_subjects" minOccurs="0">
+				<xs:complexType>
+					<xs:annotation>
+						<xs:appinfo>
+							<jxb:property name="AttachmentSectionList"/>
+						</xs:appinfo>
+					</xs:annotation>
+					<xs:sequence>
+						<xs:element name="subject" type="rf:dataprefill_clue_ADDSubjectType"
+							maxOccurs="100">
+							<xs:annotation>
+								<xs:appinfo>
+									<jxb:property name="subjectList"/>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="discovered_vehicles" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="vehicle" maxOccurs="25">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="vehicle_detail" type="rf:resultVehicleType"/>
+									<xs:element name="policy_detail" minOccurs="0" maxOccurs="3">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="business_vehicle" type="xs:boolean" minOccurs="0"/>
+												<xs:element name="coverage" type="xs:string" minOccurs="0"/>
+												<xs:element name="limit" type="xs:string" minOccurs="0"/>
+												<xs:element name="deductible" type="xs:string" minOccurs="0"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType> <!--cc_reportType-->
+	
+	<xs:complexType name="dataprefill_vin_discovered_vehicles">
+		<xs:sequence>
+			<xs:element name="discovered_vehicles" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="vehicle" type="rf:resultVehicleType" maxOccurs="50"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="discovered_vehicles_messages" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="message" type="rf:messageType" maxOccurs="99"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- dataprefill_vin_discovered_vehicles-->
+
+	<xs:complexType name="driverdiscovery_reported">
+		<xs:attribute name="status">
+			<xs:simpleType>
+				<xs:annotation>
+					<xs:appinfo>
+						<jxb:typesafeEnumClass name="ADDReportedStatusEnum"/>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Driver Discovery reported"/>
+					<xs:enumeration value="No Driver Discovery reported"/>
+					<xs:enumeration value="Driver Discovery search unavailable"/>
+					<xs:enumeration value="Driver Discovery search not requested"/>
+					<xs:enumeration value="Driver Discovery state unavailable"/>
+					<xs:enumeration value="Requested state not on Driver Discovery database"/>
+					<xs:enumeration value="Search not processed; state limitation."/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="count" type="rf:counterType"/>
+	</xs:complexType>
+	<!--add_reported-->
+	
+	
+	<xs:complexType name="dataprefill_vmr">
+		<xs:sequence>
+			<xs:element name="mileage_result" type="rf:MileageResultType" minOccurs="1" maxOccurs="25"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="MileageResultType">
+		<xs:sequence>
+			<xs:element name="vehicle" type="rf:vmrResultVehicleType"/>
+		</xs:sequence>
+		<xs:attribute name="status" type="xs:string" use="optional"/>
+		<xs:attribute name="unit_number" type="xs:nonNegativeInteger"/>
+	</xs:complexType>
+	
+	<xs:complexType name="vmrResultVehicleType">
+		<xs:complexContent>
+			<xs:extension base="rf:resultVehicleType">
+				<xs:sequence>
+					<xs:element name="mileage" type="rf:mileageType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="mileageType">
+		<xs:sequence>
+			<xs:element name="inspection_date" type="rf:USDateType" minOccurs="0"/>
+			<xs:element name="reason" type="rf:vmrReasonType" minOccurs="0"/>
+			<xs:element name="overall_result" type="rf:vmrOverallResultType" minOccurs="0"/>
+			<xs:element name="estimated_annual_mileage" type="xs:string" minOccurs="0"/> <!-- if formatting is needed-->
+			<xs:element name="actual_mileage" type="xs:string" minOccurs="0"></xs:element>
+			<xs:element name="unusual_activity" type="rf:vmrUnusualActivityType" minOccurs="0"/>            
+		</xs:sequence>
+		<xs:attribute name="group_sequence_number" type="xs:nonNegativeInteger"/>
+	</xs:complexType>
+	
+	<xs:complexType name="vmrUnusualActivityType">
+		<xs:simpleContent>
+			<xs:extension base="rf:vmrUnusualActivityDescriptionType">
+				<xs:attribute name="code" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:simpleType name="vmrUnusualActivityDescriptionType">
+		<xs:annotation>
+			<xs:appinfo>
+				<jxb:typesafeEnumClass name="vmrUnusualActivityDescriptionTypeEnum"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Test &lt; 365 days"/>
+			<xs:enumeration value="Mileage difference &lt;= 1"/>
+			<xs:enumeration value="Mileage difference &gt;= 99,999"/>
+			<xs:enumeration value="Test &lt; 365 days and Mileage difference &lt;= 1"/>
+			<xs:enumeration value="Mileage difference &lt;= 1 and Test &lt; 365 days"/>
+			<xs:enumeration value="Test &lt; 365 days and Mileage difference &gt;= 99,999"/>
+			<xs:enumeration value="Mileage difference &gt;= 99,999 and Test &lt; 365 days"/>
+			<xs:enumeration value="Unknown"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="vmrReasonType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="code" type="xs:string" use="optional"/> 
+			</xs:extension>
+			
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="vmrOverallResultType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="code" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	
+	<xs:complexType name="vmrAddressType">
+		<xs:complexContent>
+			<xs:extension base="rf:addressType">
+				<xs:attribute name="unit_number" type="xs:nonNegativeInteger"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	
+	
+	
+	
+</xs:schema>
