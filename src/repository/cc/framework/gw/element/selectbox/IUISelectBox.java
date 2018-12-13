@@ -12,4 +12,6 @@ public interface IUISelectBox {
     boolean hasOption(String selection);
 
     List<String> getOptions();
+
+    String selectFirstExisting(String[] strings);
 }

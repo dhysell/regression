@@ -75,4 +75,17 @@ public class UISelectBox extends UIElement implements IUISelectBox {
         }
         return listStrings;
     }
+
+    @Override
+    public String selectFirstExisting(String[] selections) {
+        for (String selection: selections) {
+            for (WebElement listElement: this.listElements) {
+                if (selection.equalsIgnoreCase(listElement.getText())) {
+                    this.select(selection);
+                    return selection;
+                }
+            }
+        }
+        return null;
+    }
 }

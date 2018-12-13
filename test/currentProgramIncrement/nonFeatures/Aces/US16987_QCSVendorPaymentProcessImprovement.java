@@ -1,5 +1,6 @@
 package currentProgramIncrement.nonFeatures.Aces;
 
+import org.testng.Assert;
 import repository.cc.framework.gw.BaseOperations;
 import repository.cc.framework.gw.cc.pages.CCIDs;
 import repository.cc.framework.init.Environments;
@@ -10,6 +11,15 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
+import java.util.List;
+
+/**
+ * @Author Denver Hysell
+ * @Requirement
+ * @RequirementsLink &lt;a href="http:// "&gt;https://rally1.rallydev.com/#/203558471292ud/detail/userstory/266283702112&lt;/a&gt;
+ * @Description Make Payments on QCS vendor invoices.
+ * @DATE 12/05/2018
+ */
 
 /**
  * @Author Denver Hysell
@@ -36,14 +46,17 @@ public class US16987_QCSVendorPaymentProcessImprovement extends BaseOperations {
     }
 
     @Test
-    public void testStuff() {
+    public void qcsVendorPayment() {
         interact.withTable(CCIDs.Desktop.VendorInvoices.QCSInvoices.NewQCSInvoice.SEARCH_RESULTS).getRowWithText(storage.get("ClaimNumber")).getCell(0).clickLink();
         interact.withElement(CCIDs.Desktop.VendorInvoices.QCSInvoices.PROCESS).click();
-// TODO
-/*        interact.withSelectBox(CCIDs.Desktop.VendorInvoices.QCSInvoices.QCSInvoiceProcess.ACTION_TYPE).select("Pay on Existing Claim");
-        interact.withSelectBox(CCIDs.Desktop.VendorInvoices.QCSInvoices.QCSInvoiceProcess.EXPOSURE).selectRandom();
-        interact.withSelectBox(CCIDs.Desktop.VendorInvoices.QCSInvoices.QCSInvoiceProcess.PAYMENT_TYPE).select("");*/
 
-        System.out.println();
+        interact.withSelectBox(CCIDs.Desktop.VendorInvoices.QCSInvoices.QCSInvoiceProcess.ACTION_TYPE).select("Pay on Existing Claim");
+        interact.withSelectBox(CCIDs.Desktop.VendorInvoices.QCSInvoices.QCSInvoiceProcess.EXPOSURE).selectRandom();
+        List<String> options = interact.withSelectBox(CCIDs.Desktop.VendorInvoices.QCSInvoices.QCSInvoiceProcess.PAYMENT_TYPE).getOptions();
+        Assert.assertTrue(options.contains("Supplemental") || options.contains("Final"), "Options missing from Payment Type Select Box.");
+        interact.withSelectBox(CCIDs.Desktop.VendorInvoices.QCSInvoices.QCSInvoiceProcess.PAYMENT_TYPE).selectFirstExisting(new String[]{"Final", "Supplemental"});
+        interact.withElement(CCIDs.Desktop.VendorInvoices.QCSInvoices.QCSInvoiceProcess.MAKEPAYMENT).click();
+
+        Assert.assertFalse(interact.withOptionalElement((CCIDs.ERROR_MESSAGE)).isPresent());
     }
 }

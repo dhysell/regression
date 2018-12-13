@@ -28,6 +28,10 @@ public class CCIDs {
 
                 public static class QCSInvoiceProcess {
                     public static final Identifier UPDATE = new Identifier(By.id("DesktopQCSInvoiceProcessPopup:DesktopQCSInvoiceDetailScreen:Update-btnInnerEl"), ElementType.ELEMENT);
+                    public static final Identifier ACTION_TYPE = new Identifier(By.id("DesktopQCSInvoiceProcessPopup:DesktopQCSInvoiceDetailScreen:DesktopQCSInvoiceDetailDV:CreateClaimFlag-inputEl"), ElementType.ELEMENT);
+                    public static final Identifier EXPOSURE = new Identifier(By.id("DesktopQCSInvoiceProcessPopup:DesktopQCSInvoiceDetailScreen:DesktopQCSInvoiceDetailDV:SelectedExposure-inputEl"), ElementType.SELECT_BOX);
+                    public static final Identifier PAYMENT_TYPE = new Identifier(By.id("DesktopQCSInvoiceProcessPopup:DesktopQCSInvoiceDetailScreen:DesktopQCSInvoiceDetailDV:SelectedPaymentType-inputEl"), ElementType.SELECT_BOX);
+                    public static final Identifier MAKEPAYMENT = new Identifier(By.id("DesktopQCSInvoiceProcessPopup:DesktopQCSInvoiceDetailScreen:DesktopQCSInvoiceDetailDV:ButtonPay-btnInnerEl"), ElementType.ELEMENT);
                 }
 
                 public static class NewQCSInvoice {
