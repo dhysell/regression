@@ -1,25 +1,17 @@
 package currentProgramIncrement.nonFeatures.Aces;
 
+import gwclockhelpers.ApplicationOrCenter;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 import repository.cc.framework.gw.BaseOperations;
 import repository.cc.framework.gw.cc.pages.CCIDs;
 import repository.cc.framework.init.Environments;
 import repository.gw.enums.ClaimsUsers;
 import repository.gw.helpers.NumberUtils;
-import gwclockhelpers.ApplicationOrCenter;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.List;
-
-/**
- * @Author Denver Hysell
- * @Requirement
- * @RequirementsLink &lt;a href="http:// "&gt;https://rally1.rallydev.com/#/203558471292ud/detail/userstory/266283702112&lt;/a&gt;
- * @Description Make Payments on QCS vendor invoices.
- * @DATE 12/05/2018
- */
 
 /**
  * @Author Denver Hysell
