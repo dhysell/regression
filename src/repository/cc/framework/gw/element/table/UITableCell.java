@@ -38,6 +38,10 @@ public class UITableCell extends UIElement implements IUITableCell {
     public void fillTextBox(String text) {
         this.element.click();
         List<WebElement> textboxes = this.driver.findElements(By.cssSelector("input[id*='input-']"));
+        fillText(text, textboxes);
+    }
+
+    private void fillText(String text, List<WebElement> textboxes) {
         WebElement selectedTextbox = null;
         int currentTextbox = 0;
         for (WebElement textbox : textboxes) {
@@ -58,20 +62,7 @@ public class UITableCell extends UIElement implements IUITableCell {
     public void fillTextArea(String text) {
         this.element.click();
         List<WebElement> textareas = this.driver.findElements(By.cssSelector("textarea[id*='textarea-']"));
-        WebElement selectedTextArea = null;
-        int currentTextArea = 0;
-        for (WebElement textarea : textareas) {
-            Integer idValue = Integer.valueOf(textarea.getAttribute("id").split("-")[1]);
-            if (idValue > currentTextArea) {
-                currentTextArea = idValue;
-                selectedTextArea = textarea;
-            }
-        }
-        if (selectedTextArea != null) {
-            selectedTextArea.clear();
-            selectedTextArea.sendKeys(text);
-            this.driver.findElement(By.id("QuickJump-inputEl")).click();
-        }
+        fillText(text, textareas);
     }
 
     @Override

@@ -10,4 +10,6 @@ public interface IUIElementOperations {
     String screenGrab();
 
     boolean isPresent();
+
+    void refreshElement();
 }

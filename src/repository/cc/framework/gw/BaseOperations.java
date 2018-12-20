@@ -69,6 +69,25 @@ public class BaseOperations extends BaseTest {
         }
     }
 
+    public void randomClosedClaim() {
+        this.initOn(ApplicationOrCenter.ClaimCenter, Environments.DEV);
+        cc.loginAs(ClaimsUsers.abatts);
+        boolean isSuccessful = false;
+        int count = 0;
+        while (!isSuccessful && count < 20) {
+            try {
+                String randomClaim = interact.withDB.getRandomClosedClaim();
+                cc.accessClaim(randomClaim);
+                isSuccessful = true;
+                System.out.println(randomClaim);
+            } catch (Exception e) {
+                isSuccessful = false;
+                System.out.println("Setup failed... Trying another Claim.");
+                count++;
+            }
+        }
+    }
+
     public void randomClaimTestSetup() {
         this.initOn(ApplicationOrCenter.ClaimCenter, Environments.DEV);
         cc.loginAs(ClaimsUsers.abatts);

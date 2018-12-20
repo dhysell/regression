@@ -173,6 +173,28 @@ public class CCIDs {
 
     public static class Claim {
         public static final Identifier INSURED_NAME = new Identifier(By.cssSelector("span[id*='ClaimInfoBar:Insured-btnInnerEl'] span[class*='infobar_elem_val']"));
+        public static final Identifier ADJUSTER = new Identifier(By.id("Claim:ClaimInfoBar:Adjuster-btnWrap"), ElementType.ELEMENT);
+
+        public static class ValidationResults {
+            public static final Identifier VALIDATION_RESULTS_MESSAGES = new Identifier(By.cssSelector("div[id='WebMessageWorksheet:WebMessageWorksheetScreen:grpMsgs'] div[class='message']"), ElementType.ELEMENT);
+        }
+
+        public static class CloseClaim {
+            public static final Identifier NOTES = new Identifier(By.id("CloseClaimPopup:CloseClaimScreen:CloseClaimInfoDV:Note-inputEl"), ElementType.TEXT_AREA);
+            public static final Identifier OUTCOME = new Identifier(By.id("CloseClaimPopup:CloseClaimScreen:CloseClaimInfoDV:Outcome-inputEl"), ElementType.SELECT_BOX);
+            public static final Identifier CLOSE_CLAIM = new Identifier(By.id("CloseClaimPopup:CloseClaimScreen:Update"), ElementType.ELEMENT);
+        }
+
+        public static class NewActivityInClaim {
+            public static final Identifier MANDATORY_YES = new Identifier(By.id("NewActivity:NewActivityScreen:NewActivityDV:Activity_Mandatory_true-inputEl"), ElementType.ELEMENT);
+            public static final Identifier UPDATE = new Identifier(By.id("NewActivity:NewActivityScreen:NewActivity_UpdateButton"), ElementType.ELEMENT);
+        }
+
+        public static class ReopenClaim {
+            public static final Identifier NOTE = new Identifier(By.id("ReopenClaimPopup:ReopenClaimScreen:ReopenClaimInfoDV:Note-inputEl"), ElementType.TEXT_AREA);
+            public static final Identifier REASON = new Identifier(By.id("ReopenClaimPopup:ReopenClaimScreen:ReopenClaimInfoDV:Reason-inputEl"), ElementType.SELECT_BOX);
+            public static final Identifier REOPEN_CLAIM = new Identifier(By.id("ReopenClaimPopup:ReopenClaimScreen:Update-btnInnerEl"), ElementType.ELEMENT);
+        }
 
         public static class VoidOrStopCheck {
             public static final Identifier REASON_FOR_VOID_STOP = new Identifier(By.id("VoidStopCheck:VoidStopCheckScreen:VoidStopCheckDV:Comments-inputEl"));
@@ -342,6 +364,7 @@ public class CCIDs {
                 public static final Identifier TYPE = new Identifier(By.name("LineCategory"));
                 public static final Identifier AMOUNT = new Identifier(By.name("Amount"));
                 public static final Identifier NEXT = new Identifier(By.id("ManualCreateCheckWizard:Next"));
+                public static final Identifier CATEGORY = new Identifier(By.name("Category"));
             }
 
             public static class Instructions {
@@ -365,6 +388,12 @@ public class CCIDs {
             public static final Identifier DUPLICATE_CLAIM_INHOUSE_NO_NOTES = new Identifier(By.id("Claim:ClaimMenuActions:ClaimFileMenuItemSet:ClaimMenuActions_ClaimActions:ClaimMenuActions_CreateDuplicate:ClaimMenuActions_Inhouse:ClaimMenuActions_InhouseClaimWithoutNotes-itemEl"));
             public static final Identifier DUPLICATE_CLAIM_SPECIAL_INVESTIGATION_NOTES = new Identifier(By.id("Claim:ClaimMenuActions:ClaimFileMenuItemSet:ClaimMenuActions_ClaimActions:ClaimMenuActions_CreateDuplicate:ClaimMenuActions_SIUhouse:ClaimMenuActions_SIUClaimWithNotes-itemEl"));
             public static final Identifier DUPLICATE_CLAIM_SPECIAL_INVESTIGATION_NO_NOTES = new Identifier(By.id("Claim:ClaimMenuActions:ClaimFileMenuItemSet:ClaimMenuActions_ClaimActions:ClaimMenuActions_CreateDuplicate:ClaimMenuActions_SIUhouse:ClaimMenuActions_SIUClaimWithoutNotes-itemEl"));
+            public static final Identifier REOPEN_CLAIM = new Identifier(By.id("Claim:ClaimMenuActions:ClaimFileMenuItemSet:ClaimMenuActions_ClaimActions:ClaimMenuActions_ReopenClaim-itemEl"), ElementType.ELEMENT);
+            public static final Identifier GENERAL = new Identifier(By.linkText("General"), ElementType.ELEMENT);
+            public static final Identifier REVIEW_BI_EVALUATION = new Identifier(By.linkText("Review BI Evaluation"), ElementType.ELEMENT);
+            public static final Identifier NEW_MAIL = new Identifier(By.linkText("New Mail"), ElementType.ELEMENT);
+            public static final Identifier REVIEW_NEW_MAIL = new Identifier(By.linkText("Review New Mail"), ElementType.ELEMENT);
+            public static final Identifier CLOSE_CLAIM = new Identifier(By.linkText("Close Claim"), ElementType.ELEMENT);
         }
 
         public static class NewExposure {

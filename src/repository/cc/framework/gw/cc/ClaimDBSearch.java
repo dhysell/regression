@@ -42,8 +42,14 @@ public class ClaimDBSearch {
     }
 
     public String getRandomClaimWithVoidedFieldOrDraftCheck() {
-        String sqlQuery = "select c.CheckNumber, cl.ClaimNumber from cc_transaction t inner join cc_check c on t.CheckID = c.ID inner join cc_claim cl on cl.ID = c.ClaimID  where c.Status = 5 and t.Subtype = 1 and c.PaymentMethod = 1 order by c.IssueDate DESC";
+        String sqlQuery = "select TOP 100 c.CheckNumber, cl.ClaimNumber from cc_transaction t inner join cc_check c on t.CheckID = c.ID inner join cc_claim cl on cl.ID = c.ClaimID inner join cc_exposure e on e.ClaimID = cl.ID where c.Status = 5 and t.Subtype = 1 and c.PaymentMethod = 1 and e.ExposureType = 5 order by c.IssueDate DESC";
         HashMap<String, String> resultHashMap = randomResultFromQuerey(sqlQuery);
+        return resultHashMap.get("ClaimNumber");
+    }
+
+    public String getRandomClosedClaim() {
+        String sqlQuery = "select TOP 100 ClaimNumber from cc_claim where CloseDate is not null order by CloseDate desc";
+        HashMap <String, String> resultHashMap = randomResultFromQuerey(sqlQuery);
         return resultHashMap.get("ClaimNumber");
     }
 

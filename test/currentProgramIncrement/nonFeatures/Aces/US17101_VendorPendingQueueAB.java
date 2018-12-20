@@ -1,14 +1,14 @@
 package currentProgramIncrement.nonFeatures.Aces;
 
+import gwclockhelpers.ApplicationOrCenter;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import repository.cc.framework.gw.BaseOperations;
 import repository.cc.framework.gw.ab.pages.ABIDs;
 import repository.cc.framework.gw.cc.pages.CCIDs;
 import repository.cc.framework.init.Environments;
 import repository.cc.framework.integrations.faker.utils.FullAddress;
-import gwclockhelpers.ApplicationOrCenter;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * @Author Denver Hysell
@@ -72,7 +72,8 @@ public class US17101_VendorPendingQueueAB extends BaseOperations {
         interact.withElement(ABIDs.NavBar.SEARCH).click();
         interact.withElement(ABIDs.SideMenu.PENDING_CHANGES).click();
         interact.withElement(ABIDs.CCPendingChanges.CREATES).click();
-        Assert.assertTrue(interact.withTable(ABIDs.CCPendingChanges.Creates.PENDING_CHANGES).getRowWithText(vendorName).isPresent());
+
+        Assert.assertTrue(interact.withTable(ABIDs.CCPendingChanges.Creates.PENDING_CHANGES).getRowWithText(vendorName).isPresent(), "Selected Vendor is not visible in search.");
         interact.withTable(ABIDs.CCPendingChanges.Creates.PENDING_CHANGES).getRowWithText(vendorName).click();
         interact.withElement(ABIDs.CCPendingChanges.Creates.APPROVE).click();
         interact.withElement(ABIDs.CCPendingChanges.Creates.OK).click();

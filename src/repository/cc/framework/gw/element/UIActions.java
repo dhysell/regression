@@ -71,6 +71,25 @@ public class UIActions {
         return element;
     }
 
+    private List<WebElement> findOptionalElements(Identifier identifier) {
+
+        List<WebElement> elements = null;
+
+        try {
+            elements = waitUtils.waitUntilElementsAreVisible(identifier.getReference(), 1);
+        } catch (TimeoutException t) {
+            try {
+                elements = waitUtils.waitUntilElementsAreVisible(identifier.getReference(), 1);
+            } catch (TimeoutException e) {
+                System.out.println("Optional Element Not Found.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail(e.getLocalizedMessage());
+        }
+        return elements;
+    }
+
     public void withTabArrow(Identifier identifier) {
         WebElement element = findElement(identifier);
         Dimension size = element.getSize();
@@ -83,7 +102,7 @@ public class UIActions {
         if (!element.getTagName().equalsIgnoreCase("table")) {
             element = element.findElements(By.tagName("table")).get(0);
         }
-        return new UITable(this.driver, element);
+        return new UITable(this.driver, element, identifier);
     }
 
     public UITextbox withTexbox(Identifier identifier) {
@@ -98,6 +117,24 @@ public class UIActions {
         selectBox.click();
 
         List<WebElement> listElements = new ArrayList<>(findElement(CCIDs.LIST_OPTIONS).findElements(By.tagName("li")));
+        return new UISelectBox(this.driver, selectBox, listElements);
+    }
+
+    public UISelectBox withOptionalSelectBox(Identifier identifier) {
+        this.findElement(CCIDs.ESCAPE_CLICKER).click();
+
+        WebElement selectBox = null;
+        List<WebElement> listElements = new ArrayList<>();
+
+        try {
+            selectBox = findOptional(identifier);
+            if (selectBox != null) {
+                selectBox.click();
+                listElements = new ArrayList<>(findOptional(CCIDs.LIST_OPTIONS).findElements(By.tagName("li")));
+            }
+        } catch (TimeoutException t) {
+            System.out.println("Element Not found.  Returning shell element.");
+        }
         return new UISelectBox(this.driver, selectBox, listElements);
     }
 

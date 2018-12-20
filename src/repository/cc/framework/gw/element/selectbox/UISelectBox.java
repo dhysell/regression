@@ -43,9 +43,13 @@ public class UISelectBox extends UIElement implements IUISelectBox {
                 count++;
             }
         }
-        WebElement selectionElement = validItems.get(NumberUtils.generateRandomNumberInt(0, count - 1));
-        selectionElement.click();
-        return selectionElement.getText();
+        if (validItems.size() > 0) {
+            WebElement selectionElement = validItems.get(NumberUtils.generateRandomNumberInt(0, count - 1));
+            selectionElement.click();
+            return selectionElement.getText();
+        } else {
+            return null;
+        }
     }
 
     @Override

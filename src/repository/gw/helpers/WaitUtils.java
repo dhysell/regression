@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Date;
+import java.util.List;
 
 public class WaitUtils {
 
@@ -182,6 +183,12 @@ public class WaitUtils {
         waitForPageLoad();
         newWait(waitInSeconds).until(ExpectedConditions.visibilityOfElementLocated(locator));
         return driver.findElement(locator);
+    }
+
+    public List<WebElement> waitUntilElementsAreVisible(By locator, int waitInSeconds) {
+        waitForPageLoad();
+        newWait(waitInSeconds).until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return driver.findElements(locator);
     }
 
     public WebElement waitUntilElementIsVisible(WebElement ele, int waitInSeconds) {

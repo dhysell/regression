@@ -28,7 +28,12 @@ public class UIElement implements IUIElementOperations {
 
     @Override
     public void doubleClick() {
-        System.out.println("Not yet implemented.");
+        if (this.isPresent()) {
+            this.element.click();
+            this.element.click();
+        } else {
+            Assert.fail("Element is not Clickable");
+        }
     }
 
     @Override
@@ -55,4 +60,8 @@ public class UIElement implements IUIElementOperations {
         Actions build = new Actions(this.driver);
         build.moveToElement(this.element, size.getWidth() - 12, 10).click().build().perform();
     }
+
+    @Override
+    public void refreshElement() {}
+
 }

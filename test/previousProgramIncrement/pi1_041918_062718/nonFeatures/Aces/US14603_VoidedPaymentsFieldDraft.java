@@ -1,14 +1,14 @@
 package previousProgramIncrement.pi1_041918_062718.nonFeatures.Aces;
 
+import gwclockhelpers.ApplicationOrCenter;
+import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 import repository.cc.framework.gw.BaseOperations;
 import repository.cc.framework.gw.cc.pages.CCIDs;
 import repository.cc.framework.init.Environments;
 import repository.gw.enums.ClaimsUsers;
 import repository.gw.helpers.NumberUtils;
-import gwclockhelpers.ApplicationOrCenter;
-import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 
 import java.util.HashMap;
 
@@ -26,7 +26,11 @@ public class US14603_VoidedPaymentsFieldDraft extends BaseOperations {
     @BeforeTest
     public void setupTest() {
         this.initOnWithBatchRuns(ApplicationOrCenter.ClaimCenter, Environments.DEV);
-        cc.loginAs(ClaimsUsers.abatts);
+        try {
+            cc.loginAs(ClaimsUsers.abatts);
+        } catch (Exception e) {
+            cc.loginAs(ClaimsUsers.abatts);
+        }
 
         // Ensure Send file to ftp is off
         interact.withElement(CCIDs.NavBar.ADMINISTRATION).click();
@@ -99,6 +103,11 @@ public class US14603_VoidedPaymentsFieldDraft extends BaseOperations {
 
         interact.withTable(CCIDs.Claim.ManualCheckWizard.Payments.LINE_ITEMS).getRows().get(1).getCell(1).click();
         interact.withTexbox(CCIDs.Claim.ManualCheckWizard.Payments.TYPE).fill("Indemnity");
+
+        interact.withOptionalSelectBox(CCIDs.Claim.ManualCheckWizard.Payments.CATEGORY).selectRandom();
+
+
+
         interact.withTable(CCIDs.Claim.ManualCheckWizard.Payments.LINE_ITEMS).getRows().get(1).getCell(4).click();
         interact.withTexbox(CCIDs.Claim.ManualCheckWizard.Payments.AMOUNT).fill(String.valueOf(NumberUtils.generateRandomNumberInt(5, 200)));
         interact.withElement(CCIDs.Claim.ManualCheckWizard.Payments.NEXT).click();

@@ -1,11 +1,10 @@
 package currentProgramIncrement.nonFeatures.Aces;
 
-import repository.cc.framework.gw.BaseOperations;
-import repository.cc.framework.gw.cc.pages.CCIDs;
-import repository.gw.helpers.NumberUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import repository.cc.framework.gw.BaseOperations;
+import repository.cc.framework.gw.cc.pages.CCIDs;
 
 /**
  * @Author Denver Hysell
@@ -20,9 +19,19 @@ public class US17161_DuplicateClaimMenuAction extends BaseOperations {
     @BeforeMethod
     public void setupTest() {
         super.randomClaimTestSetup();
+        if (interact.withElement(CCIDs.Claim.ADJUSTER).screenGrab().startsWith("Safelite")) {
+            setupTest();
+        }
     }
 
     @Test
+    public void testRunner() {
+        duplicateClaimCoverage();
+        duplicateClaimInHouse();
+        duplicateClaimSpecialInvestigation();
+    }
+
+    @Test(enabled = false)
     public void duplicateClaimCoverage() {
 
         // Navigate to the duplicate claim menu
@@ -34,10 +43,10 @@ public class US17161_DuplicateClaimMenuAction extends BaseOperations {
         // Create split claim.
         interact.withElement(CCIDs.Claim.ActionsMenu.DUPLICATE_CLAIM_COVERAGE_SPLIT).click();
 
-        if (NumberUtils.generateRandomNumberInt(1, 100) % 2 == 0) {
+        try {
             interact.withElement(CCIDs.Claim.ActionsMenu.DUPLICATE_CLAIM_COVERAGE_SPLIT_NOTES).click();
             System.out.println("Create Split Claim With Notes.");
-        } else {
+        } catch(Exception e) {
             interact.withElement(CCIDs.Claim.ActionsMenu.DUPLICATE_CLAIM_COVERAGE_SPLIT_NO_NOTES).click();
             System.out.println("Create Split Claim Without Notes.");
         }
@@ -51,7 +60,7 @@ public class US17161_DuplicateClaimMenuAction extends BaseOperations {
         Assert.assertTrue(!originalClaimNumber.equalsIgnoreCase(splitClaimNumber), "A new claim was not created.");
     }
 
-    @Test
+    @Test(enabled = false)
     public void duplicateClaimInHouse() {
 
         // Navigate to the duplicate claim menu
@@ -63,10 +72,10 @@ public class US17161_DuplicateClaimMenuAction extends BaseOperations {
         // Create split claim.
         interact.withElement(CCIDs.Claim.ActionsMenu.DUPLICATE_CLAIM_INHOUSE).click();
 
-        if (NumberUtils.generateRandomNumberInt(1, 100) % 2 == 0) {
+        try {
             interact.withElement(CCIDs.Claim.ActionsMenu.DUPLICATE_CLAIM_INHOUSE_NOTES).click();
             System.out.println("Create Split Claim With Notes.");
-        } else {
+        } catch(Exception e) {
             interact.withElement(CCIDs.Claim.ActionsMenu.DUPLICATE_CLAIM_INHOUSE_NO_NOTES).click();
             System.out.println("Create Split Claim Without Notes.");
         }
@@ -81,7 +90,7 @@ public class US17161_DuplicateClaimMenuAction extends BaseOperations {
         Assert.assertTrue(!originalClaimNumber.equalsIgnoreCase(splitClaimNumber), "A new claim was not created.");
     }
 
-    @Test
+    @Test(enabled = false)
     public void duplicateClaimSpecialInvestigation() {
 
         // Navigate to the duplicate claim menu
@@ -93,10 +102,10 @@ public class US17161_DuplicateClaimMenuAction extends BaseOperations {
         // Create split claim.
         interact.withElement(CCIDs.Claim.ActionsMenu.DUPLICATE_CLAIM_SPECIAL_INVESTIGATION).click();
 
-        if (NumberUtils.generateRandomNumberInt(1, 100) % 2 == 0) {
+        try {
             interact.withElement(CCIDs.Claim.ActionsMenu.DUPLICATE_CLAIM_SPECIAL_INVESTIGATION_NOTES).click();
             System.out.println("Create Split Claim With Notes.");
-        } else {
+        } catch(Exception e) {
             interact.withElement(CCIDs.Claim.ActionsMenu.DUPLICATE_CLAIM_SPECIAL_INVESTIGATION_NO_NOTES).click();
             System.out.println("Create Split Claim Without Notes.");
         }
@@ -108,6 +117,6 @@ public class US17161_DuplicateClaimMenuAction extends BaseOperations {
         System.out.println("Original Claim Number: " + originalClaimNumber);
         System.out.println("Split Claim Number:    " + splitClaimNumber);
 
-        Assert.assertTrue(!originalClaimNumber.equalsIgnoreCase(splitClaimNumber), "A new claim was not created.");
+        Assert.assertTrue(!originalClaimNumber.equalsIgnoreCase(splitClaimNumber), "Creation of new claim encountered an Error: " + interact.withOptionalElement(CCIDs.ERROR_MESSAGE).screenGrab());
     }
 }
