@@ -1,13 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<suite name="Parallel test suite" parallel="classes" thread-count="1">
-    <test name="Regression 1" parallel="classes" thread-count="5">
-        <parameter name="myBrowser" value="chrome"/>
-        <classes>
-            <class name="currentProgramIncrement.nonFeatures.Aces.US17161_DuplicateClaimMenuAction" />
-            <class name="currentProgramIncrement.nonFeatures.Aces.US17101_VendorPendingQueueAB" />
-            <class name="currentProgramIncrement.nonFeatures.Nucleus.US17106_AddAllLienAddressesBackToTheDropDown" />
-            <class name="currentProgramIncrement.nonFeatures.Achievers.US15361_QuoteWithoutDocumentsButton" />
-        </classes>
-    </test>
-
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Aces Regression" verbose="2" annotations="JDK">
+    <suite-files>
+        <suite-file path="src/test/testng.xml"/>
+    </suite-files>
 </suite>
+
+

@@ -1,8 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="A-Test-Runner" verbose="1" data-provider-thread-count="15">
-    <test name="A-Test-Runner">
-        <classes>
-            <class name="scratchpad.ian.scratchpads.US14980MembershipCedingReport"/>
-        </classes>
-    </test>
-</suite>

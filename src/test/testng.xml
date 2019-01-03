@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="CurrentProgramIncrement" verbose="1" parallel="tests" thread-count="45">
+    <listeners>
+        <listener class-name="repository.listeners.LocalSuiteTestListener"/>
+    </listeners>
+
+    <parameter name="application" value="Current Program Increment"/>
+    <parameter name="suiteName" value="CurrentProgramIncrement"/>
+
+    <test name="Aces Regression" preserve-order="true" parallel="classes">
+        <classes>
+            <class name="currentProgramIncrement.nonFeatures.Aces.US17161_DuplicateClaimMenuAction"/>
+            <class name="currentProgramIncrement.nonFeatures.Aces.US16987_QCSVendorPaymentProcessImprovement"/>
+            <class name="currentProgramIncrement.nonFeatures.Aces.DE8269_CloseActivityValidationRuleChange"/>
+            <class name="currentProgramIncrement.nonFeatures.Aces.US17101_VendorPendingQueueAB"/>
+        </classes>
+    </test>
+</suite>
