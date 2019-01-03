@@ -21,13 +21,13 @@ public class Config extends BaseConfiguration{
 
     public Config() throws Exception {
     	setHost(gwHost);
-        setHostUrl("http://10.230.1.236:4444/wd/hub");
+        setHostUrl("http://10.100.102.227:4444/wd/hub");
     }
 
     public Config(String url) throws Exception {
     	setHost(gwHost);
         setUrl(url);
-        setHostUrl("http://10.230.1.236:4444/wd/hub");
+        setHostUrl("http://10.100.102.227:4444/wd/hub");
     }
 
 
@@ -35,7 +35,7 @@ public class Config extends BaseConfiguration{
     	setHost(gwHost);
         this.center = applicationOrCenter;
         setUrl(environmentsMap.get(applicationOrCenter).getUrl());
-        setHostUrl("http://10.230.1.236:4444/wd/hub");
+        setHostUrl("http://10.100.102.227:4444/wd/hub");
     }
 
     public Config(ApplicationOrCenter applicationOrCenter, String env) throws Exception {
@@ -43,7 +43,7 @@ public class Config extends BaseConfiguration{
         this.center = applicationOrCenter;
         this.environmentsMap = initEnvironmentsMap(env);
         setUrl(environmentsMap.get(center).getUrl());
-        setHostUrl("http://10.230.1.236:4444/wd/hub");
+        setHostUrl("http://10.100.102.227:4444/wd/hub");
     }
 
 
