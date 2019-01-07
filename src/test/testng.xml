@@ -7,7 +7,7 @@
     <parameter name="application" value="Current Program Increment"/>
     <parameter name="suiteName" value="CurrentProgramIncrement"/>
 
-    <test name="All System Maintenance" preserve-order="true" parallel="classes">
+    <test name="All System Maintenance" preserve-order="false" parallel="classes">
         <classes>
             <class name="guidewire.claimcenter.systemMaintenance.US17161_DuplicateClaimMenuAction"/>
             <class name="guidewire.claimcenter.systemMaintenance.DE8269_CloseActivityValidationRuleChange"/>
@@ -16,12 +16,12 @@
             <class name="guidewire.claimcenter.systemMaintenance.US17101_VendorPendingQueueAB"/>
         </classes>
     </test>
-    <test name="Non-Epic Features" preserve-order="true" parallel="classes">
+    <test name="Non-Epic Features" preserve-order="false" parallel="classes">
         <classes>
             <class name="guidewire.claimcenter.nonEpicFeatures.F91_CopartIntegreationForSalvageAssignmentInCC.US16412_CopartTesting"/>
         </classes>
     </test>
-    <test name="Epics" preserve-order="true" parallel="classes">
+    <test name="Epics" preserve-order="false" parallel="classes">
         <classes>
             <!---->
         </classes>
