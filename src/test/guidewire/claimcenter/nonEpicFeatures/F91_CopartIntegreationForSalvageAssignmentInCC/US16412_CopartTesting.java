@@ -24,9 +24,9 @@ public class US16412_CopartTesting extends BaseOperations {
     @Test(enabled = false)
     public void createCopartAssignmentTest() {
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.OWNER_BUY_BACK_NO).click();
-        getProQuoteTest();
         interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.SALVAGE_ASSIGNMENT).select("ClaimCenter");
-        interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.PRIMARY_DAMAGE).select("ALL OVER STD");
+        getProQuoteTest();
+        interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.PRIMARY_DAMAGE).select("ALL OVER");
         Assert.assertTrue(interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.VISIT_COPART_WEBSITE_BUTTON).isPresent(), "The \"Visit Copart Website\" button is missing.");
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.INSPECT_FOR_REPAIRABLE_TOTAL_LOSS_YES).click();
         interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.TYPE_OF_LOSS).selectRandom();
@@ -59,7 +59,7 @@ public class US16412_CopartTesting extends BaseOperations {
     @Test(enabled = false)
     public void editCopartAssignmentTest() {
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.EDIT_BUTTON).click();
-        String newSelection = "BURN - INTERIOR STD";
+        String newSelection = "BURN - INTERIOR";
         interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.PRIMARY_DAMAGE).select(newSelection);
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.UPDATE_COPART_ASSIGNMENT).click();
         interact.waitUntilElementVisible(CCIDs.Claim.Incidents.VehicleIncident.EDIT_BUTTON, 45);
@@ -85,7 +85,7 @@ public class US16412_CopartTesting extends BaseOperations {
     @Test(enabled = false)
     public void getProQuoteTest() {
         interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.PROQUOTE_STYLE).selectRandom();
-        interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.PROQUOTE_COPART_PRIMAY_DAMAGE).select("ALL OVER STD");
+        interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.PROQUOTE_COPART_PRIMAY_DAMAGE).select("ALL OVER");
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.GET_PROQUOTE_BUTTON).click();
         Assert.assertTrue(interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.PROQUOTE_RESPONSE_PROQUOTE).isPresent(), "ProQuote Response is missing.");
     }

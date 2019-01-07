@@ -46,12 +46,12 @@
                         <!-- TestNG suite XML files -->
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <properties>
+                    <!-- <properties>
                         <property>
                             <name>testnames</name>
                             <value>Aces Regression</value>
                         </property>
-                    </properties>
+                    </properties>-->
                     <parallel>methods</parallel>
                     <threadCount>5</threadCount>
                 </configuration>
