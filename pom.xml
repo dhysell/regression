@@ -10,7 +10,6 @@
     <properties>
         <jre.level>1.8</jre.level>
         <jdk.level>1.8</jdk.level>
-        <build.number>SNAPSHOT</build.number>
     </properties>
 
     <build>
@@ -20,10 +19,7 @@
         <testOutputDirectory>target/classes/test</testOutputDirectory>
         <resources>
             <resource>
-                <directory>src/main/persistence/config</directory>
-            </resource>
-            <resource>
-                <directory>/</directory>
+                <directory>src/resources</directory>
             </resource>
         </resources>
 
