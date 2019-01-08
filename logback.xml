@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+
+    <!-- Appenders - Can be specified for different ways to output the log. -->
+
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="siftingAppender" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+            <Key>testname</Key>
+            <DefaultValue>testrun</DefaultValue>
+        </discriminator>
+        <sift>
+            <appender name="FILE-${testname}" class="ch.qos.logback.core.FileAppender">
+                <File>C:/tmp/${testname}.log</File>
+                <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                    <Pattern>%d{ISO8601} %-5level [%M:%L] [%thread] - %msg%n</Pattern>
+                </encoder>
+            </appender>
+        </sift>
+    </appender>
+
+    <!-- Loggers -->
+    <!-- Loggers can be named anything or a class name. You specify the logger to use in the class file. -->
+    <!-- Loggers also specify which appenders to use. You could have one the logs to a text file and another that does text+console -->
+
+    <root level="info">
+        <appender-ref ref="consoleAppender" />
+    </root>
+
+    <logger level="info" name="siftingLogger" additivity="false" >
+        <appender-ref ref="consoleAppender" />
+        <appender-ref ref="siftingAppender"/>
+    </logger>
+</configuration>
