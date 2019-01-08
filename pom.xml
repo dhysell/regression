@@ -22,6 +22,9 @@
             <resource>
                 <directory>src/main/persistence/config</directory>
             </resource>
+            <resource>
+                <directory>/</directory>
+            </resource>
         </resources>
 
         <plugins>
