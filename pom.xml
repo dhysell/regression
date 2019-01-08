@@ -22,9 +22,6 @@
             <resource>
                 <directory>src/main/persistence/config</directory>
             </resource>
-            <resource>
-                <targetPath>logback.xml</targetPath>
-            </resource>
         </resources>
 
         <plugins>
