@@ -1,11 +1,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="CurrentProgramIncrement" verbose="1" parallel="tests" thread-count="45">
+<suite name="ACES" verbose="1" parallel="tests" thread-count="6">
     <listeners>
-        <listener class-name="repository.listeners.LocalSuiteTestListener"/>
+        <!--<listener class-name="repository.listeners.LocalSuiteTestListener"/>-->
     </listeners>
 
     <parameter name="application" value="Current Program Increment"/>
-    <parameter name="suiteName" value="CurrentProgramIncrement"/>
+    <parameter name="suiteName" value="ACES"/>
 
     <test name="All System Maintenance" preserve-order="false" parallel="classes">
         <classes>
@@ -24,6 +24,18 @@
     <test name="Epics" preserve-order="false" parallel="classes">
         <classes>
             <!---->
+        </classes>
+    </test>
+    <test name="Legacy" preserve-order="false" parallel="classes">
+        <packages>
+            <package name="regression.r2.noclock.claimcenter.fnol"/>
+            <package name="regression.r2.noclock.claimcenter.fullclaim.crop"/>
+            <package name="regression.r2.noclock.claimcenter.fullclaim.genliab"/>
+            <package name="regression.r2.noclock.claimcenter.fullclaim.inlandMarine"/>
+        </packages>
+        <classes>
+            <class name="regression.r2.noclock.claimcenter.fullclaim.auto.AutoComprehensive"/>
+            <class name="regression.r2.noclock.claimcenter.fullclaim.property.PropertyFullClaim"/>
         </classes>
     </test>
 

@@ -747,15 +747,7 @@ public class Exposures extends BasePage {
                 if (incident.isEmpty() || incident.equalsIgnoreCase("")) {
                     incident = getCoverage();
                 }
-
-                try {
-                    
-                    setPropertyName(incident);
-                    
-                } catch (Exception e) {
-                    setPropertyNameRandom();
-                }
-
+                setPropertyNameRandom();
             }
 
             if (lossParty.equalsIgnoreCase("Insured's loss")) {
@@ -934,18 +926,14 @@ public class Exposures extends BasePage {
 
         List<String> nonClaimants = new ArrayList<>();
 
-        
-
         clickInjuryPicker();
         waitUtils.waitUntilElementIsClickable(By.xpath("//span[text()='New Incident...']"));
         InjuryIncident injuryIncident = clickNewIncident().newInjury(isICDtest);
-
         
         sendArbitraryKeys(Keys.TAB);
         waitForPostBack();
         
         setResponsibilityStatus("Responsibility Accepted");
-        
 
         validateResponsibilityAcceptedDate();
 

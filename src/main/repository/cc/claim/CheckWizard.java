@@ -735,7 +735,7 @@ public class CheckWizard extends BasePage {
         try {
             if (driver.findElement(By.cssSelector("div[id*='CheckPaymentsScreen:_msgs']"))
                     .getText().equalsIgnoreCase("Payment amount greater than reserve amount!")) {
-                String availableReserves = driver.findElement(By.cssSelector("div[id*=':Transaction_AvailableReserves-inputEl']")).getText();
+                String availableReserves = driver.findElement(By.id("NormalCreateCheckWizard:CheckWizard_CheckPaymentsScreen:NewCheckPaymentPanelSet:NewPaymentDetailDV:Transaction_AvailableReserves-inputEl")).getText();
                 availableReserves = availableReserves.replace("$", "");
                 By lastRowLocator = By.xpath("//div[contains(@id,':NewPaymentDetailDV:EditablePaymentLineItemsLV-body')]//tr[not(contains(@id, 'summary-record'))][last()]");
                 clickWhenClickable(find(lastRowLocator).findElement(By.xpath(".//td[5]")));

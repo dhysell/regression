@@ -26,7 +26,7 @@ public class US16412_CopartTesting extends BaseOperations {
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.OWNER_BUY_BACK_NO).click();
         interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.SALVAGE_ASSIGNMENT).select("ClaimCenter");
         getProQuoteTest();
-        interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.PRIMARY_DAMAGE).select("ALL OVER");
+        interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.PRIMARY_DAMAGE).selectRandom();
         Assert.assertTrue(interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.VISIT_COPART_WEBSITE_BUTTON).isPresent(), "The \"Visit Copart Website\" button is missing.");
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.INSPECT_FOR_REPAIRABLE_TOTAL_LOSS_YES).click();
         interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.TYPE_OF_LOSS).selectRandom();
@@ -35,16 +35,15 @@ public class US16412_CopartTesting extends BaseOperations {
         interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CONTACT_PERSON).select(interact.withElement(CCIDs.Claim.INSURED_NAME).screenGrab());
         interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.PICKUP_LOCATION).selectRandom();
 
-        if (!interact.withOptionalElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CONTACT_PHONE).isPresent()) {
-            interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CONTACT_PERSON_PICKER).click();
-            interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.VIEW_CONTACT_DETAILS).click();
-            interact.withElement(CCIDs.Claim.Contact.Basics.EDIT_BUTTON).click();
-            interact.withTexbox(CCIDs.Claim.Contact.Basics.MOBILE).fill("5555555555");
-            interact.withSelectBox(CCIDs.Claim.Contact.Basics.PRIMARY_PHONE).select("Mobile");
-            interact.withElement(CCIDs.Claim.Contact.Basics.OK_BUTTON).click();
-            interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.INSPECT_FOR_REPAIRABLE_TOTAL_LOSS_YES).click();
+        int numSelections = interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.PICKUP_LOCATION).getOptions().size();
+        int count = 0;
+
+        while (!interact.withOptionalElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CONTACT_PHONE).isPresent() && count < numSelections) {
+            interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.PICKUP_LOCATION).select(count);
+            count++;
         }
 
+        interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.INSPECT_FOR_REPAIRABLE_TOTAL_LOSS_YES).click();
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CREATE_COPART_ASSIGNMENT_BUTTON).click();
         interact.waitUntilElementVisible(CCIDs.Claim.Incidents.VehicleIncident.EDIT_BUTTON, 45);
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VEHICLE_SALVAGE_TAB).click();
@@ -59,13 +58,14 @@ public class US16412_CopartTesting extends BaseOperations {
     @Test(enabled = false)
     public void editCopartAssignmentTest() {
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.EDIT_BUTTON).click();
-        String newSelection = "BURN - INTERIOR";
-        interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.PRIMARY_DAMAGE).select(newSelection);
+        interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.INSPECT_FOR_REPAIRABLE_TOTAL_LOSS_NO).click();
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.UPDATE_COPART_ASSIGNMENT).click();
-        interact.waitUntilElementVisible(CCIDs.Claim.Incidents.VehicleIncident.EDIT_BUTTON, 45);
-        interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VEHICLE_SALVAGE_TAB).click();
-        String actualSelection = interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.PRIMARY_DAMAGE_ELEMENT).screenGrab();
-        Assert.assertTrue(newSelection.equalsIgnoreCase(actualSelection), "Copart Edit does not appear to be successful.");
+        try {
+            interact.waitUntilElementVisible(CCIDs.Claim.Incidents.VehicleIncident.EDIT_BUTTON, 45);
+            interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VEHICLE_SALVAGE_TAB).click();
+        } catch (Exception e) {
+            Assert.fail("Unable to edit the assignment.");
+        }
     }
 
     @Test(enabled = false)
@@ -85,7 +85,7 @@ public class US16412_CopartTesting extends BaseOperations {
     @Test(enabled = false)
     public void getProQuoteTest() {
         interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.PROQUOTE_STYLE).selectRandom();
-        interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.PROQUOTE_COPART_PRIMAY_DAMAGE).select("ALL OVER");
+        interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.PROQUOTE_COPART_PRIMAY_DAMAGE).selectRandom();
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.GET_PROQUOTE_BUTTON).click();
         Assert.assertTrue(interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.PROQUOTE_RESPONSE_PROQUOTE).isPresent(), "ProQuote Response is missing.");
     }

@@ -432,9 +432,8 @@ public class BasicInfo extends BasePage {
 
     }
 
-    public String setRandomMobileNumber() {
+    public void setRandomMobileNumber() {
+        setMobileRandom();
         setPrimaryPhone(PhoneType.MOBILE);
-        String randNum = setMobileRandom();
-        return randNum;
     }
 }

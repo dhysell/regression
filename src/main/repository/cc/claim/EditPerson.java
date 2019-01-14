@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import repository.driverConfiguration.BasePage;
 import repository.gw.elements.Guidewire8Select;
 import repository.gw.helpers.DateUtils;
@@ -170,10 +171,50 @@ public class EditPerson extends BasePage {
     @FindBy(css = "input[id*=':Work:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl']")
     private WebElement inputContactInfoWork;
 
+    @FindBy(id = "ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV:PrimaryAddressInputSet:CCAddressInputSet:globalAddressContainer:FBContactInfoInputSet:Work:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl")
+    private WebElement inputContactInfoWorkAlternate;
+
+    private void setPhoneNumbers() {
+        String phoneNumber = "208555" + NumberUtils.generateRandomNumberInt(1000, 9999) + "";
+
+        WebElement businessPhone = this.driver.findElement(By.id("ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV:PrimaryAddressInputSet:CCAddressInputSet:globalAddressContainer:FBContactInfoInputSet:BusinessPhone:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl"));
+        WebElement workPhone = this.driver.findElement(By.id("ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV:PrimaryAddressInputSet:CCAddressInputSet:globalAddressContainer:FBContactInfoInputSet:Work:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl"));
+        WebElement homePhone = this.driver.findElement(By.id("ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV:PrimaryAddressInputSet:CCAddressInputSet:globalAddressContainer:FBContactInfoInputSet:Home:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl"));
+        WebElement mobilePhone = this.driver.findElement(By.id("ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV:PrimaryAddressInputSet:CCAddressInputSet:globalAddressContainer:FBContactInfoInputSet:Cell:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl"));
+
+        waitUntilElementIsClickable(businessPhone);
+        businessPhone.sendKeys(phoneNumber);
+        waitUntilElementIsClickable(workPhone);
+        workPhone.sendKeys(phoneNumber);
+        waitUntilElementIsClickable(homePhone);
+        homePhone.sendKeys(phoneNumber);
+        waitUntilElementIsClickable(mobilePhone);
+        mobilePhone.sendKeys(phoneNumber);
+
+        setPrimaryPhone("Business");
+    }
+
     private void setRandomWorkPhoneNumber() {
-        waitUntilElementIsClickable(inputContactInfoWork);
-        inputContactInfoWork.clear();
-        inputContactInfoWork.sendKeys("208555" + NumberUtils.generateRandomNumberInt(1000, 9999) + "");
+
+        String phoneNumber = "208555" + NumberUtils.generateRandomNumberInt(1000, 9999) + "";
+
+        try {
+            waitUntilElementIsClickable(inputContactInfoWork);
+            inputContactInfoWork.clear();
+            inputContactInfoWork.sendKeys(phoneNumber);
+        } catch (Exception e) {
+            waitUntilElementIsClickable(inputContactInfoWorkAlternate);
+            inputContactInfoWorkAlternate.clear();
+            inputContactInfoWorkAlternate.sendKeys(phoneNumber);
+            try {
+                WebElement workPhone = this.driver.findElement(By.id("ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV:PrimaryAddressInputSet:CCAddressInputSet:globalAddressContainer:FBContactInfoInputSet:Work:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl"));
+                waitUntilElementIsClickable(workPhone);
+                workPhone.clear();
+                workPhone.sendKeys(phoneNumber);
+            } catch (Exception f) {
+                Assert.fail("Error setting phone number on contact.");
+            }
+        }
         sendArbitraryKeys(Keys.ESCAPE);
     }
 
@@ -182,27 +223,21 @@ public class EditPerson extends BasePage {
     }
 
     private void setPrimaryPhone(String selection) {
+        waitUntilElementIsVisible(selectPrimaryPhone().getSelectButtonElement());
         selectPrimaryPhone().selectByVisibleText(selection);
     }
 
     public void validateContact() {
+
         clickEditButton();
-        
         checkName();
-        
         checkSsnValue();
-        
         checkDateOfBirthValue();
-        
         checkGenderValue();
-        
-        setRandomWorkPhoneNumber();
-        
-        setPrimaryPhone("Work");
-        
+        setPhoneNumbers();
+        setPrimaryPhone("Business");
         clickOkButton();
         fixErrorsPreventingUpdate();
-        
     }
 
 
