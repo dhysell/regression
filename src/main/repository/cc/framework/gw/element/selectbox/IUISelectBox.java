@@ -14,4 +14,6 @@ public interface IUISelectBox {
     List<String> getOptions();
 
     String selectFirstExisting(String[] strings);
+
+    String selectByPartial(String selection);
 }

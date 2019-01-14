@@ -18,7 +18,7 @@ public class ClaimDBSearch {
     }
 
     public String getRandomOpenVehicleClaim() {
-        String sqlQuery = "select c.ClaimNumber from cc_incident i inner join cc_claim c on c.id = i.ClaimID inner join cc_exposure e on e.ClaimID = c.ID where c.State = 2 and i.Subtype = 3";
+        String sqlQuery = "select c.ClaimNumber from cc_incident i inner join cc_claim c on c.id = i.ClaimID inner join cc_exposure e on e.ClaimID = c.ID where c.State = 2 and i.Subtype = 3 and c.Retired = 0";
         HashMap<String, String> resultHashMap = randomResultFromQuerey(sqlQuery);
         return resultHashMap.get("ClaimNumber");
     }

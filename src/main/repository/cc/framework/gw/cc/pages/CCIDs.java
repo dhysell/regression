@@ -334,6 +334,7 @@ public class CCIDs {
                         public static final Identifier SALVAGE_ASSIGNMENT = new Identifier(By.id("EditVehicleIncidentPopup:EditVehicleIncidentScreen:VehIncidentDetailDV:FB_VI_VehicleSalvageDV:HowSalvageWasDone-inputEl"));
                         public static final Identifier STATUS_DESCRIPTION = new Identifier(By.id("EditVehicleIncidentPopup:EditVehicleIncidentScreen:VehIncidentDetailDV:CopartDetailsDV:CopartStatusInputSet:Description-inputEl"));
                         public static final Identifier INSPECT_FOR_REPAIRABLE_TOTAL_LOSS_NO = new Identifier(By.id("EditVehicleIncidentPopup:EditVehicleIncidentScreen:VehIncidentDetailDV:CopartDetailsDV:CopartDetailsInputSet:inpect_at_copart_false-inputEl"), ElementType.RADIO);
+                        public static final Identifier CLEAR = new Identifier(By.id("WebMessageWorksheet:WebMessageWorksheetScreen:WebMessageWorksheet_ClearButton"), ElementType.BUTTON);
                     }
 
                     public static final class CopartCancelAssignment {

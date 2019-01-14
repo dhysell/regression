@@ -61,6 +61,17 @@ public class UISelectBox extends UIElement implements IUISelectBox {
     }
 
     @Override
+    public String selectByPartial(String selection) {
+        for (WebElement listItem : listElements) {
+            if (listItem.getText().contains(selection)) {
+                listItem.click();
+                return listItem.getText();
+            }
+        }
+        return null;
+    }
+
+    @Override
     public boolean hasOption(String selection) {
         for (WebElement listItem : listElements) {
             if (listItem.getText().equalsIgnoreCase(selection)) {

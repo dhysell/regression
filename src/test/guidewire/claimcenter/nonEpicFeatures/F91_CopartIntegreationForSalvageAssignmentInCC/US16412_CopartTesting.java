@@ -36,16 +36,24 @@ public class US16412_CopartTesting extends BaseOperations {
         interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CONTACT_PERSON).select(insuredName);
         interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.PICKUP_LOCATION).selectRandom();
 
-        int numSelections = interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.PICKUP_LOCATION).getOptions().size();
+        int numSelections = interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CONTACT_PERSON).getOptions().size();
         int count = 0;
 
         while (!interact.withOptionalElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CONTACT_PHONE).isPresent() && count < numSelections) {
-            interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.PICKUP_LOCATION).select(count);
+            interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CONTACT_PERSON).select(count);
             count++;
         }
 
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.INSPECT_FOR_REPAIRABLE_TOTAL_LOSS_YES).click();
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CREATE_COPART_ASSIGNMENT_BUTTON).click();
+
+        // If exposure warning message appears, clear it and continue
+        if (interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CLEAR).isPresent()) {
+            interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CLEAR).click();
+            interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CREATE_COPART_ASSIGNMENT_BUTTON).click();
+        }
+
+        // Edit the assignment
         interact.waitUntilElementVisible(CCIDs.Claim.Incidents.VehicleIncident.EDIT_BUTTON, 45);
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VEHICLE_SALVAGE_TAB).click();
 
