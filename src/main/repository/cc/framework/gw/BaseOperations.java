@@ -116,6 +116,15 @@ public class BaseOperations extends BaseTest {
             try {
                 String randomOpenVehicleClaim = interact.withDB.getRandomOpenVehicleClaim();
                 cc.accessClaim(randomOpenVehicleClaim);
+
+                // Set Phone number on insured
+                interact.withElement(CCIDs.Claim.SideMenu.PARTIES_INVOLVED).click();
+                interact.withSelectBox(CCIDs.Claim.Contacts.ROLES_FILTER).select("Insured");
+                interact.withElement(CCIDs.Claim.Contacts.EDIT).click();
+                interact.withTexbox(CCIDs.Claim.Contacts.WORK_PHONE).fill("2085555555");
+                interact.withElement(CCIDs.ESCAPE_CLICKER).click();
+                interact.withElement(CCIDs.Claim.Contacts.UPDATE).click();
+
                 cc.accessVehicleIncidentFromExposure(new String[]{CoverageTypes.COLLISION_AND_ROLLOVER, CoverageTypes.LIABILITY_AUTO_PROPERTY_DAMAGE,
                         CoverageTypes.COMPREHENSIVE, CoverageTypes.LIABILITY_AUTO_BODILY_INJURY}, true);
                 interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.Details.IS_THIS_VEHICLE_DAMAGED_NO).click();

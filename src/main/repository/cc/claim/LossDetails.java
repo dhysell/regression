@@ -250,11 +250,10 @@ public class LossDetails extends BasePage {
 
     public String selectRandom_LossRouter() {
 
-        String selection;
+        String selection = "Major Incident";
 
         Guidewire8Select mySelect = select_LossRouter();
-        mySelect.selectByVisibleTextRandom();
-        selection = mySelect.getText();
+        mySelect.selectByVisibleText(selection);
 
         return selection;
     }

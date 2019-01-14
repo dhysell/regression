@@ -182,16 +182,18 @@ public class EditPerson extends BasePage {
         WebElement homePhone = this.driver.findElement(By.id("ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV:PrimaryAddressInputSet:CCAddressInputSet:globalAddressContainer:FBContactInfoInputSet:Home:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl"));
         WebElement mobilePhone = this.driver.findElement(By.id("ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV:PrimaryAddressInputSet:CCAddressInputSet:globalAddressContainer:FBContactInfoInputSet:Cell:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl"));
 
-        waitUntilElementIsClickable(businessPhone);
-        businessPhone.sendKeys(phoneNumber);
-        waitUntilElementIsClickable(workPhone);
-        workPhone.sendKeys(phoneNumber);
-        waitUntilElementIsClickable(homePhone);
-        homePhone.sendKeys(phoneNumber);
-        waitUntilElementIsClickable(mobilePhone);
-        mobilePhone.sendKeys(phoneNumber);
+        setPhoneNumber(businessPhone, phoneNumber);
+        setPhoneNumber(workPhone, phoneNumber);
+        setPhoneNumber(homePhone, phoneNumber);
+        setPhoneNumber(mobilePhone, phoneNumber);
 
         setPrimaryPhone("Business");
+    }
+
+    private void setPhoneNumber(WebElement phoneNumberField, String phoneNumber) {
+        waitUntilElementIsClickable(phoneNumberField);
+        phoneNumberField.clear();
+        phoneNumberField.sendKeys(phoneNumber);
     }
 
     private void setRandomWorkPhoneNumber() {

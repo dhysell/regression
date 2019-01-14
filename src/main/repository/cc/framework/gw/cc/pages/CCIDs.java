@@ -233,6 +233,10 @@ public class CCIDs {
 
         public static class Contacts {
             public static final Identifier ADD_CONTACT = new Identifier(By.id("ClaimContacts:ClaimContactsScreen:PeopleInvolvedDetailedListDetail:PeopleInvolvedDetailedLV_tb:ClaimContacts_AddExistingButton-btnInnerEl"));
+            public static final Identifier ROLES_FILTER = new Identifier(By.id("ClaimContacts:ClaimContactsScreen:PeopleInvolvedDetailedListDetail:PeopleInvolvedDetailedLV:RoleFilter-inputEl"), ElementType.SELECT_BOX);
+            public static final Identifier EDIT = new Identifier(By.id("ClaimContacts:ClaimContactsScreen:PeopleInvolvedDetailedListDetail:ContactBasicsDV_tb:ContactDetailToolbarButtonSet:Edit-btnInnerEl"), ElementType.BUTTON);
+            public static final Identifier WORK_PHONE = new Identifier(By.id("ClaimContacts:ClaimContactsScreen:PeopleInvolvedDetailedListDetail:ContactBasicsDV:PrimaryAddressInputSet:CCAddressInputSet:globalAddressContainer:FBContactInfoInputSet:Work:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl"), ElementType.TEXT_BOX);
+            public static final Identifier UPDATE = new Identifier(By.id("ClaimContacts:ClaimContactsScreen:PeopleInvolvedDetailedListDetail:ContactBasicsDV_tb:ContactDetailToolbarButtonSet:Update"), ElementType.BUTTON);
         }
 
         public static class Contact {

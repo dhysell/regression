@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="ACES" verbose="1" parallel="tests" thread-count="6">
     <listeners>
-        <!--<listener class-name="repository.listeners.LocalSuiteTestListener"/>-->
+        <listener class-name="repository.listeners.LocalSuiteTestListener"/>
     </listeners>
 
     <parameter name="application" value="Current Program Increment"/>
