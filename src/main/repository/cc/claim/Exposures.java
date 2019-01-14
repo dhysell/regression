@@ -878,11 +878,10 @@ public class Exposures extends BasePage {
         List<String> nonClaimants = new ArrayList<>();
 
         if (getLossType().equalsIgnoreCase("General Liability")) {
-            setExpLossCauseRandom();
+            setExpLossCause("General Liability (including medical)");
 
             setClaimant(getInsuredName());
             setClaimantType("Insured");
-
             
             if (getLossParty().equalsIgnoreCase("Third-party liability")) {
 

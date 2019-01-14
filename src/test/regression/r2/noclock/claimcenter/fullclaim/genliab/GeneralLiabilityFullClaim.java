@@ -1,24 +1,18 @@
 package regression.r2.noclock.claimcenter.fullclaim.genliab;
 
-import java.util.ArrayList;
-
+import com.idfbins.driver.BaseTest;
+import gwclockhelpers.ApplicationOrCenter;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
-
-import com.idfbins.driver.BaseTest;
-
 import repository.cc.enums.CheckLineItemCategory;
 import repository.cc.enums.CheckLineItemType;
 import repository.driverConfiguration.Config;
 import repository.gw.enums.ClaimsUsers;
 import repository.gw.enums.GenerateCheckType;
 import repository.gw.enums.GenerateFNOLType;
-import repository.gw.generate.cc.GenerateCheck;
-import repository.gw.generate.cc.GenerateExposure;
-import repository.gw.generate.cc.GenerateFNOL;
-import repository.gw.generate.cc.GenerateReserve;
-import repository.gw.generate.cc.ReserveLine;
-import gwclockhelpers.ApplicationOrCenter;
+import repository.gw.generate.cc.*;
+
+import java.util.ArrayList;
 public class GeneralLiabilityFullClaim extends BaseTest {
 	private WebDriver driver;
     private ClaimsUsers user = ClaimsUsers.gmurray;
@@ -30,9 +24,8 @@ public class GeneralLiabilityFullClaim extends BaseTest {
     private String incidentName = "Random";
     private String lossDescription = "Loss Description Test";
     private String lossCause = "Random";
-    private String lossRouter = "Random";
     private String address = "Random";
-    private String policyNumber = "01-177894-01";
+    private String policyNumber = "01-006752-01";
 
     // Check Specific Strings
     private boolean deductibleToAdd = false;
@@ -50,9 +43,9 @@ public class GeneralLiabilityFullClaim extends BaseTest {
                 .withCreatorUserNamePassword(user.toString(), password)
                 .withSpecificIncident(incidentName)
                 .withLossDescription(lossDescription)
-                .withLossCause(lossCause)
-                .withLossRouter(lossRouter)
+                .withLossCause("General Liability (including medical)")
                 .withAdress(address)
+                .withLossRouter("Liability Issue")
                 .withPolicyNumber(policyNumber)
                 .build(GenerateFNOLType.GeneralLiability);
         this.claimNumber = myFNOLObj.claimNumber;

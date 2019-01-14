@@ -685,8 +685,6 @@ public class GenerateFNOL extends BasePage {
             lossDetails.selectSpecific_LossCause(lossCause);
         }
 
-        
-
         if (lossRouter.equalsIgnoreCase("Random")) {
             lossRouter = lossDetails.selectRandom_LossRouter();
         } else {
