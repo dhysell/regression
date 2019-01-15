@@ -8,7 +8,6 @@ import repository.cc.framework.gw.BaseOperations;
 import repository.cc.framework.gw.cc.pages.CCIDs;
 import repository.cc.framework.init.Environments;
 import repository.gw.enums.ClaimsUsers;
-import repository.gw.helpers.NumberUtils;
 
 import java.util.HashMap;
 
@@ -106,12 +105,17 @@ public class US14603_VoidedPaymentsFieldDraft extends BaseOperations {
 
         interact.withOptionalSelectBox(CCIDs.Claim.ManualCheckWizard.Payments.CATEGORY).selectRandom();
 
-
-
         interact.withTable(CCIDs.Claim.ManualCheckWizard.Payments.LINE_ITEMS).getRows().get(1).getCell(4).click();
-        interact.withTexbox(CCIDs.Claim.ManualCheckWizard.Payments.AMOUNT).fill(String.valueOf(NumberUtils.generateRandomNumberInt(5, 200)));
-        interact.withElement(CCIDs.Claim.ManualCheckWizard.Payments.NEXT).click();
-        interact.withElement(CCIDs.Claim.ManualCheckWizard.Instructions.FINISH).click();
+        interact.withTexbox(CCIDs.Claim.ManualCheckWizard.Payments.AMOUNT).fill("5");
+
+        try {
+            interact.withElement(CCIDs.Claim.ManualCheckWizard.Payments.NEXT).click();
+            interact.withElement(CCIDs.Claim.ManualCheckWizard.Instructions.FINISH).click();
+        } catch (Exception e) {
+            interact.withOptionalSelectBox(CCIDs.Claim.ManualCheckWizard.Payments.CATEGORY).selectRandom();
+            interact.withElement(CCIDs.Claim.ManualCheckWizard.Payments.NEXT).click();
+            interact.withElement(CCIDs.Claim.ManualCheckWizard.Instructions.FINISH).click();
+        }
 
         // Approve check
         interact.withElement(CCIDs.Claim.SideMenu.WORKPLAN).click();

@@ -1479,4 +1479,10 @@ public class Incidents extends BasePage {
         WebElement selectedButton = selectButtons.get(repository.gw.helpers.NumberUtils.generateRandomNumberInt(0, selectButtons.size() - 1));
         selectedButton.click();
     }
+
+    public void isReplant() {
+        WebElement element = this.driver.findElement(By.id("EditCropIncidentPopup:EditCropIncidentScreen:CropIncidentDetailDV:CropIncidentDV:IsReplant-inputEl"));
+        element.clear();
+        element.sendKeys("No");
+    }
 }

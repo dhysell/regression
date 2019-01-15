@@ -1,13 +1,10 @@
 package regression.r2.noclock.claimcenter.fullclaim.crop;
 
-import java.time.LocalDate;
-
+import com.idfbins.driver.BaseTest;
+import gwclockhelpers.ApplicationOrCenter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
-
-import com.idfbins.driver.BaseTest;
-
 import repository.cc.claim.CropHailCalculator;
 import repository.cc.claim.Incidents;
 import repository.cc.claim.LossDetails;
@@ -16,13 +13,12 @@ import repository.cc.sidemenu.SideMenuCC;
 import repository.cc.topmenu.TopMenu;
 import repository.driverConfiguration.Config;
 import repository.gw.enums.ClaimsUsers;
-import repository.gw.enums.GenerateCheckType;
 import repository.gw.enums.GenerateFNOLType;
-import repository.gw.generate.cc.GenerateCheck;
 import repository.gw.generate.cc.GenerateFNOL;
 import repository.gw.helpers.GuidewireHelpers;
 import repository.gw.login.Login;
-import gwclockhelpers.ApplicationOrCenter;
+
+import java.time.LocalDate;
 public class CropHailFullClaim extends BaseTest {
 	private WebDriver driver;
     private ClaimsUsers user = ClaimsUsers.bhogan;
@@ -112,13 +108,13 @@ public class CropHailFullClaim extends BaseTest {
 
         incidents.setCropDamageDescription("Test Damage Description");
 
-        incidents.clickAddCropButton();
+        incidents.isReplant();
 
-        cropHail.inputBreakOutAcres();
+/*        cropHail.inputBreakOutAcres();
         cropHail.inputRandomPercentGross();
-        String value = cropHail.getPaymentAmount();
-        cropHail.clickUpdateButton();
-        cropHail.clickIncidentOk();
+        String value = cropHail.getPaymentAmount();*/
+
+        this.driver.findElement(By.id("EditCropIncidentPopup:EditCropIncidentScreen:Update")).click();
         reserve.approveReserves(this.claimNumber);
 
         new GuidewireHelpers(driver).logout();
@@ -126,7 +122,7 @@ public class CropHailFullClaim extends BaseTest {
         // If The value isn't zero the FNOL creates both the exposure and
         // reserve for the incident.
         // So we can write a check on them.
-        if (!value.equals("0") && !value.equals("")) {
+/*        if (!value.equals("0") && !value.equals("")) {
             GenerateCheck myCheck = new GenerateCheck.Builder(driver)
                     .withCreatorUserNamePassword(user, this.password)
                     .withClaimNumber(this.claimNumber)
@@ -143,7 +139,7 @@ public class CropHailFullClaim extends BaseTest {
                     "-------This means nothing else can be tested at this point and the test is considered passed. -------------");
             System.out.println(
                     "----------------------------------------------------------------------------------------------------");
-        }
+        }*/
 
     }
 

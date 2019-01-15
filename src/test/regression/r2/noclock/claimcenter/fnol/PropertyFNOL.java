@@ -1,15 +1,13 @@
 package regression.r2.noclock.claimcenter.fnol;
 
+import com.idfbins.driver.BaseTest;
+import gwclockhelpers.ApplicationOrCenter;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
-
-import com.idfbins.driver.BaseTest;
-
 import repository.driverConfiguration.Config;
 import repository.gw.enums.ClaimsUsers;
 import repository.gw.enums.GenerateFNOLType;
 import repository.gw.generate.cc.GenerateFNOL;
-import gwclockhelpers.ApplicationOrCenter;
 public class PropertyFNOL extends BaseTest {
 	private WebDriver driver;
     private ClaimsUsers user = ClaimsUsers.gmurray;
@@ -24,7 +22,7 @@ public class PropertyFNOL extends BaseTest {
     private String lossCause = "Random";
     private String lossRouter = "Random";
     private String address = "Random";
-    private String policyNumber = "01-259482-02";
+    private String policyNumber = "01-219941-02";
 
 
     @Test

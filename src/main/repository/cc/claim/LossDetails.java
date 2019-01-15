@@ -502,4 +502,14 @@ public class LossDetails extends BasePage {
         clickUpdateButton();
     }
 
+    public Guidewire8Select select_OtherInsurance() {
+        return new Guidewire8Select(
+                driver, "//table[@id='FNOLWizard:FBClaimWizardStepSet:FNOLWizard_NewLossDetailsScreen:LossDetailsAddressDV:CropOtherInsuranceQuestion-triggerWrap]");
+    }
+
+    public void otherInsuranceSelect() {
+        WebElement element = this.driver.findElement(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_NewLossDetailsScreen:LossDetailsAddressDV:CropOtherInsuranceQuestion-inputEl"));
+        element.clear();
+        element.sendKeys("No");
+    }
 }

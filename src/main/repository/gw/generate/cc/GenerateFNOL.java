@@ -1048,6 +1048,7 @@ public class GenerateFNOL extends BasePage {
             lossDetails.setCatastrophe(catastrophe.getSelectionText());
         }
 
+        lossDetails.otherInsuranceSelect();
         
         lossDetails.selectRandom_Location();
         
