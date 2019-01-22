@@ -14,6 +14,7 @@
             <class name="guidewire.claimcenter.systemMaintenance.US14603_VoidedPaymentsFieldDraft"/>
             <class name="guidewire.claimcenter.systemMaintenance.US16987_QCSVendorPaymentProcessImprovement"/>
             <class name="guidewire.claimcenter.systemMaintenance.US17101_VendorPendingQueueAB"/>
+            <class name="guidewire.claimcenter.systemMaintenance.US17492_FlagshipProcessSkipForNonUSCitizens"/>
         </classes>
     </test>
     <test name="Non-Epic Features" preserve-order="false" parallel="classes">
