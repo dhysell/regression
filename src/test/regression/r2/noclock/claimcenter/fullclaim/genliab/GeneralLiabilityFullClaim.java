@@ -23,14 +23,14 @@ public class GeneralLiabilityFullClaim extends BaseTest {
     // FNOL Specific Strings 
     private String incidentName = "Random";
     private String lossDescription = "Loss Description Test";
-    private String lossCause = "Random";
+    private String lossCause = "General Liability (including medical)";
     private String address = "Random";
     private String policyNumber = "01-006752-01";
 
     // Check Specific Strings
     private boolean deductibleToAdd = false;
     private CheckLineItemType paymentType = CheckLineItemType.INDEMNITY;
-    private String paymentAmount = "1000";
+    private String paymentAmount = "5000";
     private CheckLineItemCategory categoryType = CheckLineItemCategory.INDEMNITY;
     private String deductibleAmount = "250";
     private String companyCheckBook = "Farm Bureau";
@@ -45,6 +45,7 @@ public class GeneralLiabilityFullClaim extends BaseTest {
                 .withLossDescription(lossDescription)
                 .withLossCause("General Liability (including medical)")
                 .withAdress(address)
+                .withLossCause(lossCause)
                 .withLossRouter("Liability Issue")
                 .withPolicyNumber(policyNumber)
                 .build(GenerateFNOLType.GeneralLiability);

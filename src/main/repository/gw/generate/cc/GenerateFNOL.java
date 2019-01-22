@@ -653,7 +653,7 @@ public class GenerateFNOL extends BasePage {
         topMenu.clickNewClaimLink();
         
         this.dateOfLoss = findPolicy.searchOrCreatePolicy(policyNumber, policyNumbers, fnolType, dateOfLoss, null);
-        waitUntilElementIsClickable(By.xpath("//span[@id='FNOLWizard:ClaimInfoBar:Insured-btnInnerEl']/span[@class='infobar_elem_val']"),60);
+        waitUntilElementIsClickable(By.xpath("//span[@id='FNOLWizard:ClaimInfoBar:Insured-btnInnerEl']/span[@class='infobar_elem_val']"),90);
         // Basic Info - Step 2
 
         String insuredName = basicInfo.getNameOfInsured();

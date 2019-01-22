@@ -19,7 +19,29 @@ import java.util.List;
 
 public class EditPerson extends BasePage {
 
+    @FindBy(xpath = "//input[contains(@id,':GlobalAddressInputSet:City-inputEl')]")
+    public WebElement inputPrimaryAddressCity;
+    @FindBy(xpath = "//input[contains(@id,':GlobalPersonNameInputSet:FirstName-inputEl')]")
+    public WebElement inputFirstName;
+    @FindBy(xpath = "//input[contains(@id,':GlobalPersonNameInputSet:LastName-inputEl')]")
+    public WebElement inputLastName;
+    @FindBy(xpath = "//input[@id='ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV:PersonNameInputSet:SSN-inputEl']")
+    public WebElement inputSSN;
+    @FindBy(xpath = "//input[contains(@id,':PersonNameInputSet:DateOfBirth-inputEl')]")
+    public WebElement inputDateOfBirth;
     private WebDriver driver;
+    @FindBy(xpath = "//a[contains(@id,':ContactDetailToolbarButtonSet:Edit')]")
+    private WebElement buttonEdit;
+    @FindBy(xpath = "//input[contains(@id,':AddressLine1-inputEl')]")
+    private WebElement inputPrimaryAddressLine1;
+    @FindBy(xpath = "//input[contains(@id,':GlobalAddressInputSet:PostalCode-inputEl')]")
+    private WebElement inputPrimaryAddressZip;
+    @FindBy(xpath = "//a[contains(@id,':ContactDetailToolbarButtonSet:Update')]")
+    private WebElement buttonOk;
+    @FindBy(css = "input[id*=':Work:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl']")
+    private WebElement inputContactInfoWork;
+    @FindBy(id = "ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV:PrimaryAddressInputSet:CCAddressInputSet:globalAddressContainer:FBContactInfoInputSet:Work:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl")
+    private WebElement inputContactInfoWorkAlternate;
 
     public EditPerson(WebDriver driver) {
         super(driver);
@@ -27,49 +49,28 @@ public class EditPerson extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//a[contains(@id,':ContactDetailToolbarButtonSet:Edit')]")
-    private WebElement buttonEdit;
-
     private void clickEditButton() {
         clickWhenClickable(buttonEdit);
     }
-
-    @FindBy(xpath = "//input[contains(@id,':AddressLine1-inputEl')]")
-    private WebElement inputPrimaryAddressLine1;
 
     private void setPrimaryAddressLine1(String address) {
         inputPrimaryAddressLine1.sendKeys(address);
     }
 
-    @FindBy(xpath = "//input[contains(@id,':GlobalAddressInputSet:City-inputEl')]")
-    public WebElement inputPrimaryAddressCity;
-
     private void setPrimaryAddressCity(String city) {
         inputPrimaryAddressCity.sendKeys(city);
     }
-
-    @FindBy(xpath = "//input[contains(@id,':GlobalAddressInputSet:PostalCode-inputEl')]")
-    private WebElement inputPrimaryAddressZip;
 
     private void setPrimaryAddressZip(String zip) {
         inputPrimaryAddressZip.sendKeys(zip);
     }
 
-    @FindBy(xpath = "//a[contains(@id,':ContactDetailToolbarButtonSet:Update')]")
-    private WebElement buttonOk;
-
-    private void clickOkButton() {
+    public void clickOkButton() {
         clickWhenClickable(buttonOk);
         waitUntilElementIsNotVisible(By.cssSelector("a[id$='EditableClaimContactRelationshipsLV_tb:Add']"));
     }
 
-    @FindBy(xpath = "//input[contains(@id,':GlobalPersonNameInputSet:FirstName-inputEl')]")
-    public WebElement inputFirstName;
-
-    @FindBy(xpath = "//input[contains(@id,':GlobalPersonNameInputSet:LastName-inputEl')]")
-    public WebElement inputLastName;
-
-    private void checkName() {
+    public void checkName() {
 
         String insNameString = waitUntilElementIsClickable(find(By.xpath("//span[@id='Claim:ClaimInfoBar:Insured-btnWrap']//span[@class='infobar_elem_val']"))).getText();
 
@@ -85,10 +86,7 @@ public class EditPerson extends BasePage {
         }
     }
 
-    @FindBy(xpath = "//input[@id='ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV:PersonNameInputSet:SSN-inputEl']")
-    public WebElement inputSSN;
-
-    private void checkSsnValue() {
+    public void checkSsnValue() {
 
         if (inputSSN.getAttribute("value").equalsIgnoreCase("")) {
             String numString = StringsUtils.generateRandomNumberDigits(9);
@@ -97,10 +95,7 @@ public class EditPerson extends BasePage {
         }
     }
 
-    @FindBy(xpath = "//input[contains(@id,':PersonNameInputSet:DateOfBirth-inputEl')]")
-    public WebElement inputDateOfBirth;
-
-    private void checkDateOfBirthValue() {
+    public void checkDateOfBirthValue() {
 
         if (inputDateOfBirth.getAttribute("value").equalsIgnoreCase("")) {
             DataFactory generateDataFactory = new DataFactory();
@@ -143,7 +138,7 @@ public class EditPerson extends BasePage {
         boolean errorsExist = errorMsgs.size() > 0;
 
         if (errorsExist) {
-            
+
             for (WebElement ele : errorMsgs) {
                 if (ele.getText().contains("SSN : Invalid SSN:")) {
                     resetSSN();
@@ -154,9 +149,9 @@ public class EditPerson extends BasePage {
             clickOkButton();
             fixErrorsPreventingUpdate();
         } else {
-            
+
             systemOut("No Incident Errors Found");
-            
+
         }
     }
 
@@ -167,12 +162,6 @@ public class EditPerson extends BasePage {
         setPrimaryAddressZip("83201");
         clickOkButton();
     }
-
-    @FindBy(css = "input[id*=':Work:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl']")
-    private WebElement inputContactInfoWork;
-
-    @FindBy(id = "ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV:PrimaryAddressInputSet:CCAddressInputSet:globalAddressContainer:FBContactInfoInputSet:Work:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl")
-    private WebElement inputContactInfoWorkAlternate;
 
     private void setPhoneNumbers() {
         String phoneNumber = "208555" + NumberUtils.generateRandomNumberInt(1000, 9999) + "";
@@ -187,13 +176,21 @@ public class EditPerson extends BasePage {
         setPhoneNumber(homePhone, phoneNumber);
         setPhoneNumber(mobilePhone, phoneNumber);
 
-        setPrimaryPhone("Business");
+
+        if (selectPrimaryPhone().getText().contains("<none>")) {
+            setPrimaryPhone("Business");
+        }
     }
 
     private void setPhoneNumber(WebElement phoneNumberField, String phoneNumber) {
         waitUntilElementIsClickable(phoneNumberField);
+        this.driver.findElement(By.xpath("//label[contains(text(),'Primary Address')]")).click();
         phoneNumberField.clear();
+        waitUntilElementIsClickable(this.driver.findElement(By.id("//label[contains(text(),'Primary Address')]")));
+        this.driver.findElement(By.id("//label[contains(text(),'Contact Info')]")).click();
         phoneNumberField.sendKeys(phoneNumber);
+        waitUntilElementIsClickable(this.driver.findElement(By.id("//label[contains(text(),'Primary Address')]")));
+        this.driver.findElement(By.id("//label[contains(text(),'Contact Info')]")).click();
     }
 
     private void setRandomWorkPhoneNumber() {
@@ -226,7 +223,9 @@ public class EditPerson extends BasePage {
 
     private void setPrimaryPhone(String selection) {
         waitUntilElementIsVisible(selectPrimaryPhone().getSelectButtonElement());
-        selectPrimaryPhone().selectByVisibleText(selection);
+        if (selectPrimaryPhone().getText().contains("<none>")) {
+            selectPrimaryPhone().selectByVisibleText(selection);
+        }
     }
 
     public void validateContact() {
@@ -237,7 +236,6 @@ public class EditPerson extends BasePage {
         checkDateOfBirthValue();
         checkGenderValue();
         setPhoneNumbers();
-        setPrimaryPhone("Business");
         clickOkButton();
         fixErrorsPreventingUpdate();
     }

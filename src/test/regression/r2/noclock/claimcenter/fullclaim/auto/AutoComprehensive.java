@@ -1,13 +1,10 @@
 
 package regression.r2.noclock.claimcenter.fullclaim.auto;
 
-import java.util.ArrayList;
-
+import com.idfbins.driver.BaseTest;
+import gwclockhelpers.ApplicationOrCenter;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
-
-import com.idfbins.driver.BaseTest;
-
 import repository.cc.enums.CheckLineItemCategory;
 import repository.cc.enums.CheckLineItemType;
 import repository.driverConfiguration.Config;
@@ -15,12 +12,9 @@ import repository.gw.enums.ClaimSearchLineOfBusiness;
 import repository.gw.enums.ClaimsUsers;
 import repository.gw.enums.GenerateCheckType;
 import repository.gw.enums.GenerateFNOLType;
-import repository.gw.generate.cc.GenerateCheck;
-import repository.gw.generate.cc.GenerateExposure;
-import repository.gw.generate.cc.GenerateFNOL;
-import repository.gw.generate.cc.GenerateReserve;
-import repository.gw.generate.cc.ReserveLine;
-import gwclockhelpers.ApplicationOrCenter;
+import repository.gw.generate.cc.*;
+
+import java.util.ArrayList;
 public class AutoComprehensive extends BaseTest {
 	private WebDriver driver;
     private ClaimsUsers user = ClaimsUsers.gmurray;
@@ -42,7 +36,7 @@ public class AutoComprehensive extends BaseTest {
     // Check Specific Strings
     private boolean deductibleToAdd = false;
     private CheckLineItemType paymentType = CheckLineItemType.INDEMNITY;
-    private String paymentAmount = "1000";
+    private String paymentAmount = "500";
     private CheckLineItemCategory categoryType = CheckLineItemCategory.INDEMNITY;
     private String deductibleAmount = "250";
     private String companyCheckBook = "Farm Bureau";

@@ -1,24 +1,18 @@
 package regression.r2.noclock.claimcenter.fullclaim.inlandMarine;
 
-import java.util.ArrayList;
-
+import com.idfbins.driver.BaseTest;
+import gwclockhelpers.ApplicationOrCenter;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
-
-import com.idfbins.driver.BaseTest;
-
 import repository.cc.enums.CheckLineItemCategory;
 import repository.cc.enums.CheckLineItemType;
 import repository.driverConfiguration.Config;
 import repository.gw.enums.ClaimsUsers;
 import repository.gw.enums.GenerateCheckType;
 import repository.gw.enums.GenerateFNOLType;
-import repository.gw.generate.cc.GenerateCheck;
-import repository.gw.generate.cc.GenerateExposure;
-import repository.gw.generate.cc.GenerateFNOL;
-import repository.gw.generate.cc.GenerateReserve;
-import repository.gw.generate.cc.ReserveLine;
-import gwclockhelpers.ApplicationOrCenter;
+import repository.gw.generate.cc.*;
+
+import java.util.ArrayList;
 public class InlandMarineFullClaim extends BaseTest {
 	private WebDriver driver;
     private ClaimsUsers user = ClaimsUsers.gmurray;
@@ -30,14 +24,14 @@ public class InlandMarineFullClaim extends BaseTest {
     private String incidentName = "Random";
     private String lossDescription = "Loss Description Test";
     private String lossCause = "Random";
-    private String lossRouter = "Random";
+    private String lossRouter = "Major Incident";
     private String address = "Random";
     private String policyNumber = "01-146506-01";
 
     // Check Specific Strings
     private boolean deductibleToAdd = false;
     private CheckLineItemType paymentType = CheckLineItemType.INDEMNITY;
-    private String paymentAmount = "1000";
+    private String paymentAmount = "400";
     private CheckLineItemCategory categoryType = CheckLineItemCategory.INDEMNITY;
     private String deductibleAmount = "250";
     private String companyCheckBook = "Farm Bureau";

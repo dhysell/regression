@@ -181,6 +181,7 @@ public class NewInjuryIncidents extends BasePage {
 
         clickInjuredPersonPicker();
         clickViewContactDetails().validateContact();
+
         waitUntilElementIsClickable(By.cssSelector("textarea[id$=':InjuryDescription-inputEl']"));
         // Set Injury Severity
         String severity = setInjuryIncidentSeverityRandom();
@@ -269,6 +270,95 @@ public class NewInjuryIncidents extends BasePage {
 
     @FindBy(xpath = "//input[@id='NewInjuryIncidentPopup:NewInjuryIncidentScreen:InjuryIncidentDV:Liability_Subcause-inputEl']")
     private WebElement inputFarmProductsProduced;
+
+    public InjuryIncident newBasicInjuryIncident() {
+
+        waitUntilElementIsVisible(By.cssSelector("input[id$='InjuryIncidentDV:Injured_Picker-inputEl']"), 20);
+
+        // Variables
+        String tableXpath = "";
+        String tableID = "";
+
+        // Create new Injury Incident object.
+        repository.cc.claim.incidents.InjuryIncident injuryIncident = new InjuryIncident();
+
+        // Set Injured Party
+        String injuredParty = ClaimHelpers.setDynamicSelectBoxRestricted(selectBoxInjuredPerson(), "<none>");
+        injuryIncident.setInjuredPerson(injuredParty);
+
+        clickInjuredPersonPicker();
+        clickViewContactDetails();
+
+        EditPerson editPerson = new EditPerson(this.driver);
+        this.driver.findElement(By.id("ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV_tb:ContactDetailToolbarButtonSet:Edit")).click();
+        editPerson.checkName();
+        editPerson.checkSsnValue();
+        editPerson.checkDateOfBirthValue();
+        editPerson.checkGenderValue();
+        if (this.driver.findElement(By.id("ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV:PrimaryAddressInputSet:CCAddressInputSet:globalAddressContainer:FBContactInfoInputSet:Work:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl")).getText().equalsIgnoreCase("")) {
+            this.driver.findElement(By.id("ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV:PrimaryAddressInputSet:CCAddressInputSet:globalAddressContainer:FBContactInfoInputSet:Work:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl")).sendKeys("2085555555");
+        }
+        this.driver.findElement(By.id("ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV:PrimaryAddressInputSet:CCAddressInputSet:globalAddressContainer:FBContactInfoInputSet:primaryPhone-inputEl")).clear();
+        this.driver.findElement(By.id("ClaimContactDetailPopup:ContactDetailScreen:ContactBasicsDV:PrimaryAddressInputSet:CCAddressInputSet:globalAddressContainer:FBContactInfoInputSet:primaryPhone-inputEl")).sendKeys("Work");
+        editPerson.clickOkButton();
+
+        waitUntilElementIsClickable(By.cssSelector("textarea[id$=':InjuryDescription-inputEl']"));
+        // Set Injury Severity
+        String severity = setInjuryIncidentSeverityRandom();
+        injuryIncident.setSeverity(severity);
+
+        // Set Description
+        injuryIncident.setInjuryDescription("Test Describe Injuries Text Area");
+        setInjuryIncidentDescribeInjuriesTextArea(injuryIncident.getInjuryDescription());
+
+        // Set Injury Details
+        String generalInjuryType = setInjuryIncidentGeneralInjuryTypeRandom();
+        injuryIncident.setGeneralInjuryType(generalInjuryType);
+        String detailedInjuryType = setInjuryIncidentDetailedInjuryTypeRandom();
+        injuryIncident.setDetailedInjuryType(detailedInjuryType);
+
+        clickAddBodyParts();
+
+        // Locate ComboBox in table, select random item
+        clickAreaOfBodyCell();
+
+        tableID = find(By.xpath("//table[starts-with(@id,'simplecombo-')]")).getAttribute("id");
+        tableXpath = "//table[starts-with(@id,'" + tableID + "')]";
+
+
+        focusInjuryIncidentAreaOfBody(tableXpath);
+
+        String areaOfbody = setInjuryIncidentAreaOfBodyRandom(tableXpath);
+        injuryIncident.setAreaOfBody(areaOfbody);
+
+
+        // Focus the page
+        clickInjuryIncidentPageHeader();
+
+        // Locate ComboBox in table, select random item
+        clickDetailedBodyPartCell();
+
+        List<WebElement> hiddenComboBoxList = finds(By.xpath("//table[starts-with(@id,'simplecombo-')]"));
+        tableID = hiddenComboBoxList.get(2).getAttribute("id");
+        tableXpath = "//table[starts-with(@id,'" + tableID + "')]";
+
+
+        focusInjuryIncidentDetailedBodyPart(tableXpath);
+
+        String detailedBodyPart = setInjuryIncidentDetailedBodyPartRandom(tableXpath);
+        injuryIncident.setDetailedBodyPart(detailedBodyPart);
+
+
+        // Check and Set Farm Products Produced select box if it is visible.
+        List<WebElement> farmProductsProduced = finds(By.cssSelector("table[id*='Liability_Subcause-triggerWrap']"));
+        if (farmProductsProduced != null && farmProductsProduced.size() > 0) {
+            setFarmProductsProducedRandom();
+        }
+
+        clickOkButton();
+
+        return injuryIncident;
+    }
     
     /*private void setFarmProductsProduced() {
     	farmProductsProduced().selectByVisibleTextRandom();

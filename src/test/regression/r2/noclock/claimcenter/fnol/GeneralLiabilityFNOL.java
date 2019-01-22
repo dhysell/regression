@@ -1,15 +1,13 @@
 package regression.r2.noclock.claimcenter.fnol;
 
+import com.idfbins.driver.BaseTest;
+import gwclockhelpers.ApplicationOrCenter;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
-
-import com.idfbins.driver.BaseTest;
-
 import repository.driverConfiguration.Config;
 import repository.gw.enums.ClaimsUsers;
 import repository.gw.enums.GenerateFNOLType;
 import repository.gw.generate.cc.GenerateFNOL;
-import gwclockhelpers.ApplicationOrCenter;
 public class GeneralLiabilityFNOL extends BaseTest {
 	private WebDriver driver;
     private ClaimsUsers user = ClaimsUsers.bhogan;
@@ -21,10 +19,10 @@ public class GeneralLiabilityFNOL extends BaseTest {
     // FNOL Specific Strings
     private String incidentName = "Random";
     private String lossDescription = "Loss Description Test";
-    private String lossCause = "Random";
-    private String lossRouter = "Random";
+    private String lossCause = "General Liability (including medical)";
+    private String lossRouter = "Liability Issue";
     private String address = "Random";
-    private String policyNumber = "01-278542-01";
+    private String policyNumber = "01-006752-01";
 
 
     @Test

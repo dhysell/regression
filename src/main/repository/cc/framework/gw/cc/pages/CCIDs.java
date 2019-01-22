@@ -229,6 +229,7 @@ public class CCIDs {
             public static final Identifier WORKPLAN = new Identifier(By.id("Claim:MenuLinks:Claim_ClaimWorkplan"));
             public static final Identifier FINANCIALS = new Identifier(By.id("Claim:MenuLinks:Claim_ClaimFinancialsGroup"));
             public static final Identifier FINANCIALS_CHECKS = new Identifier(By.id("Claim:MenuLinks:Claim_ClaimFinancialsGroup:ClaimFinancialsGroup_ClaimFinancialsChecks"));
+            public static final Identifier LOSS_DETAILS = new Identifier(By.id("Claim:MenuLinks:Claim_ClaimLossDetailsGroup"), ElementType.LINK);
         }
 
         public static class Contacts {
@@ -276,6 +277,7 @@ public class CCIDs {
             public static final Identifier EDIT_BUTTON = new Identifier(By.id("ClaimLossDetails:ClaimLossDetailsScreen:Edit-btnInnerEl"));
             public static final Identifier UPDATE_BUTTON = new Identifier(By.id("ClaimLossDetails:ClaimLossDetailsScreen:Update"));
             public static final Identifier SALVAGE_STATUS = new Identifier(By.id("ClaimLossDetails:ClaimLossDetailsScreen:LossDetailsPanelSet:LossDetailsCardCV:LossDetailsDV:ClaimsDetailInputSet:Status_SalvageStatus-inputEl"));
+            public static final Identifier INJURIES_INCIDENTS = new Identifier(By.id("ClaimLossDetails:ClaimLossDetailsScreen:LossDetailsPanelSet:LossDetailsCardCV:LossDetailsDV:EditableInjuryIncidentsLV-body"), ElementType.TABLE);
         }
 
         public static final class Workplan {
@@ -290,6 +292,8 @@ public class CCIDs {
             public static final class InjuryIncident {
                 public static final Identifier EDIT_BUTTON = new Identifier(By.id("EditInjuryIncidentPopup:EditInjuryIncidentScreen:Edit"));
                 public static final Identifier MBI = new Identifier(By.id("EditInjuryIncidentPopup:EditInjuryIncidentScreen:InjuryIncidentDV:MBI-inputEl"));
+                public static final Identifier IS_INJURED_PARTY_US_CITIZEN_NO = new Identifier(By.id("EditInjuryIncidentPopup:EditInjuryIncidentScreen:InjuryIncidentDV:USCitizen_FBM_false-inputEl"), ElementType.BUTTON);
+                public static final Identifier UPDATE = new Identifier(By.id("EditInjuryIncidentPopup:EditInjuryIncidentScreen:Update"), ElementType.BUTTON);
             }
             
             public static final class VehicleIncident {

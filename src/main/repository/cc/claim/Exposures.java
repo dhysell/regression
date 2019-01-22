@@ -40,7 +40,7 @@ public class Exposures extends BasePage {
     public String createExposure(String incident, boolean isICDtest) {
 
         String exposureType = find(By.xpath("//span[@id='NewExposure:NewExposureScreen:ttlBar']")).getText();
-        String coverageType = new String();
+        String coverageType = "";
 
         switch (exposureType) {
             case "New Exposure - Vehicle Damage":
@@ -216,7 +216,6 @@ public class Exposures extends BasePage {
             find(By.xpath("//div[contains(@id,'PrimaryCoverage-inputEl')]")).click();
             selectClaimant().selectByVisibleTextPartial(selection);
         } catch (Exception e) {
-            
             selectClaimant().selectByVisibleTextPartial(selection);
         }
     }
@@ -544,8 +543,6 @@ public class Exposures extends BasePage {
 
     private NewInjuryIncidents clickNewIncident() {
         clickWhenClickable(linkNewIncident);
-        
-
         return new NewInjuryIncidents(this.driver);
     }
 
@@ -714,9 +711,9 @@ public class Exposures extends BasePage {
             String lossParty = getLossParty();
 
             if (getLossType().equalsIgnoreCase("General Liability")) {
-                setExpLossCauseRandom();
 
-                
+                setExpLossCause("General Liability (including medical)");
+
                 if (!getLossParty().equalsIgnoreCase("Insured's loss")) {
                     while (getClaimant().equalsIgnoreCase("<none>") || getClaimant().equalsIgnoreCase(getInsuredName())) {
                         setClaimantRandom();
@@ -816,11 +813,13 @@ public class Exposures extends BasePage {
         waitUtils.waitUntilElementIsNotVisible(By.xpath("//span[text()='OK']"), 20);
 
         if (getClaimant().equalsIgnoreCase("<none>")) {
-            
             setClaimant(insuredName);
         }
 
-        
+        if (this.driver.findElement(By.id("NewExposure:NewExposureScreen:NewExposureDV:NewClaimPropertyDamageDV:NewClaimIncidentInputSet:FarmProductsProducedOnLoc_false-inputEl")).isDisplayed()) {
+            this.driver.findElement(By.id("NewExposure:NewExposureScreen:NewExposureDV:NewClaimPropertyDamageDV:NewClaimIncidentInputSet:FarmProductsProducedOnLoc_false-inputEl")).click();
+        }
+
         clickUpdateButton();
 
         return coverageType;
@@ -874,7 +873,7 @@ public class Exposures extends BasePage {
 
         clickInjuryPicker();
         
-        InjuryIncident injuryIncident = clickNewIncident().newInjury(isICDtest);
+        InjuryIncident injuryIncident = clickNewIncident().newBasicInjuryIncident();
         List<String> nonClaimants = new ArrayList<>();
 
         if (getLossType().equalsIgnoreCase("General Liability")) {
@@ -927,7 +926,7 @@ public class Exposures extends BasePage {
 
         clickInjuryPicker();
         waitUtils.waitUntilElementIsClickable(By.xpath("//span[text()='New Incident...']"));
-        InjuryIncident injuryIncident = clickNewIncident().newInjury(isICDtest);
+        InjuryIncident injuryIncident = clickNewIncident().newBasicInjuryIncident();
         
         sendArbitraryKeys(Keys.TAB);
         waitForPostBack();
