@@ -30,7 +30,13 @@ public class ClaimDBSearch {
     }
 
     public String getRandomPolicy() {
-        String sqlQuery = "select PolicyNumber from cc_policy where CURRENT_TIMESTAMP <= ExpirationDate and CURRENT_TIMESTAMP > EffectiveDate and PolicyType in (10019,10025) and TotalVehicles > 0";
+        String sqlQuery = "select PolicyNumber from cc_policy where CURRENT_TIMESTAMP <= ExpirationDate and CURRENT_TIMESTAMP > EffectiveDate and PolicyType in (10019,10025) and TotalVehicles > 0 and Retired = 0";
+        HashMap<String, String> resultHashMap = randomResultFromQuerey(sqlQuery);
+        return resultHashMap.get("PolicyNumber");
+    }
+
+    public String getRandomGLPolicy() {
+        String sqlQuery = "select PolicyNumber from cc_policy where CURRENT_TIMESTAMP <= ExpirationDate and CURRENT_TIMESTAMP > EffectiveDate and PolicyType in (10019,10025) and TotalVehicles > 0 and Retired = 0";
         HashMap<String, String> resultHashMap = randomResultFromQuerey(sqlQuery);
         return resultHashMap.get("PolicyNumber");
     }

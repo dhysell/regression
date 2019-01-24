@@ -4,9 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import repository.cc.framework.gw.element.Identifier;
 import repository.cc.framework.gw.element.UIElement;
+import repository.gw.helpers.NumberUtils;
 import repository.gw.helpers.WaitUtils;
 
 import java.util.ArrayList;
@@ -118,5 +121,17 @@ public class UITable extends UIElement implements IGWUITable {
     @Override
     public void clickToolbarButtonWithText(String buttonText) {
 
+    }
+
+    public void clickRandomCheckbox() {
+        List<WebElement> checkboxes = this.element.findElements(By.tagName("img"));
+        WebElement checkbox = checkboxes.get(NumberUtils.generateRandomNumberInt(0, checkboxes.size() - 1));
+
+        Actions builder = new Actions(driver);
+        Action clickCheckbox = builder.clickAndHold(checkbox)
+                .moveByOffset(1, 1)
+                .release(checkbox)
+                .build();
+        clickCheckbox.perform();
     }
 }

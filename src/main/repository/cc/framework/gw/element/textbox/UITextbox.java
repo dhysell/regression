@@ -26,7 +26,8 @@ public class UITextbox extends UIElement implements IUITextOperations {
 
     @Override
     public void fillIfEmpty(String value) {
-        if (this.element.getText().isEmpty() || this.element.getText().equalsIgnoreCase("<none>")) {
+        String fieldValue = this.element.getAttribute("value");
+        if (fieldValue.equalsIgnoreCase("<none>") || fieldValue.equalsIgnoreCase("")) {
             fill(value);
         }
     }

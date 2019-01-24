@@ -26,4 +26,8 @@ public class UICheckbox extends UIElement implements IUICheckbox {
                 .build();
         clickCheckbox.perform();
     }
+
+    public boolean isChecked() {
+        return this.element.getAttribute("class").contains("checked");
+    }
 }

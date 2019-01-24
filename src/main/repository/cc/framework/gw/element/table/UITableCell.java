@@ -69,4 +69,6 @@ public class UITableCell extends UIElement implements IUITableCell {
     public void clickCheckbox() {
         new UICheckbox(this.driver, this.element.findElement(By.tagName("img"))).click();
     }
+
+
 }

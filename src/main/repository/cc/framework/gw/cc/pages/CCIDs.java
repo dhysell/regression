@@ -175,6 +175,45 @@ public class CCIDs {
         public static final Identifier INSURED_NAME = new Identifier(By.cssSelector("span[id*='ClaimInfoBar:Insured-btnInnerEl'] span[class*='infobar_elem_val']"));
         public static final Identifier ADJUSTER = new Identifier(By.id("Claim:ClaimInfoBar:Adjuster-btnWrap"), ElementType.ELEMENT);
 
+        public static class NewClaimSaved {
+            public static final Identifier CLAIM_NUMBER_TEXT = new Identifier(By.id("NewClaimSaved:NewClaimSavedScreen:NewClaimSavedDV:Header"), ElementType.ELEMENT);
+        }
+        
+        public static class AddClaimInformation {
+            public static final Identifier LOSS_DESCRIPTION = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_NewLossDetailsScreen:LossDetailsAddressDV:Description-inputEl"), ElementType.TEXT_AREA);
+            public static final Identifier LOSS_CAUSE = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_NewLossDetailsScreen:LossDetailsAddressDV:Claim_LossCause-inputEl"), ElementType.SELECT_BOX);
+            public static final Identifier LOSS_ROUTER = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_NewLossDetailsScreen:LossDetailsAddressDV:Claim_LossRouter-inputEl"), ElementType.SELECT_BOX);
+            public static final Identifier LOCATION = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_NewLossDetailsScreen:LossDetailsAddressDV:AddressDetailInputSetRef:LossDetailsAddressDetailInputSet:LossLocation_Name-inputEl"), ElementType.SELECT_BOX);
+            public static final Identifier FINISH = new Identifier(By.id("FNOLWizard:Finish-btnInnerEl"), ElementType.BUTTON);
+        }
+
+        public static class BasicInformation {
+            public static final Identifier NAME = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_BasicInfoScreen:PanelRow:BasicInfoDetailViewPanelDV:ReportedBy_Name-inputEl"), ElementType.SELECT_BOX);
+            public static final Identifier RELATION_TO_INSURED = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_BasicInfoScreen:PanelRow:BasicInfoDetailViewPanelDV:Claim_ReportedByType-inputEl"), ElementType.SELECT_BOX);
+            public static final Identifier BUSINESS = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_BasicInfoScreen:PanelRow:BasicInfoDetailViewPanelDV:FNOLWizard_ContactInfoInputSet:FBContactInfoInputSet:BusinessPhone:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl"), ElementType.TEXT_BOX);
+            public static final Identifier WORK = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_BasicInfoScreen:PanelRow:BasicInfoDetailViewPanelDV:FNOLWizard_ContactInfoInputSet:FBContactInfoInputSet:Work:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl"), ElementType.TEXT_BOX);
+            public static final Identifier HOME = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_BasicInfoScreen:PanelRow:BasicInfoDetailViewPanelDV:FNOLWizard_ContactInfoInputSet:FBContactInfoInputSet:Home:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl"), ElementType.TEXT_BOX);
+            public static final Identifier MOBILE = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_BasicInfoScreen:PanelRow:BasicInfoDetailViewPanelDV:FNOLWizard_ContactInfoInputSet:FBContactInfoInputSet:Cell:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl"), ElementType.TEXT_BOX);
+            public static final Identifier FAX = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_BasicInfoScreen:PanelRow:BasicInfoDetailViewPanelDV:FNOLWizard_ContactInfoInputSet:FBContactInfoInputSet:Fax:GlobalPhoneInputSet:NationalSubscriberNumber-inputEl"), ElementType.TEXT_BOX);
+            public static final Identifier PRIMARY_PHONE = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_BasicInfoScreen:PanelRow:BasicInfoDetailViewPanelDV:FNOLWizard_ContactInfoInputSet:FBContactInfoInputSet:primaryPhone-inputEl"), ElementType.SELECT_BOX);
+            public static final Identifier EMAIL = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_BasicInfoScreen:PanelRow:BasicInfoDetailViewPanelDV:FNOLWizard_ContactInfoInputSet:reporter_email-inputEl"), ElementType.TEXT_BOX);
+            public static final Identifier INCIDENTS_INVOLVED = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_BasicInfoScreen:PanelRow:RightPanel:FNOLWizard_BasicInfoRightPanelSet:3-body"), ElementType.TABLE);
+            public static final Identifier NEXT = new Identifier(By.id("FNOLWizard:Next"), ElementType.BUTTON);
+            
+            public static class DuplicateClaims {
+                public static final Identifier CLOSE = new Identifier(By.id("NewClaimDuplicatesWorksheet:NewClaimDuplicatesScreen:NewClaimDuplicatesWorksheet_CloseButton"), ElementType.BUTTON);
+            }
+        }
+
+        public static class SearchOrCreatePolicy {
+            public static final Identifier POLICY_ROOT_NUMBER = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:policyNumber-inputEl"), ElementType.TEXT_BOX);
+            public static final Identifier SEARCH = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:Search"), ElementType.ELEMENT);
+            public static final Identifier POLICY_RESULTS = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:PolicyResultLV-body"), ElementType.TABLE);
+            public static final Identifier DATE_OF_LOSS = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:Claim_LossDate-inputEl"), ElementType.TEXT_BOX);
+            public static final Identifier GENERAL_LIABILITY = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:ClaimMode_option2-inputEl"), ElementType.BUTTON);
+            public static final Identifier NEXT = new Identifier(By.id("FNOLWizard:Next"), ElementType.BUTTON);
+        }
+
         public static class ValidationResults {
             public static final Identifier VALIDATION_RESULTS_MESSAGES = new Identifier(By.cssSelector("div[id='WebMessageWorksheet:WebMessageWorksheetScreen:grpMsgs'] div[class='message']"), ElementType.ELEMENT);
         }
