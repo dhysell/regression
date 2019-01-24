@@ -48,7 +48,7 @@ public class US16412_CopartTesting extends BaseOperations {
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CREATE_COPART_ASSIGNMENT_BUTTON).click();
 
         // If exposure warning message appears, clear it and continue
-        if (interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CLEAR).isPresent()) {
+        if (interact.withOptionalElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CLEAR).isPresent()) {
             interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CLEAR).click();
             interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CREATE_COPART_ASSIGNMENT_BUTTON).click();
         }
