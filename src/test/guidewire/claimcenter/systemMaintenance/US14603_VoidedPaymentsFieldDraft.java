@@ -86,7 +86,7 @@ public class US14603_VoidedPaymentsFieldDraft extends BaseOperations {
             if (checkString.length() < 6) {
                 checkString = "0" + checkString;
             }
-            interact.withTexbox(CCIDs.Claim.ManualCheckWizard.Payees.CHECK_NUMBER).fill(String.valueOf(checkString));
+            interact.withTexbox(CCIDs.Claim.ManualCheckWizard.Payees.CHECK_NUMBER).fill(checkString);
             interact.withElement(CCIDs.ESCAPE_CLICKER);
             interact.withElement(CCIDs.Claim.ManualCheckWizard.Payees.NEXT).click();
 
@@ -125,8 +125,17 @@ public class US14603_VoidedPaymentsFieldDraft extends BaseOperations {
         interact.withElement(CCIDs.Claim.ApprovalPopup.APPROVE).click();
 
         // Run batches
-        batchServer.getBatch("Financials Escalation");
-        batchServer.getBatch("Ledger Files");
+        batchServer.getBatch("Financials Escalation").start();
+        batchServer.getBatch("Ledger Files").start();
+        while (batchServer.getBatch("Ledger Files").isRunning()) {
+            try {
+                this.getDriver().wait(1000);
+                System.out.println("Batch is running.");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         // Navigate to check and mark as void
         interact.withElement(CCIDs.Claim.SideMenu.FINANCIALS).click();

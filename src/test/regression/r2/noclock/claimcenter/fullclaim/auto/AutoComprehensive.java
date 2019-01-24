@@ -104,13 +104,10 @@ public class AutoComprehensive extends BaseTest {
         GenerateCheck myCheck = new GenerateCheck.Builder(driver)
                 .withCreatorUserNamePassword(user, this.password)
                 .withClaimNumber(this.claimNumber)
-                .withDeductible(deductibleToAdd)
-                .withDeductibleAmount(deductibleAmount)
                 .withPaymentType(paymentType)
                 .withCategoryType(categoryType)
-                .withPaymentAmount(paymentAmount)
-                .withCompanyCheckBook(companyCheckBook)
-                .build(GenerateCheckType.Regular);
+                .withPaymentAmount("5.00")
+                   .build(GenerateCheckType.Regular);
 
         System.out.println(myCheck.claimNumber);
 

@@ -11,7 +11,6 @@
         <classes>
             <class name="guidewire.claimcenter.systemMaintenance.US17161_DuplicateClaimMenuAction"/>
             <class name="guidewire.claimcenter.systemMaintenance.DE8269_CloseActivityValidationRuleChange"/>
-            <class name="guidewire.claimcenter.systemMaintenance.US14603_VoidedPaymentsFieldDraft"/>
             <class name="guidewire.claimcenter.systemMaintenance.US16987_QCSVendorPaymentProcessImprovement"/>
             <class name="guidewire.claimcenter.systemMaintenance.US17101_VendorPendingQueueAB"/>
             <class name="guidewire.claimcenter.systemMaintenance.US17492_FlagshipProcessSkipForNonUSCitizens"/>
