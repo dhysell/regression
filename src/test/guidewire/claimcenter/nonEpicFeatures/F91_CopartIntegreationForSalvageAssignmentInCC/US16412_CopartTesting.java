@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import repository.cc.framework.gw.BaseOperations;
 import repository.cc.framework.gw.cc.pages.CCIDs;
+import repository.cc.framework.gw.element.UIElement;
 
 /**
  * @Author Denver Hysell
@@ -34,7 +35,7 @@ public class US16412_CopartTesting extends BaseOperations {
         interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.PICKUP_ADDRESS).click();
         String insuredName = interact.withElement(CCIDs.Claim.INSURED_NAME).screenGrab();
         interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CONTACT_PERSON).select(insuredName);
-        interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.PICKUP_LOCATION).selectRandom();
+        // interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.PICKUP_LOCATION).selectRandom();
 
         int numSelections = interact.withSelectBox(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CONTACT_PERSON).getOptions().size();
         int count = 0;
@@ -51,6 +52,12 @@ public class US16412_CopartTesting extends BaseOperations {
         if (interact.withOptionalElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CLEAR).isPresent()) {
             interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CLEAR).click();
             interact.withElement(CCIDs.Claim.Incidents.VehicleIncident.VehicleSalvage.CopartAssignmentDetails.CREATE_COPART_ASSIGNMENT_BUTTON).click();
+        }
+
+        // Check for error message
+        UIElement messageElement = interact.withOptionalElement(CCIDs.ERROR_MESSAGE);
+        if (messageElement.isPresent() && !messageElement.screenGrab().equalsIgnoreCase("")) {
+            Assert.fail(messageElement.screenGrab());
         }
 
         // Edit the assignment

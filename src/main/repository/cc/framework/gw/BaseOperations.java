@@ -123,6 +123,7 @@ public class BaseOperations extends BaseTest {
                 interact.withElement(CCIDs.Claim.Contacts.EDIT).click();
                 interact.withTexbox(CCIDs.Claim.Contacts.WORK_PHONE).fill("2085555555");
                 interact.withElement(CCIDs.ESCAPE_CLICKER).click();
+                interact.withSelectBox(CCIDs.Claim.Contacts.PRIMARY_PHONE).select("Work");
                 interact.withElement(CCIDs.Claim.Contacts.UPDATE).click();
 
                 cc.accessVehicleIncidentFromExposure(new String[]{CoverageTypes.COLLISION_AND_ROLLOVER, CoverageTypes.LIABILITY_AUTO_PROPERTY_DAMAGE,

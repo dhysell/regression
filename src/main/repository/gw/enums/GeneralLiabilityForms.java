@@ -20,7 +20,7 @@ public enum GeneralLiabilityForms {
 	AdditionalInsured_ManagersOrLessorsOfPremises_CG_20_11("Additional Insured - Managers Or Lessors Of Premises CG 20 11"),
 	AdditionalInsured_StateOrGovernmentalAgencyOrSubdivisionOrPoliticalSubdivision_PermitsOrAuthorizations_CG_20_12("Additional Insured - State Or Governmental Agency Or Subdivision Or Political Subdivision - Permits Or Authorizations CG 20 12"),
 	AdditionalInsured_StateOrGovernmentalAgencyOrSubdivisionOrPoliticalSubdivision_PermitsOrAuthorizationsRelatingToPremises_CG_20_13("Additional Insured - State Or Governmental Agency Or Subdivision Or Political Subdivision - Permits Or Authorizations Relating To Premises CG 20 13"),
-	AdditionalInsured_UsersOfTeamsDraftOrSaddleAnimals_CG_20_14("Additional Insured - Users Of Teams, Draft Or Saddle Animals CG 20 14"),
+	AdditionalInsured_UsersOfTeamsDraftOrSaddleAnimals_CG_20_14("Additional Insured - Users Of Team, Draft Or Saddle Animals CG 20 14"),
 	AdditionalInsured_Vendors_CG_20_15("Additional Insured - Vendors CG 20 15"),
 	AdditionalInsured_TownhouseAssociations_CG_20_17("Additional Insured - Townhouse Associations CG 20 17"),
 	AdditionalInsured_MortgageeAssigneeOrReceiver_CG_20_18("Additional Insured - Mortgagee, Assignee Or Receiver CG 20 18"),
@@ -141,7 +141,7 @@ public enum GeneralLiabilityForms {
 
 	String value;
 	
-	private GeneralLiabilityForms(String type){
+	GeneralLiabilityForms(String type){
 		value = type;
 	}
 	

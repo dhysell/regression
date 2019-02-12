@@ -66,7 +66,7 @@ public enum GeneralLiabilityCoverages {
 	/**
 	 * UW Question @ QQ: Please provide underwriting details of the equine exposure i.e. type of events, number of animals, number of events etc.  "String Text Box"
 	 */
-	CG2014("Additional Insured - Users Of Teams, Draft Or Saddle Animals CG 20 14"),
+	CG2014("Additional Insured - Users Of Team, Draft Or Saddle Animals CG 20 14"),
 	/**
 	 * UW Question @ QQ: Is applicant/insured the manufacturer of the product? Correct Answer - Yes <br>
 	 * Available when Additional Insured - Vendors CG 20 15 is selected on the Screen New Additional Insured.
@@ -793,7 +793,7 @@ public enum GeneralLiabilityCoverages {
 
 	String value;
 	
-	private GeneralLiabilityCoverages(String type){
+	GeneralLiabilityCoverages(String type){
 		value = type;
 	}
 	

@@ -856,7 +856,7 @@ public class GeneralLiabilityFormInference extends BasePage {
                 case AdditionalInsured_EngineersArchitectsOrSurveyors_CG_20_07:
                     //Electable
                     break;
-                //Additional Insured - Users Of Teams, Draft Or Saddle Animals CG 20 14
+                //Additional Insured - Users Of Team, Draft Or Saddle Animals CG 20 14
                 case AdditionalInsured_UsersOfTeamsDraftOrSaddleAnimals_CG_20_14:
                     //Electable
                     break;
@@ -1000,7 +1000,7 @@ public class GeneralLiabilityFormInference extends BasePage {
         if (policy.generalLiabilityCPP.getCPPGeneralLiabilityCoverages().isAdditionalInsured_UsersOfGolfmobilesCG2008()) {
             policy.generalLiabilityCPP.glForms.add(GeneralLiabilityForms.AdditionalInsured_UsersOfGolfmobiles_CG_20_08);
         }
-        // Additional Insured - Users Of Teams, Draft Or Saddle Animals CG 20 14
+        // Additional Insured - Users Of Team, Draft Or Saddle Animals CG 20 14
         if (policy.generalLiabilityCPP.getCPPGeneralLiabilityCoverages().isAdditionalInsured_UsersOfTeamsDraftOrSaddleAnimalsCG2014()) {
             policy.generalLiabilityCPP.glForms.add(GeneralLiabilityForms.AdditionalInsured_UsersOfTeamsDraftOrSaddleAnimals_CG_20_14);
         }

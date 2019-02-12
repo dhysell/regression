@@ -47,7 +47,7 @@ public class GenericWorkorderGeneralLiabilityCoverages_AdditionalCoverages exten
     }
 
     Guidewire8Checkbox checkbox_AIUsersOfTeamsDraftOrSaddleAnimals() {
-        return new Guidewire8Checkbox(driver, "//div[contains(text(), 'Additional Insured - Users Of Teams, Draft Or Saddle Animals CG 20 14')]/preceding-sibling::table");
+        return new Guidewire8Checkbox(driver, "//div[contains(text(), 'Additional Insured - Users Of Team, Draft Or Saddle Animals CG 20 14')]/preceding-sibling::table");
     }
 
     Guidewire8Select select_AmendmentOfLiquorLiabilityExclusionExceptionForScheduledActivities() {

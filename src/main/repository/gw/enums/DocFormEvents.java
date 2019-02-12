@@ -198,7 +198,7 @@ public class DocFormEvents {
 		CPP_GL_AI_ManagersOrLessorsOfPremises_CG_20_11("Additional Insured - Managers Or Lessors Of Premises CG 20 11", repository.gw.enums.ProductLineType.CPP, repository.gw.enums.LineSelection.GeneralLiabilityLineCPP, true),
 		CPP_GL_AI_StateOrGovernmentalAgencyOrSubdivisionOrPoliticalSubdivision_PermitsOrAuthorizations_CG_20_12("Additional Insured - State Or Governmental Agency Or Subdivision Or Political Subdivision - Permits Or Authorizations CG 20 12", repository.gw.enums.ProductLineType.CPP, repository.gw.enums.LineSelection.GeneralLiabilityLineCPP, true),
 		CPP_GL_AI_StateOrGovernmentalAgencyOrSubdivisionOrPoliticalSubdivision_PermitsOrAuthorizationsRelatingToPremises_CG_20_13("Additional Insured - State Or Governmental Agency Or Subdivision Or Political Subdivision - Permits Or Authorizations Relating To Premises CG 20 13", repository.gw.enums.ProductLineType.CPP, repository.gw.enums.LineSelection.GeneralLiabilityLineCPP, true),
-		CPP_GL_AI_UsersOfTeamsDraftOrSaddleAnimals_CG_20_14("Additional Insured - Users Of Teams, Draft Or Saddle Animals CG 20 14", repository.gw.enums.ProductLineType.CPP, repository.gw.enums.LineSelection.GeneralLiabilityLineCPP, true),
+		CPP_GL_AI_UsersOfTeamsDraftOrSaddleAnimals_CG_20_14("Additional Insured - Users Of Team, Draft Or Saddle Animals CG 20 14", repository.gw.enums.ProductLineType.CPP, repository.gw.enums.LineSelection.GeneralLiabilityLineCPP, true),
 		CPP_GL_AI_Vendors_CG_20_15("Additional Insured - Vendors CG 20 15", repository.gw.enums.ProductLineType.CPP, repository.gw.enums.LineSelection.GeneralLiabilityLineCPP, true),
 		CPP_GL_AI_TownhouseAssociations_CG_20_17("Additional Insured - Townhouse Associations CG 20 17", repository.gw.enums.ProductLineType.CPP, repository.gw.enums.LineSelection.GeneralLiabilityLineCPP, true),
 		CPP_GL_AI_MortgageeAssigneeOrReceiver_CG_20_18("Additional Insured - Mortgagee, Assignee Or Receiver CG 20 18", repository.gw.enums.ProductLineType.CPP, repository.gw.enums.LineSelection.GeneralLiabilityLineCPP, true),
@@ -328,7 +328,7 @@ public class DocFormEvents {
 		repository.gw.enums.LineSelection line;
 		boolean directlyTriggersDocuments;
 		
-		private PolicyCenter(String eventName, repository.gw.enums.ProductLineType product, repository.gw.enums.LineSelection line, boolean directlyTriggersDocuments) {
+		PolicyCenter(String eventName, repository.gw.enums.ProductLineType product, repository.gw.enums.LineSelection line, boolean directlyTriggersDocuments) {
 			this.eventName = eventName;
 			this.product = product;
 			this.line = line;
@@ -376,7 +376,7 @@ public class DocFormEvents {
 		repository.gw.enums.ProductLineType product;
 		repository.gw.enums.LineSelection line;
 		
-		private BillingCenter(String eventName) {
+		BillingCenter(String eventName) {
 			this.eventName = eventName;
 		}
 		

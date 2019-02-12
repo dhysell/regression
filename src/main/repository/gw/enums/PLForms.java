@@ -107,7 +107,7 @@ public enum PLForms {
 	CG2011_AdditionalInsured_ManagersOrLessorsOfPremisesCG2011("CG2011", "Additional Insured - Managers Or Lessors Of Premises CG 20 11"),
 	CG2012_AdditionalInsured_StateOrGovernmentalAgencyOrSubdivisionOrPoliticalSubdivision_PermitsOrAuthorizationsCG2012("CG2012", "Additional Insured - State Or Governmental Agency Or Subdivision Or Political Subdivision - Permits Or Authorizations CG 20 12"),
 	CG2013_AdditionalInsured_StateOrGovernmentalAgencyOrSubdivisionOrPoliticalSubdivision_PermitsOrAuthorizationsRelatingToPremisesCG2013("CG2013", "Additional Insured - State Or Governmental Agency Or Subdivision Or Political Subdivision - Permits Or Authorizations Relating To Premises CG 20 13"),
-	CG2014_AdditionalInsured_UsersOfTeamsDraftOrSaddleAnimalsCG2014("CG2014", "Additional Insured - Users Of Teams, Draft Or Saddle Animals CG 20 14"),
+	CG2014_AdditionalInsured_UsersOfTeamsDraftOrSaddleAnimalsCG2014("CG2014", "Additional Insured - Users Of Team, Draft Or Saddle Animals CG 20 14"),
 	CG2015_AdditionalInsured_VendorsCG2015("CG2015", "Additional Insured - Vendors CG 20 15"),
 	CG2017_AdditionalInsured_TownhouseAssociationsCG2017("CG2017", "Additional Insured - Townhouse Associations CG 20 17"),
 	CG2018_AdditionalInsured_MortgageeAssigneeOrReceiverCG2018("CG2018", "Additional Insured - Mortgagee, Assignee Or Receiver CG 20 18"),
@@ -447,7 +447,7 @@ public enum PLForms {
 	String number;
 	String name;
 	
-	private PLForms(String number, String name){
+	PLForms(String number, String name){
 		this.number = number;
 		this.name = name;
 	}
