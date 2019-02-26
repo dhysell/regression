@@ -19,7 +19,7 @@ public class UITextbox extends UIElement implements IUITextOperations {
 
     @Override
     public void fill(String value) {
-        this.element.clear();
+        this.element.sendKeys(Keys.chord(Keys.CONTROL + "a"));
         this.element.sendKeys(value);
         this.element.sendKeys(Keys.TAB);
     }

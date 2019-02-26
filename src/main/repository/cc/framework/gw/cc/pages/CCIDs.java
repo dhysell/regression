@@ -1,8 +1,8 @@
 package repository.cc.framework.gw.cc.pages;
 
-import org.openqa.selenium.By;
 import repository.cc.framework.gw.element.Identifier;
 import repository.cc.framework.gw.element.enums.ElementType;
+import org.openqa.selenium.By;
 
 
 public class CCIDs {
@@ -178,7 +178,7 @@ public class CCIDs {
         public static class NewClaimSaved {
             public static final Identifier CLAIM_NUMBER_TEXT = new Identifier(By.id("NewClaimSaved:NewClaimSavedScreen:NewClaimSavedDV:Header"), ElementType.ELEMENT);
         }
-        
+
         public static class AddClaimInformation {
             public static final Identifier LOSS_DESCRIPTION = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_NewLossDetailsScreen:LossDetailsAddressDV:Description-inputEl"), ElementType.TEXT_AREA);
             public static final Identifier LOSS_CAUSE = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_NewLossDetailsScreen:LossDetailsAddressDV:Claim_LossCause-inputEl"), ElementType.SELECT_BOX);
@@ -199,7 +199,7 @@ public class CCIDs {
             public static final Identifier EMAIL = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_BasicInfoScreen:PanelRow:BasicInfoDetailViewPanelDV:FNOLWizard_ContactInfoInputSet:reporter_email-inputEl"), ElementType.TEXT_BOX);
             public static final Identifier INCIDENTS_INVOLVED = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_BasicInfoScreen:PanelRow:RightPanel:FNOLWizard_BasicInfoRightPanelSet:3-body"), ElementType.TABLE);
             public static final Identifier NEXT = new Identifier(By.id("FNOLWizard:Next"), ElementType.BUTTON);
-            
+
             public static class DuplicateClaims {
                 public static final Identifier CLOSE = new Identifier(By.id("NewClaimDuplicatesWorksheet:NewClaimDuplicatesScreen:NewClaimDuplicatesWorksheet_CloseButton"), ElementType.BUTTON);
             }
@@ -212,6 +212,9 @@ public class CCIDs {
             public static final Identifier DATE_OF_LOSS = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:Claim_LossDate-inputEl"), ElementType.TEXT_BOX);
             public static final Identifier GENERAL_LIABILITY = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:ClaimMode_option2-inputEl"), ElementType.BUTTON);
             public static final Identifier NEXT = new Identifier(By.id("FNOLWizard:Next"), ElementType.BUTTON);
+            public static final Identifier AUTO = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:ClaimMode_option0-inputEl"), ElementType.BUTTON);
+            public static final Identifier PROPERTY = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:ClaimMode_option4-inputEl"), ElementType.BUTTON);
+            public static final Identifier INLAND_MARINE = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:ClaimMode_option3-inputEl"), ElementType.BUTTON);
         }
 
         public static class ValidationResults {
@@ -335,7 +338,7 @@ public class CCIDs {
                 public static final Identifier IS_INJURED_PARTY_US_CITIZEN_NO = new Identifier(By.id("EditInjuryIncidentPopup:EditInjuryIncidentScreen:InjuryIncidentDV:USCitizen_FBM_false-inputEl"), ElementType.BUTTON);
                 public static final Identifier UPDATE = new Identifier(By.id("EditInjuryIncidentPopup:EditInjuryIncidentScreen:Update"), ElementType.BUTTON);
             }
-            
+
             public static final class VehicleIncident {
                 public static final Identifier VEHICLE_SALVAGE_TAB = new Identifier(By.id("EditVehicleIncidentPopup:EditVehicleIncidentScreen:VehIncidentDetailDV:VehicleDamage_VehicleSalvageCardTab"));
                 public static final Identifier TOTAL_LOSS_YES = new Identifier(By.id("EditVehicleIncidentPopup:EditVehicleIncidentScreen:VehIncidentDetailDV:VehicleIncidentDV:TotalLoss_true-inputEl"));
@@ -458,6 +461,11 @@ public class CCIDs {
             public static final Identifier INCIDENT_PICKER = new Identifier(By.cssSelector("a[id*='_IncidentMenuIcon']"));
             public static final Identifier EDIT_INCIDENT_DETAILS = new Identifier(By.cssSelector("a[id*='_EditIncidentMenuItem-itemEl']"));
             public static final Identifier VIEW_INCIDENT_DETAILS = new Identifier(By.cssSelector("a[id*='_ViewIncidentMenuItem-itemEl']"));
+            public static final Identifier CREATE_RESERVE = new Identifier(By.id("ClaimExposures:ClaimExposuresScreen:ClaimExposures_CreateReserve"), ElementType.BUTTON);
+
+            public static class ExposureDetailView {
+                public static final Identifier CREATE_RESERVE = new Identifier(By.id("ExposureDetail:ExposureDetailScreen:ExposureDetailScreen_CreateReserveButton"), ElementType.BUTTON);
+            }
 
             public static class VehicleDamageExposure {
 
@@ -469,11 +477,11 @@ public class CCIDs {
         }
 
         public static class SetReserves {
-
             public static final Identifier ADD_BUTTON = new Identifier(By.id("NewReserveSet:NewReserveSetScreen:Add"));
             public static final Identifier RESERVES_TABLE = new Identifier(By.id("NewReserveSet:NewReserveSetScreen:ReservesSummaryDV:EditableReservesLV-body"));
-            public static final Identifier COST_CATEGORY = new Identifier(By.name("CostCategory"));
-
+            public static final Identifier COST_CATEGORY = new Identifier(By.name("CostCategory"), ElementType.TEXT_BOX);
+            public static final Identifier NEW_AVAILABLE_RESERVES = new Identifier(By.name("NewAmount"), ElementType.TEXT_BOX);
+            public static final Identifier SAVE = new Identifier(By.id("NewReserveSet:NewReserveSetScreen:Update"), ElementType.BUTTON);
         }
     }
 }

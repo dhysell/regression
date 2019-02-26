@@ -88,14 +88,17 @@ public class UITable extends UIElement implements IGWUITable {
                 }
             }
 
-            if (!this.element.findElement(TOOLBAR_REFERENCE).findElement(NEXT_PAGE_REFERENCE).getAttribute("class").contains("x-btn-disabled")) {
-                clickNextPage();
-                //this.element = driver.findElement(By.id(""+ tableID +""));
+            if (!this.element.findElement(TOOLBAR_REFERENCE).findElements(NEXT_PAGE_REFERENCE).isEmpty()) {
+                if(!this.element.findElement(TOOLBAR_REFERENCE).findElement(NEXT_PAGE_REFERENCE).getAttribute("class").contains("x-btn-disabled")) {
+                    clickNextPage();
+                } else {
+                    isLastPage = true;
+                }
             } else {
                 isLastPage = true;
             }
         } while (!isLastPage);
-        return null;
+        return new UITableRow(this.driver, null);
     }
 
     @Override

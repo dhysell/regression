@@ -1,6 +1,7 @@
 package repository.cc.framework.gw.element.table;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import repository.cc.framework.gw.element.UIElement;
@@ -21,7 +22,7 @@ public class UITableCell extends UIElement implements IUITableCell {
 
     @Override
     public String getText() {
-        return null;
+        return this.element.getText();
     }
 
     @Override
@@ -52,7 +53,7 @@ public class UITableCell extends UIElement implements IUITableCell {
             }
         }
         if (selectedTextbox != null) {
-            selectedTextbox.clear();
+            selectedTextbox.sendKeys(Keys.chord(Keys.CONTROL + "a"));
             selectedTextbox.sendKeys(text);
             this.driver.findElement(By.id("QuickJump-inputEl")).click();
         }

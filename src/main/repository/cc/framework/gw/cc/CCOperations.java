@@ -16,8 +16,12 @@ public class CCOperations {
     }
 
     public void loginAs(ClaimsUsers user) {
-        interact.withTexbox(CCIDs.Login.USER_NAME).fill(user.toString());
-        interact.withTexbox(CCIDs.Login.PASSWORD).fill(user.getPassword());
+        login(user.name(), user.getPassword());
+    }
+
+    public void login(String userName, String password){
+        interact.withTexbox(CCIDs.Login.USER_NAME).fill(userName);
+        interact.withTexbox(CCIDs.Login.PASSWORD).fill(password);
         interact.withElement(CCIDs.Login.LOG_IN).click();
     }
 
@@ -72,5 +76,30 @@ public class CCOperations {
 
     public String retrieveClaimNumber() {
         return interact.withElement(CCIDs.NavBar.CLAIM).screenGrab().replaceAll("[^\\d.]", "");
+    }
+
+    public void approveActivity(String activity, String claimNumber) {
+        interact.withElement(CCIDs.Claim.SideMenu.WORKPLAN).click();
+        String assignedTo = interact.withTable(CCIDs.Claim.Workplan.ACTIVITIES_TABLE).getRowWithText(activity).getCell(10).getText();
+        String userName = interact.withDB.getUserNameFor(assignedTo);
+        logout();
+        login(userName, "gw");
+        accessClaim(claimNumber);
+        interact.withElement(CCIDs.Claim.SideMenu.WORKPLAN).click();
+        interact.withTable(CCIDs.Claim.Workplan.ACTIVITIES_TABLE).getRowWithText(activity).getCell(7).clickLink();
+        interact.withElement(CCIDs.Claim.Workplan.APPROVE_BUTTON).click();
+    }
+
+    public void createReserve(String coverageType, String amount) {
+        interact.withElement(CCIDs.Claim.SideMenu.EXPOSURES).click();
+        interact.withTable(CCIDs.Claim.Exposures.EXPOSURES_TABLE).getRowWithText(coverageType).getCell(2).clickLink();
+        interact.withElement(CCIDs.Claim.Exposures.ExposureDetailView.CREATE_RESERVE).click();
+        if (!interact.withTable(CCIDs.Claim.SetReserves.RESERVES_TABLE).getRowWithText(coverageType).isPresent()) {
+            interact.withElement(CCIDs.Claim.SetReserves.ADD_BUTTON).click();
+            interact.withTable(CCIDs.Claim.SetReserves.RESERVES_TABLE).getRowWithText(coverageType).getCell(3).click();
+            interact.withTexbox(CCIDs.Claim.SetReserves.COST_CATEGORY).fill("Vehicle Damage");
+        }
+        interact.withTexbox(CCIDs.Claim.SetReserves.NEW_AVAILABLE_RESERVES).fill(amount);
+        interact.withElement(CCIDs.Claim.SetReserves.SAVE).click();
     }
 }

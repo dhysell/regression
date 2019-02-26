@@ -2,12 +2,23 @@ package repository.cc.framework.gw.pc.pages;
 
 import org.openqa.selenium.By;
 import repository.cc.framework.gw.element.Identifier;
+import repository.cc.framework.gw.element.enums.ElementType;
 
 public class PCIDs {
     public final static class Login {
         public static final Identifier USER_NAME = new Identifier(By.id("Login:LoginScreen:LoginDV:username-inputEl"));
         public static final Identifier PASSWORD = new Identifier(By.id("Login:LoginScreen:LoginDV:password-inputEl"));
         public static final Identifier LOGIN_BUTTON = new Identifier(By.id("Login:LoginScreen:LoginDV:submit"));
+    }
+
+    public final static class Policy{
+        public static final Identifier ACTIVITIES_TABLE = new Identifier(By.id("AccountFile_Summary:AccountFile_SummaryScreen:AccountFile_Summary_ActivitiesLV-body"), ElementType.TABLE);
+    }
+
+    public final static class Search {
+        public static final Identifier ACCOUNT_NUMBER = new Identifier(By.id("AccountSearch:AccountSearchScreen:AccountSearchDV:AccountNumber-inputEl"), ElementType.TEXT_BOX);
+        public static final Identifier SEARCH_BUTTON = new Identifier(By.id("AccountSearch:AccountSearchScreen:AccountSearchDV:SearchAndResetInputSet:SearchLinksInputSet:Search"), ElementType.BUTTON);
+        public static final Identifier ACCOUNTS_TABLE = new Identifier(By.id("AccountSearch:AccountSearchScreen:AccountSearchResultsLV-body"), ElementType.TABLE);
     }
 
     public final static class PolicyTab {
@@ -89,7 +100,7 @@ public class PCIDs {
 
     }
 
-    public final static class Policy {
-
+    public final static class SearchTab {
+        public static final Identifier SEARCH_TAB = new Identifier(By.id("TabBar:SearchTab"), ElementType.BUTTON);
     }
 }

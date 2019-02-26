@@ -1,7 +1,7 @@
 package repository.cc.framework.gw.cc;
 
-import org.testng.Assert;
 import repository.gw.helpers.NumberUtils;
+import org.testng.Assert;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -29,8 +29,15 @@ public class ClaimDBSearch {
         return resultHashMap.get("ClaimNumber");
     }
 
-    public String getRandomPolicy() {
-        String sqlQuery = "select PolicyNumber from cc_policy where CURRENT_TIMESTAMP <= ExpirationDate and CURRENT_TIMESTAMP > EffectiveDate and PolicyType in (10019,10025) and TotalVehicles > 0 and Retired = 0";
+    public String getRandomAutoPolicy(boolean requirePolicyCenterPolicy) {
+
+        String sqlQuery;
+
+        if (requirePolicyCenterPolicy) {
+            sqlQuery = "select distinct PolicyNumber from cc_policy where CURRENT_TIMESTAMP <= ExpirationDate and CURRENT_TIMESTAMP > EffectiveDate and PolicyType in (10019,10025) and TotalVehicles > 0 and Retired = 0 AND PolicyOrigination_FBM = 'PC'";
+        } else {
+            sqlQuery = "select distinct PolicyNumber from cc_policy where CURRENT_TIMESTAMP <= ExpirationDate and CURRENT_TIMESTAMP > EffectiveDate and PolicyType in (10019,10025) and TotalVehicles > 0 and Retired = 0";
+        }
         HashMap<String, String> resultHashMap = randomResultFromQuerey(sqlQuery);
         return resultHashMap.get("PolicyNumber");
     }
@@ -55,7 +62,7 @@ public class ClaimDBSearch {
 
     public String getRandomClosedClaim() {
         String sqlQuery = "select TOP 100 ClaimNumber from cc_claim where CloseDate is not null order by CloseDate desc";
-        HashMap <String, String> resultHashMap = randomResultFromQuerey(sqlQuery);
+        HashMap<String, String> resultHashMap = randomResultFromQuerey(sqlQuery);
         return resultHashMap.get("ClaimNumber");
     }
 
@@ -81,7 +88,11 @@ public class ClaimDBSearch {
         int randNum = 0;
         try {
             if (resultSet.last()) {
-                randNum = NumberUtils.generateRandomNumberInt(0, resultSet.getRow() - 1);
+                if(resultSet.getRow() == 1){
+                    randNum = 1;
+                } else {
+                    randNum = NumberUtils.generateRandomNumberInt(0, resultSet.getRow() - 1);
+                }
                 resultSet.beforeFirst();
             }
             int count = 0;
@@ -101,5 +112,13 @@ public class ClaimDBSearch {
             Assert.fail("NO DATA FOUND");
         }
         return null;
+    }
+
+    public String getUserNameFor(String userString) {
+        String[] nameSplit = userString.split(" ");
+        String sqlQuery = "select top 1 c.UserName from cc_user u inner join cc_credential c on u.CredentialID = c.id " +
+                "inner join cc_contact ct on u.ContactID = ct.id where ct.FirstName = '" + nameSplit[0] + "' AND ct.LastName = '" + nameSplit[1] + "'";
+        HashMap<String, String> userMap = randomResultFromQuerey(sqlQuery);
+        return userMap.get("UserName");
     }
 }
