@@ -63,6 +63,7 @@ public class CCIDs {
         public static final Identifier CREATE_NEW = new Identifier(By.id("AddressBookPickerPopup:AddressBookPickerSearchScreen:SearchPanel_FBMPanelSet:FBMAddressBookSearchLV_tb:ContactSearchToolbarButtonSet:ClaimContacts_CreateNewContactButton-btnInnerEl"));
         public static final Identifier COMPANY = new Identifier(By.id("AddressBookPickerPopup:AddressBookPickerSearchScreen:SearchPanel_FBMPanelSet:FBMAddressBookSearchLV_tb:ContactSearchToolbarButtonSet:ClaimContacts_CreateNewContactButton:Parties_Company-textEl"));
         public static final Identifier RETURN_TO_CONTACTS = new Identifier(By.id("AddressBookPickerPopup:__crumb__"));
+        public static final Identifier RESULTS_TABLE = new Identifier(By.id("AddressBookPickerPopup:AddressBookPickerSearchScreen:SearchPanel_FBMPanelSet:FBMAddressBookSearchLV-body"), ElementType.TABLE);
 
         public static class NewCompany {
             public static final Identifier NAME = new Identifier(By.id("NewPartyInvolvedPopup:ContactDetailScreen:ContactBasicsDV:OrganizationName:GlobalContactNameInputSet:Name-inputEl"));
@@ -179,6 +180,16 @@ public class CCIDs {
             public static final Identifier CLAIM_NUMBER_TEXT = new Identifier(By.id("NewClaimSaved:NewClaimSavedScreen:NewClaimSavedDV:Header"), ElementType.ELEMENT);
         }
 
+        public static class AutoERSorGlass {
+            public static final Identifier NAME = new Identifier(By.id("FNOLWizard:FNOLWizard_NewQuickClaimScreen:QuickClaimPanelSet:ReportedBy_Name-inputEl"), ElementType.SELECT_BOX);
+            public static final Identifier RELATION_TO_INSURED = new Identifier(By.id("FNOLWizard:FNOLWizard_NewQuickClaimScreen:QuickClaimPanelSet:Claim_ReportedByType-inputEl"), ElementType.SELECT_BOX);
+            public static final Identifier LOSS_DESCRIPTION = new Identifier(By.id("FNOLWizard:FNOLWizard_NewQuickClaimScreen:QuickClaimPanelSet:Claim_Description-inputEl"), ElementType.TEXT_AREA);
+            public static final Identifier LOSS_CAUSE = new Identifier(By.id("FNOLWizard:FNOLWizard_NewQuickClaimScreen:QuickClaimPanelSet:Claim_LossCause-inputEl"), ElementType.SELECT_BOX);
+            public static final Identifier INCIDENTS_INVOLVED = new Identifier(By.id("FNOLWizard:FNOLWizard_NewQuickClaimScreen:QuickClaimPanelSet:8-body"), ElementType.TABLE);
+            public static final Identifier FINISH = new Identifier(By.id("FNOLWizard:Finish"), ElementType.BUTTON);
+            public static final Identifier REPAIR_YES = new Identifier(By.id("FNOLWizard:FNOLWizard_NewQuickClaimScreen:QuickClaimPanelSet:Claim_RepairQuestion_true-inputEl"), ElementType.BUTTON);
+        }
+
         public static class AddClaimInformation {
             public static final Identifier LOSS_DESCRIPTION = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_NewLossDetailsScreen:LossDetailsAddressDV:Description-inputEl"), ElementType.TEXT_AREA);
             public static final Identifier LOSS_CAUSE = new Identifier(By.id("FNOLWizard:FBClaimWizardStepSet:FNOLWizard_NewLossDetailsScreen:LossDetailsAddressDV:Claim_LossCause-inputEl"), ElementType.SELECT_BOX);
@@ -215,6 +226,40 @@ public class CCIDs {
             public static final Identifier AUTO = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:ClaimMode_option0-inputEl"), ElementType.BUTTON);
             public static final Identifier PROPERTY = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:ClaimMode_option4-inputEl"), ElementType.BUTTON);
             public static final Identifier INLAND_MARINE = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:ClaimMode_option3-inputEl"), ElementType.BUTTON);
+            public static final Identifier AUTO_ERS_OR_GLASS = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:ClaimMode_option1-inputEl"), ElementType.BUTTON);
+            public static final Identifier PROPERTY_RESIDENTIAL_GLASS = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:ClaimMode_option5-inputEl"), ElementType.BUTTON);
+            
+            public static final class UnverifiedPolicy {
+                public static final Identifier CREATE_UNVERIFIED_POLICY = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:ScreenMode_false-inputEl"), ElementType.BUTTON);
+                public static final Identifier UNVERIFIED_AUTO = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:ClaimLossType_option1-inputEl"), ElementType.BUTTON);
+                public static final Identifier TYPE = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:Type-inputEl"), ElementType.SELECT_BOX);
+                public static final Identifier EFFECTIVE_DATE = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:NewClaimPolicyGeneralPanelSet:NewClaimPolicyGeneralDV:EffectiveDate-inputEl"), ElementType.TEXT_BOX);
+                public static final Identifier EXPIRATION_DATE = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:NewClaimPolicyGeneralPanelSet:NewClaimPolicyGeneralDV:ExpirationDate-inputEl"), ElementType.TEXT_BOX);
+                public static final Identifier INSURED_NAME_PICKER = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:NewClaimPolicyGeneralPanelSet:NewClaimPolicyGeneralDV:Insured_Name:Insured_NameMenuIcon"), ElementType.BUTTON);
+                public static final Identifier ADD_VEHICLE = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:NewClaimVehiclesLV_tb:Add"), ElementType.BUTTON);
+                public static final Identifier ADD_LOCATION = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:PolicyLocationLDV_tb:Add-btnInnerEl"), ElementType.BUTTON);
+                public static final Identifier POLICY_NUMBER = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:PolicyNumber-inputEl"), ElementType.TEXT_BOX);
+
+                public static class InsuredNamePicker {
+                    public static final Identifier SEARCH = new Identifier(By.id("FNOLWizard:FNOLWizard_FindPolicyScreen:FNOLWizardFindPolicyPanelSet:NewClaimPolicyGeneralPanelSet:NewClaimPolicyGeneralDV:Insured_Name:MenuItem_Search-itemEl"), ElementType.LINK);
+                }
+                
+                public static class PolicyLocation {
+                    public static final Identifier ADDRESS_ONE = new Identifier(By.id("PolicyLocationPopup:PolicyLocationScreen:CCAddressInputSet:globalAddressContainer:globalAddress:GlobalAddressInputSet:AddressLine1-inputEl"), ElementType.TEXT_BOX);
+                    public static final Identifier CITY = new Identifier(By.id("PolicyLocationPopup:PolicyLocationScreen:CCAddressInputSet:globalAddressContainer:globalAddress:GlobalAddressInputSet:City-inputEl"), ElementType.TEXT_BOX);
+                    public static final Identifier STATE = new Identifier(By.id("PolicyLocationPopup:PolicyLocationScreen:CCAddressInputSet:globalAddressContainer:globalAddress:GlobalAddressInputSet:State-inputEl"), ElementType.SELECT_BOX);
+                    public static final Identifier ZIP = new Identifier(By.id("PolicyLocationPopup:PolicyLocationScreen:CCAddressInputSet:globalAddressContainer:globalAddress:GlobalAddressInputSet:PostalCode-inputEl"), ElementType.TEXT_BOX);
+                    public static final Identifier OK = new Identifier(By.id("PolicyLocationPopup:PolicyLocationScreen:Update"), ElementType.BUTTON);
+                }
+                
+                public static class NewVehicle {
+                    public static final Identifier OLIE_ITEM_NUMBER = new Identifier(By.id("NewClaimWizard_NewPolicyVehiclePopup:NewClaimWizard_NewPolicyVehicleScreen:PolicyVehicleDetailPanelSet:PolicyVehicleDetailDV:OlieItemNum-inputEl"), ElementType.TEXT_BOX);
+                    public static final Identifier MAKE = new Identifier(By.id("NewClaimWizard_NewPolicyVehiclePopup:NewClaimWizard_NewPolicyVehicleScreen:PolicyVehicleDetailPanelSet:PolicyVehicleDetailDV:Make-inputEl"), ElementType.TEXT_BOX);
+                    public static final Identifier MODEL = new Identifier(By.id("NewClaimWizard_NewPolicyVehiclePopup:NewClaimWizard_NewPolicyVehicleScreen:PolicyVehicleDetailPanelSet:PolicyVehicleDetailDV:Model-inputEl"), ElementType.TEXT_BOX);
+                    public static final Identifier OK = new Identifier(By.id("NewClaimWizard_NewPolicyVehiclePopup:NewClaimWizard_NewPolicyVehicleScreen:Update"), ElementType.BUTTON);
+                }
+            }
+
         }
 
         public static class ValidationResults {
