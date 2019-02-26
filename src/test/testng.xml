@@ -6,16 +6,15 @@
 
     <parameter name="application" value="Program Increments"/>
     <parameter name="suiteName" value="ACES"/>
-
-    <!--<test name="All System Maintenance" preserve-order="false" parallel="classes">-->
-        <!--<classes>-->
-            <!--<class name="guidewire.claimcenter.systemMaintenance.US17161_DuplicateClaimMenuAction"/>-->
-            <!--<class name="guidewire.claimcenter.systemMaintenance.DE8269_CloseActivityValidationRuleChange"/>-->
-            <!--<class name="guidewire.claimcenter.systemMaintenance.US16987_QCSVendorPaymentProcessImprovement"/>-->
-            <!--<class name="guidewire.claimcenter.systemMaintenance.US17101_VendorPendingQueueAB"/>-->
-            <!--<class name="guidewire.claimcenter.systemMaintenance.US17492_FlagshipProcessSkipForNonUSCitizens"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="All System Maintenance" preserve-order="false" parallel="classes">
+        <classes>
+            <class name="guidewire.claimcenter.systemMaintenance.US17161_DuplicateClaimMenuAction"/>
+            <class name="guidewire.claimcenter.systemMaintenance.DE8269_CloseActivityValidationRuleChange"/>
+            <class name="guidewire.claimcenter.systemMaintenance.US16987_QCSVendorPaymentProcessImprovement"/>
+            <class name="guidewire.claimcenter.systemMaintenance.US17101_VendorPendingQueueAB"/>
+            <class name="guidewire.claimcenter.systemMaintenance.US17492_FlagshipProcessSkipForNonUSCitizens"/>
+        </classes>
+    </test>
     <test name="Non-Epic Features" preserve-order="false" parallel="classes">
         <classes>
             <class name="guidewire.claimcenter.nonEpicFeatures.F91_CopartIntegreationForSalvageAssignmentInCC.US16412_CopartTesting"/>
