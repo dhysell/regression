@@ -26,16 +26,16 @@
             <!--&lt;!&ndash;&ndash;&gt;-->
         <!--</classes>-->
     <!--</test>-->
-    <!--<test name="Legacy" preserve-order="false" parallel="classes">-->
-        <!--<packages>-->
-            <!--<package name="regression.r2.noclock.claimcenter.fnol"/>-->
-            <!--<package name="regression.r2.noclock.claimcenter.fullclaim.crop"/>-->
-            <!--<package name="regression.r2.noclock.claimcenter.fullclaim.genliab"/>-->
-            <!--<package name="regression.r2.noclock.claimcenter.fullclaim.inlandMarine"/>-->
-        <!--</packages>-->
-        <!--<classes>-->
-            <!--<class name="regression.r2.noclock.claimcenter.fullclaim.auto.AutoComprehensive"/>-->
-            <!--<class name="regression.r2.noclock.claimcenter.fullclaim.property.PropertyFullClaim"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="Legacy" preserve-order="false" parallel="classes">
+        <packages>
+<!--            <package name="regression.r2.noclock.claimcenter.fnol"/>
+            <package name="regression.r2.noclock.claimcenter.fullclaim.crop"/>
+            <package name="regression.r2.noclock.claimcenter.fullclaim.genliab"/>
+            <package name="regression.r2.noclock.claimcenter.fullclaim.inlandMarine"/>-->
+        </packages>
+        <classes>
+            <class name="regression.r2.noclock.claimcenter.fullclaim.auto.AutoComprehensive"/>
+            <class name="regression.r2.noclock.claimcenter.fullclaim.property.PropertyFullClaim"/>
+        </classes>
+    </test>
 </suite>
