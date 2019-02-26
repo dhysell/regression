@@ -26,7 +26,7 @@
             <!---->
         </classes>
     </test>
-<!--    <test name="Legacy" preserve-order="false" parallel="classes">
+    <test name="Legacy" preserve-order="false" parallel="classes">
         <packages>
             <package name="regression.r2.noclock.claimcenter.fnol"/>
             <package name="regression.r2.noclock.claimcenter.fullclaim.crop"/>
@@ -37,6 +37,5 @@
             <class name="regression.r2.noclock.claimcenter.fullclaim.auto.AutoComprehensive"/>
             <class name="regression.r2.noclock.claimcenter.fullclaim.property.PropertyFullClaim"/>
         </classes>
-    </test>-->
-
+    </test>
 </suite>
