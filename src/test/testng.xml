@@ -18,7 +18,7 @@
     <!--</test>-->
     <test name="Non-Epic Features" preserve-order="false" parallel="classes">
         <classes>
-            <!--<class name="guidewire.claimcenter.nonEpicFeatures.F91_CopartIntegreationForSalvageAssignmentInCC.US16412_CopartTesting"/>-->
+            <class name="guidewire.claimcenter.nonEpicFeatures.F91_CopartIntegreationForSalvageAssignmentInCC.US16412_CopartTesting"/>
             <class name="guidewire.claimcenter.nonEpicFeatures.F524_LargeLossNotification_PersonalLinesAndBOP.US3972_CCtoPC_LargeLossNotifications"/>
         </classes>
     </test>
