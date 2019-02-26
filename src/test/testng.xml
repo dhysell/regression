@@ -4,7 +4,7 @@
         <listener class-name="repository.listeners.LocalSuiteTestListener"/>
     </listeners>
 
-    <parameter name="application" value="Current Program Increment"/>
+    <parameter name="application" value="Program Increments"/>
     <parameter name="suiteName" value="ACES"/>
 
     <test name="All System Maintenance" preserve-order="false" parallel="classes">
