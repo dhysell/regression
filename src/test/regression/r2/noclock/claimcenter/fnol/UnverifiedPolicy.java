@@ -26,7 +26,7 @@ public class UnverifiedPolicy extends BaseOperations {
     public void setup() {
         this.initOn(ApplicationOrCenter.ClaimCenter, Environments.DEV);
         cc.loginAs(ClaimsUsers.abatts);
-        storage.put("policyNumber", "01-195607-01");
+        storage.put("policyNumber", "01-017070-01");
     }
 
     @Test()

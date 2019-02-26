@@ -25,7 +25,7 @@ public class AutoERSorGlass extends BaseOperations {
     public void setup() {
         this.initOn(ApplicationOrCenter.ClaimCenter, Environments.DEV);
         cc.loginAs(ClaimsUsers.abatts);
-        storage.put("policyNumber", "01-195607-01");
+        storage.put("policyNumber", "01-173682-04");
     }
 
     @Test()

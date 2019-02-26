@@ -13,7 +13,7 @@ public class Config extends BaseConfiguration{
 
     private String env = System.getProperty("env", "dev");
     private String gwHost = System.getProperty("host", "grid"); // change me to grid  or local.
-    private ApplicationOrCenter center = ApplicationOrCenter.valueOf(System.getProperty("center", "PolicyCenter"));
+    private ApplicationOrCenter center = ApplicationOrCenter.valueOf(System.getProperty("center", "ClaimCenter"));
 
 
     private Map<ApplicationOrCenter, Urls> environmentsMap = initEnvironmentsMap(env);

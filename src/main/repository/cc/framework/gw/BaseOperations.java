@@ -3,6 +3,7 @@ package repository.cc.framework.gw;
 import com.github.javafaker.Faker;
 import com.idfbins.driver.BaseTest;
 import gwclockhelpers.ApplicationOrCenter;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
 import repository.cc.framework.gw.cc.CCOperations;
@@ -35,10 +36,22 @@ public class BaseOperations extends BaseTest {
     private String env;
     protected HashMap<String, String> storage;
 
+    public static void load(WebDriver driver, String url, int timeout) {
+        ((JavascriptExecutor)driver).executeScript(
+                "var url = arguments[0], timeout = arguments[1];",
+                "window.setTimeout(function(){window.location.href = url}, 1);" +
+                        "var timer = window.setTimeout(window.stop, timeout);" +
+                        "window.onload = function(){window.clearTimeout(timer)}; "
+                , url, timeout);
+    }
+
     public void initOn(ApplicationOrCenter applicationOrCenter, String env) {
         try {
             Config cf = new Config(applicationOrCenter, env);
             this.driver = buildDriver(cf);
+
+            load(this.driver, driver.getCurrentUrl(), 300);
+
             this.interact = new UIActions(driver);
             this.env = env;
             this.connection = DriverManager.getConnection(Objects.requireNonNull(DBConnectionPoint.getConnectionTo(applicationOrCenter, env)).getConnectionString());

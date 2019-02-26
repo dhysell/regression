@@ -22,7 +22,7 @@ public class Property extends BaseOperations {
 
     @Test
     public void propertyFNOL() {
-        storage.put("policyNumber", "01-195607-01");
+        storage.put("policyNumber", "01-214010-01");
 
         interact.withElement(CCIDs.NavBar.CLAIM_ARROW).clickTabArrow();
         interact.withElement(CCIDs.NavBar.NEW_CLAIM).click();
