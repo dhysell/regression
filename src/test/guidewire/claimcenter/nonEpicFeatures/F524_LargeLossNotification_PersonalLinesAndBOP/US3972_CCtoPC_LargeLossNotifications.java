@@ -142,6 +142,7 @@ public class US3972_CCtoPC_LargeLossNotifications extends BaseOperations {
     @Test()
     public void checkPCMessages() {
         this.initOn(ApplicationOrCenter.PolicyCenter, Environments.DEV);
+
         PCOperations pc = new PCOperations(new UIActions(this.getDriver()));
         pc.loginAs("panderson", "gw");
         interact.withElement(PCIDs.SearchTab.SEARCH_TAB).click();

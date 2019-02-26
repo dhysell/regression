@@ -1,42 +1,42 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="ACES" verbose="1" parallel="tests" thread-count="6">
     <listeners>
-        <listener class-name="repository.listeners.LocalSuiteTestListener"/>
+        <!--<listener class-name="repository.listeners.LocalSuiteTestListener"/>-->
     </listeners>
 
     <parameter name="application" value="Program Increments"/>
     <parameter name="suiteName" value="ACES"/>
 
-    <test name="All System Maintenance" preserve-order="false" parallel="classes">
-        <classes>
-            <class name="guidewire.claimcenter.systemMaintenance.US17161_DuplicateClaimMenuAction"/>
-            <class name="guidewire.claimcenter.systemMaintenance.DE8269_CloseActivityValidationRuleChange"/>
-            <class name="guidewire.claimcenter.systemMaintenance.US16987_QCSVendorPaymentProcessImprovement"/>
-            <class name="guidewire.claimcenter.systemMaintenance.US17101_VendorPendingQueueAB"/>
-            <class name="guidewire.claimcenter.systemMaintenance.US17492_FlagshipProcessSkipForNonUSCitizens"/>
-        </classes>
-    </test>
+    <!--<test name="All System Maintenance" preserve-order="false" parallel="classes">-->
+        <!--<classes>-->
+            <!--<class name="guidewire.claimcenter.systemMaintenance.US17161_DuplicateClaimMenuAction"/>-->
+            <!--<class name="guidewire.claimcenter.systemMaintenance.DE8269_CloseActivityValidationRuleChange"/>-->
+            <!--<class name="guidewire.claimcenter.systemMaintenance.US16987_QCSVendorPaymentProcessImprovement"/>-->
+            <!--<class name="guidewire.claimcenter.systemMaintenance.US17101_VendorPendingQueueAB"/>-->
+            <!--<class name="guidewire.claimcenter.systemMaintenance.US17492_FlagshipProcessSkipForNonUSCitizens"/>-->
+        <!--</classes>-->
+    <!--</test>-->
     <test name="Non-Epic Features" preserve-order="false" parallel="classes">
         <classes>
-            <class name="guidewire.claimcenter.nonEpicFeatures.F91_CopartIntegreationForSalvageAssignmentInCC.US16412_CopartTesting"/>
+            <!--<class name="guidewire.claimcenter.nonEpicFeatures.F91_CopartIntegreationForSalvageAssignmentInCC.US16412_CopartTesting"/>-->
             <class name="guidewire.claimcenter.nonEpicFeatures.F524_LargeLossNotification_PersonalLinesAndBOP.US3972_CCtoPC_LargeLossNotifications"/>
         </classes>
     </test>
-    <test name="Epics" preserve-order="false" parallel="classes">
-        <classes>
-            <!---->
-        </classes>
-    </test>
-    <test name="Legacy" preserve-order="false" parallel="classes">
-        <packages>
-            <package name="regression.r2.noclock.claimcenter.fnol"/>
-            <package name="regression.r2.noclock.claimcenter.fullclaim.crop"/>
-            <package name="regression.r2.noclock.claimcenter.fullclaim.genliab"/>
-            <package name="regression.r2.noclock.claimcenter.fullclaim.inlandMarine"/>
-        </packages>
-        <classes>
-            <class name="regression.r2.noclock.claimcenter.fullclaim.auto.AutoComprehensive"/>
-            <class name="regression.r2.noclock.claimcenter.fullclaim.property.PropertyFullClaim"/>
-        </classes>
-    </test>
+    <!--<test name="Epics" preserve-order="false" parallel="classes">-->
+        <!--<classes>-->
+            <!--&lt;!&ndash;&ndash;&gt;-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="Legacy" preserve-order="false" parallel="classes">-->
+        <!--<packages>-->
+            <!--<package name="regression.r2.noclock.claimcenter.fnol"/>-->
+            <!--<package name="regression.r2.noclock.claimcenter.fullclaim.crop"/>-->
+            <!--<package name="regression.r2.noclock.claimcenter.fullclaim.genliab"/>-->
+            <!--<package name="regression.r2.noclock.claimcenter.fullclaim.inlandMarine"/>-->
+        <!--</packages>-->
+        <!--<classes>-->
+            <!--<class name="regression.r2.noclock.claimcenter.fullclaim.auto.AutoComprehensive"/>-->
+            <!--<class name="regression.r2.noclock.claimcenter.fullclaim.property.PropertyFullClaim"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 </suite>
